@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerStateList : MonoBehaviour
 {
+    //ToDo: Refactor to properties instead of exposing all variables as public.
 
     public bool walking;
     public bool interact;
