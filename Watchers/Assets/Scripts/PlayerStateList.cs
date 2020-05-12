@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class PlayerStateList : MonoBehaviour
 {
-    //ToDo: Refactor to properties instead of exposing all variables as public.
-
-    public bool walking;
-    public bool interact;
-    public bool interacting;
-    public bool lookingRight;
-    public bool jumping;
-    public bool dashing;
-    public bool touchingWall;
-    public bool wallSliding;
-    public bool wallJumping;
-    public bool casting;
-    public bool castReleased;
-    public bool onBench;
-    public bool atBench;
-    public bool atNPC;
-    public bool usingNPC;
-    //public bool 
-
+    public bool IsWalking { get; set; }
+    public bool IsInteracting { get; set; }
+    public bool IsLookingRight { get; set; }
+    public bool IsJumping { get; set; }
+    public bool IsDashing { get; set; }
+    public bool IsTouchingWall { get; set; }
+    public bool IsWallSliding { get; set; }
+    public bool IsWallJumping { get; set; }
+    public bool IsCasting { get; set; }
+    public bool IsCastReleased { get; set; }
+    public bool IsNearBench { get; set; }
+    public bool IsOnBench { get; set; }
+    public bool IsNearNPC { get; set; }
+    public bool IsUsingNPC { get; set; }
 }

@@ -57,7 +57,7 @@ public class PlayerAnimationController : MonoBehaviour
     void SetJumpingState()
     {
         //Jumping Animation
-        if (playerStateList.jumping && !playerStateList.wallSliding)
+        if (playerStateList.IsJumping && !playerStateList.IsWallSliding)
         {
             playerAnimator.SetBool("IsJumping", true);
         }
@@ -70,7 +70,7 @@ public class PlayerAnimationController : MonoBehaviour
     void SetDashingState()
     {
         //Dash Animation
-        if (playerStateList.dashing)
+        if (playerStateList.IsDashing)
         {
             playerAnimator.SetBool("IsDashing", true);
         } else

@@ -50,6 +50,12 @@ public class PlayerMovement : MonoBehaviour
     private float jumpCancelTime = 0.11f;
     private float jumpCancelCounter;
 
+    private void Awake()
+    {
+        playerState.IsLookingRight = true;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,11 +105,11 @@ public class PlayerMovement : MonoBehaviour
             groundedBufferCounter = 0;
             jumpBufferCounter = 0;
             jumpCancelCounter = 0;
-            playerState.jumping = true;
+            playerState.IsJumping = true;
         }
 
         jumpCancelCounter -= Time.deltaTime;
-        if (!Input.GetButton("Jump") && playerState.jumping)
+        if (!Input.GetButton("Jump") && playerState.IsJumping)
         {
             if (jumpCancelCounter < -jumpCancelTime)
             {
@@ -112,15 +118,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Wall Jumping
-        if (Input.GetButtonDown("Jump") && playerState.wallSliding)
+        if (Input.GetButtonDown("Jump") && playerState.IsWallSliding)
         {
-            playerState.wallJumping = true;
+            playerState.IsWallJumping = true;
         }
 
         //Dashing
-        if (Input.GetButtonDown("Dash") && currentDashCooldown == 0f && stepsDashed < dashSteps && !playerState.wallSliding)
+        if (Input.GetButtonDown("Dash") && currentDashCooldown == 0f && stepsDashed < dashSteps && !playerState.IsWallSliding)
         {
-            playerState.dashing = true;
+            playerState.IsDashing = true;
             currentDashCooldown = 0.2f;
         }
     }
@@ -128,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
     void Movement()
     {
         //Handles movement such as walking, jumping, etc and is called under FixedUpdate
-        if (!playerState.wallSliding)
+        if (!playerState.IsWallSliding)
         {
             Vector3 targetVelocity = new Vector2(horizontalMove * 10f * Time.fixedDeltaTime, playerRigidbody2d.velocity.y);
             playerRigidbody2d.velocity = targetVelocity;
@@ -137,18 +143,18 @@ public class PlayerMovement : MonoBehaviour
             //If the absolute value of velocity X is greater than 0 than set player state "walking" to true
         if (Mathf.Abs(playerRigidbody2d.velocity.x) > 0 && GroundCheck())
         {
-            playerState.walking = true;
+            playerState.IsWalking = true;
         } else
         {
-            playerState.walking = false;
+            playerState.IsWalking = false;
         }
         
         //Flip the player depending on whether they are looking right or not
-        if (horizontalMove > 0 && !playerState.lookingRight)
+        if (horizontalMove > 0 && !playerState.IsLookingRight)
         {
             Flip();
         } 
-        else if (horizontalMove < 0 && playerState.lookingRight)
+        else if (horizontalMove < 0 && playerState.IsLookingRight)
         {
             Flip();
         }
@@ -156,14 +162,14 @@ public class PlayerMovement : MonoBehaviour
         //Wallchecking to determine if the player is standing next to a wall
         if (WallCheck())
         {
-            playerState.touchingWall = true;
+            playerState.IsTouchingWall = true;
         }
         else
         {
-            playerState.touchingWall = false;
+            playerState.IsTouchingWall = false;
         }
 
-        if (playerState.wallSliding)
+        if (playerState.IsWallSliding)
         {
             if (playerRigidbody2d.velocity.y < -wallSlideSpeed)
             {
@@ -177,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
     void Flip()
     {
         //Switch to true if playerState.lookingRight is false, and to true if playerState.lookingRight is false
-        playerState.lookingRight = !playerState.lookingRight;
+        playerState.IsLookingRight = !playerState.IsLookingRight;
 
         //Captures the local scale of the transform and multiplies its X value by -1 returning -1 if it was 1 or 1 if it was -1
         Vector3 flippedScale = transform.localScale;
@@ -187,9 +193,9 @@ public class PlayerMovement : MonoBehaviour
         //Flip wallcheck X and wall hop speed as well
         wallCheckX *= -1;
         
-        if (playerState.wallJumping)
+        if (playerState.IsWallJumping)
         {
-            playerState.wallJumping = false;
+            playerState.IsWallJumping = false;
             stepsWallJumped = 7;
         }
 
@@ -197,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (playerState.jumping)
+        if (playerState.IsJumping)
         {
             if (stepsJumped < jumpSteps && !RoofCheck())
             {
@@ -219,13 +225,13 @@ public class PlayerMovement : MonoBehaviour
 
     void WallJump()
     {
-        if (playerState.wallJumping)
+        if (playerState.IsWallJumping)
         {
-            if (stepsWallJumped < wallJumpSteps && !RoofCheck() && !playerState.lookingRight)
+            if (stepsWallJumped < wallJumpSteps && !RoofCheck() && !playerState.IsLookingRight)
             {
                 playerRigidbody2d.velocity = new Vector2(wallJumpSpeed, jumpSpeed);
                 stepsWallJumped++;
-            } else if (stepsWallJumped < wallJumpSteps && !RoofCheck() && playerState.lookingRight)
+            } else if (stepsWallJumped < wallJumpSteps && !RoofCheck() && playerState.IsLookingRight)
             {
                 playerRigidbody2d.velocity = new Vector2(-wallJumpSpeed, jumpSpeed);
                 stepsWallJumped++;
@@ -239,16 +245,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Dash()
     {
-        if (playerState.dashing) //Increase forward facing velocity if the player is in the dashing state
+        if (playerState.IsDashing) //Increase forward facing velocity if the player is in the dashing state
         {
             if (stepsDashed <= dashSteps)
             {
-                if (playerState.lookingRight)
+                if (playerState.IsLookingRight)
                 {
                     playerRigidbody2d.gravityScale = 0;
                     playerRigidbody2d.velocity = new Vector2(dashSpeed, 0);
                     stepsDashed++;
-                } else if (!playerState.lookingRight)
+                } else if (!playerState.IsLookingRight)
                 {
                     playerRigidbody2d.gravityScale = 0;
                     playerRigidbody2d.velocity = new Vector2(-dashSpeed, 0);
@@ -257,16 +263,16 @@ public class PlayerMovement : MonoBehaviour
             } else
             {
                 playerRigidbody2d.gravityScale = 1;
-                playerState.dashing = false;
+                playerState.IsDashing = false;
             }
         }
 
-        if (!playerState.dashing && GroundCheck()) //Prevent the player from dashing multiple times while in the air
+        if (!playerState.IsDashing && GroundCheck()) //Prevent the player from dashing multiple times while in the air
         {
             stepsDashed = 0;
         }
 
-        if (!playerState.dashing) //Decrease dash cooldown once the dashing animation is finished
+        if (!playerState.IsDashing) //Decrease dash cooldown once the dashing animation is finished
         {
             currentDashCooldown -= Time.fixedDeltaTime;
             currentDashCooldown = Mathf.Clamp(currentDashCooldown, 0, maxDashCooldown);
@@ -275,19 +281,19 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckWallSliding()
     {
-        if (playerState.touchingWall && !GroundCheck() && playerRigidbody2d.velocity.y < 0)
+        if (playerState.IsTouchingWall && !GroundCheck() && playerRigidbody2d.velocity.y < 0)
         {
-            playerState.wallSliding = true;
+            playerState.IsWallSliding = true;
         } else
         {
-            playerState.wallSliding = false;
+            playerState.IsWallSliding = false;
         }
     }
 
     void StopJumpQuick()
     {
         stepsJumped = 0;
-        playerState.jumping = false;
+        playerState.IsJumping = false;
         playerRigidbody2d.velocity = new Vector2(playerRigidbody2d.velocity.x, 0);
     }
 
@@ -295,8 +301,8 @@ public class PlayerMovement : MonoBehaviour
     {
         stepsJumped = 0;
         stepsWallJumped = 0;
-        playerState.jumping = false;
-        playerState.wallJumping = false;
+        playerState.IsJumping = false;
+        playerState.IsWallJumping = false;
     }
 
     public bool GroundCheck()
