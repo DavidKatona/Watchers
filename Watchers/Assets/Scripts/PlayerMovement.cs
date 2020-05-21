@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
         //Handles movement such as walking, jumping, etc and is called under FixedUpdate
         if (!playerState.IsWallSliding)
         {
-            Vector3 targetVelocity = new Vector2(horizontalMove * 10f * Time.fixedDeltaTime, playerRigidbody2d.velocity.y);
+            Vector2 targetVelocity = new Vector2(horizontalMove * 10f * Time.fixedDeltaTime, playerRigidbody2d.velocity.y);
             playerRigidbody2d.velocity = targetVelocity;
         }
 
