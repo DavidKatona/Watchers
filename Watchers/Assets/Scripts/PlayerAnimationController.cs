@@ -6,8 +6,8 @@ public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private Rigidbody2D playerRigidbody2d;
-    [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private PlayerStateList playerStateList;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private PlayerStateManager playerStateList;
 
     // Update is called once per frame
     void Update()
@@ -22,7 +22,7 @@ public class PlayerAnimationController : MonoBehaviour
     void SetGroundedState()
     {
         //Use the ground check method from the player movement script/component
-        if (playerMovement.GroundCheck())
+        if (playerController.IsGrounded())
         {
             playerAnimator.SetBool("IsGrounded", true);
             playerAnimator.SetBool("IsFalling", false);
@@ -35,7 +35,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     void SetFallingState()
     {
-        if (playerRigidbody2d.velocity.y < 0 && !playerMovement.GroundCheck())
+        if (playerRigidbody2d.velocity.y < 0 && !playerController.IsGrounded())
         {
             playerAnimator.SetBool("IsFalling", true);
         }
@@ -44,7 +44,7 @@ public class PlayerAnimationController : MonoBehaviour
     void SetRunningState()
     {
         //Running Animation
-        if (Mathf.Abs(playerRigidbody2d.velocity.x) > 0 && playerMovement.GroundCheck())
+        if (Mathf.Abs(playerRigidbody2d.velocity.x) > 0 && playerController.IsGrounded())
         {
             playerAnimator.SetBool("IsRunning", true);
         }

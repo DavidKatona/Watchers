@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateList : MonoBehaviour
+public class PlayerStateManager : MonoBehaviour
 {
     //This class is used to track player state.
     public bool IsWalking { get; set; }
