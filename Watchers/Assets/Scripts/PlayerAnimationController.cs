@@ -7,7 +7,7 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private Rigidbody2D playerRigidbody2d;
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private PlayerStateManager playerStateList;
+    [SerializeField] private PlayerStateManager playerStateManager;
 
     // Update is called once per frame
     void Update()
@@ -57,7 +57,7 @@ public class PlayerAnimationController : MonoBehaviour
     void SetJumpingState()
     {
         //Jumping Animation
-        if (playerStateList.IsJumping && !playerStateList.IsWallSliding)
+        if (playerStateManager.IsJumping && !playerStateManager.IsWallSliding)
         {
             playerAnimator.SetBool("IsJumping", true);
         }
@@ -70,7 +70,7 @@ public class PlayerAnimationController : MonoBehaviour
     void SetDashingState()
     {
         //Dash Animation
-        if (playerStateList.IsDashing)
+        if (playerStateManager.IsDashing)
         {
             playerAnimator.SetBool("IsDashing", true);
         } else
