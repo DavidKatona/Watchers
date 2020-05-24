@@ -57,7 +57,7 @@ public class PlayerMovementHandler : MonoBehaviour
             _stepsJumped = 0;
         }
 
-        _currentJumpBuffer -= Time.deltaTime; //Decrease jump buffer counter each frame
+        _currentJumpBuffer -= Time.deltaTime;
         if (_playerBrain.GetInputManager().IsJumpPressed)
         {
             _currentJumpBuffer = _maxJumpBuffer;
@@ -73,7 +73,7 @@ public class PlayerMovementHandler : MonoBehaviour
         }
 
         _jumpCancelCounter -= Time.deltaTime;
-        if (_playerBrain.GetInputManager().IsJumpPressed && _playerBrain.GetStateManager().IsJumping)
+        if (!_playerBrain.GetInputManager().IsJumpHeld && _playerBrain.GetStateManager().IsJumping)
         {
             if (_jumpCancelCounter < -_jumpCancelTime)
             {
@@ -89,7 +89,7 @@ public class PlayerMovementHandler : MonoBehaviour
         if (_playerBrain.GetInputManager().IsDashPressed && _currentDashCooldown == 0f && _stepsDashed < _maxDashSteps && !_playerBrain.GetStateManager().IsWallSliding)
         {
             _playerBrain.GetStateManager().IsDashing = true;
-            _currentDashCooldown = 0.2f;
+            _currentDashCooldown = _maxDashCooldown;
         }
     }
 

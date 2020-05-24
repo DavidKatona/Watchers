@@ -9,6 +9,7 @@ public class PlayerInputManager : MonoBehaviour
     public float HorizontalInputModifier { get; private set; }
     public float VerticalInputModifier { get; private set; }
     public bool IsJumpPressed { get; private set; }
+    public bool IsJumpHeld { get; private set; }
     public bool IsDashPressed { get; private set; }
 
     void Update()
@@ -18,18 +19,28 @@ public class PlayerInputManager : MonoBehaviour
 
     void GetInput()
     {
-        //Movement on the X axis
+        //Movement Modifiers
         HorizontalInputModifier = Input.GetAxisRaw("Horizontal");
         VerticalInputModifier = Input.GetAxisRaw("Vertical");
 
-        //Jumping
+        //Jump Pressed
         if (Input.GetButtonDown("Jump"))
         {
             IsJumpPressed = true;
         }
-        else if (!Input.GetButtonDown("Jump"))
+        else
         {
             IsJumpPressed = false;
+        }
+
+        //Jump Being Held Down
+        if (Input.GetButton("Jump"))
+        {
+            IsJumpHeld = true;
+        }
+        else
+        {
+            IsJumpHeld = false;
         }
 
         //Dashing
@@ -37,7 +48,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             IsDashPressed = true;
         }
-        else if (!Input.GetButtonDown("Dash"))
+        else
         {
             IsDashPressed = false;
         }
