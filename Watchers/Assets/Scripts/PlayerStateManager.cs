@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    //This class is used to track player state.
+    [SerializeField] private PlayerBrain _playerBrain;
+
     public bool IsWalking { get; set; }
     public bool IsInteracting { get; set; }
     public bool IsLookingRight { get; set; }

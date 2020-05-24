@@ -854,10 +854,13 @@ GameObject:
   - component: {fileID: 373681129}
   - component: {fileID: 373681128}
   - component: {fileID: 373681127}
-  - component: {fileID: 373681132}
-  - component: {fileID: 373681134}
   - component: {fileID: 373681133}
+  - component: {fileID: 373681137}
+  - component: {fileID: 373681136}
+  - component: {fileID: 373681132}
   - component: {fileID: 373681135}
+  - component: {fileID: 373681131}
+  - component: {fileID: 373681134}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -980,6 +983,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &373681131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373681126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be0d9a0f3ad416f4f9be360f67dcf463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerBrain: {fileID: 373681137}
+  _groundCheckLengthX: 0.3
+  _groundCheckLengthY: 0.2
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _roofCheckLengthX: 0.3
+  _roofCheckLengthY: 0.2
+  _wallCheckLengthX: 0.4
+  _groundCheckTransform: {fileID: 441751445}
+  _roofCheckTransform: {fileID: 1558018232}
+  _wallCheckTransform: {fileID: 1160920920}
 --- !u!114 &373681132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -992,6 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb4955d3f4b66643990847486b4f4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerBrain: {fileID: 373681137}
 --- !u!95 &373681133
 Animator:
   serializedVersion: 3
@@ -1026,7 +1054,8 @@ MonoBehaviour:
   playerAnimator: {fileID: 373681133}
   playerRigidbody2d: {fileID: 373681127}
   playerController: {fileID: 373681135}
-  playerStateList: {fileID: 373681132}
+  playerStateManager: {fileID: 373681132}
+  _playerBrain: {fileID: 373681137}
 --- !u!114 &373681135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1039,6 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c7d9d11c7dad640bfbcf52e3657c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerBrain: {fileID: 373681137}
   moveSpeed: 25
   dashSpeed: 12
   dashSteps: 13
@@ -1051,20 +1081,6 @@ MonoBehaviour:
   wallJumpSteps: 7
   playerStateManager: {fileID: 373681132}
   playerRigidbody2d: {fileID: 373681127}
-  timeBetweenAttack: 0.4
-  attackTransform: {fileID: 0}
-  attackRadius: 1
-  downAttackTransform: {fileID: 0}
-  downAttackRadius: 1
-  upAttackTransform: {fileID: 0}
-  upAttackRadius: 1
-  attackableLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  recoilXSteps: 4
-  recoilYSteps: 10
-  recoilXSpeed: 45
-  recoilYSpeed: 45
   groundCheckTransform: {fileID: 441751445}
   groundCheckY: 0.2
   groundCheckX: 0.3
@@ -1076,6 +1092,37 @@ MonoBehaviour:
   roofCheckX: 0.3
   wallCheckTransform: {fileID: 1160920920}
   wallCheckX: 0.4
+--- !u!114 &373681136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373681126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315b5521a224f404ba71ddbc6aec04b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerBrain: {fileID: 373681137}
+--- !u!114 &373681137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373681126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe52eee8b348d724c82649da4a72b9fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerMovementHandler: {fileID: 373681135}
+  _playerInputManager: {fileID: 373681136}
+  _playerCollisionDetector: {fileID: 373681131}
+  _playerStateManager: {fileID: 373681132}
+  _playerAnimationController: {fileID: 373681134}
+  _playerRigidbody2D: {fileID: 0}
 --- !u!1 &383622207
 GameObject:
   m_ObjectHideFlags: 0
