@@ -36,7 +36,7 @@ public class PlayerMovementHandler : MonoBehaviour
     private void Update()
     {
         ManageMovementBuffers();
-        PerformWallSliding();
+        SetWallSliding();
     }
 
     private void FixedUpdate()
@@ -249,7 +249,7 @@ public class PlayerMovementHandler : MonoBehaviour
         }
     }
 
-    private void PerformWallSliding()
+    private void SetWallSliding()
     {
         if (_playerBrain.GetStateManager().IsTouchingWall && !_playerBrain.GetCollisionDetector().IsGrounded() && _playerBrain.PlayerRigidBody2D.velocity.y < 0)
         {
