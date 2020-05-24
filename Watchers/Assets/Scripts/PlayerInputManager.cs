@@ -20,6 +20,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         //Movement on the X axis
         HorizontalInputModifier = Input.GetAxisRaw("Horizontal");
+        VerticalInputModifier = Input.GetAxisRaw("Vertical");
 
         //Jumping
         if (Input.GetButtonDown("Jump"))

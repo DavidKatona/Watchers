@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,173 +8,147 @@ public class PlayerMovementHandler : MonoBehaviour
     [SerializeField] private PlayerBrain _playerBrain;
 
     //X Axis Movement
-    public float MovementSpeed { get; private set; } = 25.0f;
-    public float DashSpeed { get; private set; }
-    public float MaxDashSteps { get; private set; }
-    public float MaxDashCooldown { get; private set; }
-
-    [SerializeField] private float moveSpeed = 25f; //Movement speed of the object/player
-    [SerializeField] private float dashSpeed = 12f; //Speed used for dashing
-    [SerializeField] private float dashSteps = 13f;
-    [SerializeField] private float maxDashCooldown = 0.2f;
-    private float horizontalMove = 0f; //Float variable containing value returned from the Input.GetAxisRaw function (no smoothing)
+    private float _moveSpeed = 25.0f;
+    private float _dashSpeed = 12.0f;
+    private float _maxDashSteps = 13.0f;
+    private int _stepsDashed = 0;
+    private float _maxDashCooldown = 0.2f;
+    private float _currentDashCooldown = 0f;
 
     //Y Axis Movement
-    [SerializeField] private float jumpSpeed = 12f; //Jump speed of the object/player
-    [SerializeField] private int jumpSteps = 10;
-    [SerializeField] private float fallSpeed = 10f; //Fall speed of the object/player
-    [SerializeField] private float wallSlideSpeed = 1.0f;
-    [SerializeField] private float wallJumpSpeed = 5f;
-    [SerializeField] private float wallJumpSteps = 7f;
+    private float _jumpSpeed = 12.0f;
+    private int _maxJumpSteps = 10;
+    private int _stepsJumped = 0;
+    private float _wallSlideSpeed = 1.0f;
+    private float _wallJumpSpeed = 5.0f;
+    private int _maxWallJumpSteps = 7;
+    private int _stepsWallJumped = 0;
+    private float _fallSpeed = 10.0f;
+    
+    //Movement Buffers
+    private float _maxJumpBuffer = 0.05f;
+    private float _currentJumpBuffer;
+    private float _maxGroundBuffer = 0.1f;
+    private float _currentGroundBuffer;
+    private float _jumpCancelTime = 0.11f;
+    private float _jumpCancelCounter;
 
-    [Header("Components")]
-    [SerializeField] private PlayerStateManager playerStateManager; //Reference to the PlayerStateList class which behaves like a state machine for the player
-    [SerializeField] private Rigidbody2D playerRigidbody2d; //Rigidbody component of the object this script is attached to
-
-    private int stepsJumped = 0;
-    private int stepsDashed = 0;
-    private int stepsWallJumped = 0;
-    private float currentDashCooldown = 0f;
-    private float jumpBufferTime = 0.05f; //How long the game should remember in seconds that the player has pressed the jump button (used for jump buffering)
-    private float jumpBufferCounter; //The counter for the jump buffer that's decreased each frame
-    private float groundedBufferTime = 0.1f; //How long the game should remember in seconds that the player has touched the ground (used for coyote jumping)
-    private float groundedBufferCounter; //The counter for the ground buffer that's decreased each frame
-    private float jumpCancelTime = 0.11f;
-    private float jumpCancelCounter;
-
-    public float MaxJumpBuffer { get; private set; }
-    public float CurrentJumpBuffer { get; private set; }
-    public float MaxGroundBuffer { get; private set; }
-    public float CurrentGroundBuffer { get; private set; }
-
-    private void Awake()
+    private void Update()
     {
-        playerRigidbody2d = GetComponent<Rigidbody2D>();
-        _playerBrain.GetStateManager().IsLookingRight = true;
+        ManageMovementBuffers();
+        PerformWallSliding();
     }
 
-    void Update()
-    {
-        GetInput(); //Get inputs from the player
-        CheckWallSliding();
-    }
-
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Move();
         Jump();
         WallJump();
         Dash();
+        LimitFallSpeed();
     }
 
-    void GetInput()
+    private void ManageMovementBuffers()
     {
-        //Movement on the X axis
-        horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
-
-        //Jumping
-        groundedBufferCounter -= Time.deltaTime; //Decrease ground buffer counter each fame
+        _currentGroundBuffer -= Time.deltaTime;
         if (_playerBrain.GetCollisionDetector().IsGrounded())
         {
-            groundedBufferCounter = groundedBufferTime;
-            stepsJumped = 0;
+            _currentGroundBuffer = _maxGroundBuffer;
+            _stepsJumped = 0;
         }
 
-        jumpBufferCounter -= Time.deltaTime; //Decrease jump buffer counter each frame
-        if (Input.GetButtonDown("Jump"))
+        _currentJumpBuffer -= Time.deltaTime; //Decrease jump buffer counter each frame
+        if (_playerBrain.GetInputManager().IsJumpPressed)
         {
-            jumpBufferCounter = jumpBufferTime;
-            jumpCancelCounter = jumpCancelTime;
+            _currentJumpBuffer = _maxJumpBuffer;
+            _jumpCancelCounter = _jumpCancelTime;
         }
 
-        if (jumpBufferCounter > 0 && groundedBufferCounter > 0 && jumpCancelCounter > 0)
+        if (_currentJumpBuffer > 0 && _currentGroundBuffer > 0 && _jumpCancelCounter > 0)
         {
-            groundedBufferCounter = 0;
-            jumpBufferCounter = 0;
-            jumpCancelCounter = 0;
-            playerStateManager.IsJumping = true;
+            _currentGroundBuffer = 0;
+            _currentJumpBuffer = 0;
+            _jumpCancelCounter = 0;
+            _playerBrain.GetStateManager().IsJumping = true;
         }
 
-        jumpCancelCounter -= Time.deltaTime;
-        if (!Input.GetButton("Jump") && playerStateManager.IsJumping)
+        _jumpCancelCounter -= Time.deltaTime;
+        if (_playerBrain.GetInputManager().IsJumpPressed && _playerBrain.GetStateManager().IsJumping)
         {
-            if (jumpCancelCounter < -jumpCancelTime)
+            if (_jumpCancelCounter < -_jumpCancelTime)
             {
-                StopJumpQuick();
+                StopJump(true);
             }
         }
 
-        //Wall Jumping
-        if (Input.GetButtonDown("Jump") && playerStateManager.IsWallSliding)
+        if (_playerBrain.GetInputManager().IsJumpPressed && _playerBrain.GetStateManager().IsWallSliding)
         {
-            playerStateManager.IsWallJumping = true;
+            _playerBrain.GetStateManager().IsWallJumping = true;
         }
 
-        //Dashing
-        if (Input.GetButtonDown("Dash") && currentDashCooldown == 0f && stepsDashed < dashSteps && !playerStateManager.IsWallSliding)
+        if (_playerBrain.GetInputManager().IsDashPressed && _currentDashCooldown == 0f && _stepsDashed < _maxDashSteps && !_playerBrain.GetStateManager().IsWallSliding)
         {
-            playerStateManager.IsDashing = true;
-            currentDashCooldown = 0.2f;
+            _playerBrain.GetStateManager().IsDashing = true;
+            _currentDashCooldown = 0.2f;
         }
     }
 
-    void Move()
+    private void Move()
     {
         //Handles movement such as walking, jumping, etc and is called under FixedUpdate
-        if (!playerStateManager.IsWallSliding)
+        if (!_playerBrain.GetStateManager().IsWallSliding)
         {
-            var horizontalMovement = _playerBrain.GetInputManager().HorizontalInputModifier * MovementSpeed;
-            Vector3 targetVelocity = new Vector2(horizontalMovement * 10f * Time.fixedDeltaTime, playerRigidbody2d.velocity.y);
+            var horizontalMovement = _playerBrain.GetInputManager().HorizontalInputModifier * _moveSpeed;
+            Vector2 targetVelocity = new Vector2(horizontalMovement * 10f * Time.fixedDeltaTime, _playerBrain.PlayerRigidBody2D.velocity.y);
             _playerBrain.PlayerRigidBody2D.velocity = targetVelocity;
         }
 
-            //If the absolute value of velocity X is greater than 0 than set player state "walking" to true
-        if (Mathf.Abs(playerRigidbody2d.velocity.x) > 0 && _playerBrain.GetCollisionDetector().IsGrounded())
+        //If the absolute value of velocity X is greater than 0 than set player state "walking" to true
+        if (Mathf.Abs(_playerBrain.PlayerRigidBody2D.velocity.x) > 0 && _playerBrain.GetCollisionDetector().IsGrounded())
         {
-            playerStateManager.IsWalking = true;
+            _playerBrain.GetStateManager().IsWalking = true;
         }
         else
         {
-            playerStateManager.IsWalking = false;
+            _playerBrain.GetStateManager().IsWalking = false;
         }
-        
-        //Flip the player depending on whether they are looking right or not
-        if (horizontalMove > 0 && !playerStateManager.IsLookingRight)
+
+        //Flip the player depending on whether they are looking right or left
+        if (_playerBrain.GetInputManager().HorizontalInputModifier > 0 && !_playerBrain.GetStateManager().IsLookingRight)
         {
             Flip();
-        } 
-        else if (horizontalMove < 0 && playerStateManager.IsLookingRight)
+        }
+        else if (_playerBrain.GetInputManager().HorizontalInputModifier < 0 && _playerBrain.GetStateManager().IsLookingRight)
         {
             Flip();
         }
 
-        //Wallchecking to determine if the player is standing next to a wall
+        //Determine if the player is standing next to a wall
         if (_playerBrain.GetCollisionDetector().IsTouchingWall())
         {
-            playerStateManager.IsTouchingWall = true;
+            _playerBrain.GetStateManager().IsTouchingWall = true;
         }
         else
         {
-            playerStateManager.IsTouchingWall = false;
+            _playerBrain.GetStateManager().IsTouchingWall = false;
         }
 
-        if (playerStateManager.IsWallSliding)
+        if (_playerBrain.GetStateManager().IsWallSliding)
         {
-            if (playerRigidbody2d.velocity.y < -wallSlideSpeed)
+            if (_playerBrain.PlayerRigidBody2D.velocity.y < -_wallSlideSpeed)
             {
-                playerRigidbody2d.velocity = new Vector2(playerRigidbody2d.velocity.x, -wallSlideSpeed);
-                stepsWallJumped = 0;
+                _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_playerBrain.PlayerRigidBody2D.velocity.x, -_wallSlideSpeed);
+                _stepsWallJumped = 0;
             }
         }
-
     }
 
-    void Flip()
+    private void Flip()
     {
         //Switch to true if playerState.lookingRight is false, and to true if playerState.lookingRight is false
-        playerStateManager.IsLookingRight = !playerStateManager.IsLookingRight;
+        _playerBrain.GetStateManager().IsLookingRight = !_playerBrain.GetStateManager().IsLookingRight;
 
-        //Captures the local scale of the transform and multiplies its X value by -1 returning -1 if it was 1 or 1 if it was -1
+        //Captures the local scale of the transform and multiplies its X value by -1
         Vector3 flippedScale = transform.localScale;
         flippedScale.x *= -1;
         transform.localScale = flippedScale;
@@ -181,120 +156,124 @@ public class PlayerMovementHandler : MonoBehaviour
         //Flip wallcheck X
         var wallCheckLengthX = _playerBrain.GetCollisionDetector().GetWallCheckLengthX();
         _playerBrain.GetCollisionDetector().SetWallCheckLengthX(wallCheckLengthX * -1);
-        
-        if (playerStateManager.IsWallJumping)
+
+        if (_playerBrain.GetStateManager().IsWallJumping)
         {
-            playerStateManager.IsWallJumping = false;
-            stepsWallJumped = 7;
+            _playerBrain.GetStateManager().IsWallJumping = false;
+            _stepsWallJumped = _maxWallJumpSteps;
         }
     }
 
-    void Jump()
+    private void Jump()
     {
-        if (playerStateManager.IsJumping)
+        if (_playerBrain.GetStateManager().IsJumping)
         {
-            if (stepsJumped < jumpSteps && !_playerBrain.GetCollisionDetector().IsRoofed())
+            if (_stepsJumped < _maxJumpSteps && !_playerBrain.GetCollisionDetector().IsRoofed())
             {
-                playerRigidbody2d.velocity = new Vector2(playerRigidbody2d.velocity.x, jumpSpeed);
-                stepsJumped++;
+                _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_playerBrain.PlayerRigidBody2D.velocity.x, _jumpSpeed);
+                _stepsJumped++;
             }
             else
             {
-                StopJumpSlow();
-            }   
+                StopJump(false);
+            }
         }
+    }
 
+    private void LimitFallSpeed()
+    {
         //This limits how fast the player can fall
         //Since platformers generally have increased gravity, you don't want them to fall so fast they clip trough all the floors
-        if (playerRigidbody2d.velocity.y < -Mathf.Abs(fallSpeed))
+        if (_playerBrain.PlayerRigidBody2D.velocity.y < -Mathf.Abs(_fallSpeed))
         {
-            playerRigidbody2d.velocity = new Vector2(playerRigidbody2d.velocity.x, Mathf.Clamp(playerRigidbody2d.velocity.y, -Mathf.Abs(fallSpeed), Mathf.Infinity));
+            _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_playerBrain.PlayerRigidBody2D.velocity.x, Mathf.Clamp(_playerBrain.PlayerRigidBody2D.velocity.y, -Mathf.Abs(_fallSpeed), Mathf.Infinity));
         }
     }
 
-    void WallJump()
+    private void WallJump()
     {
-        if (playerStateManager.IsWallJumping)
+        if (_playerBrain.GetStateManager().IsWallJumping)
         {
-            if (stepsWallJumped < wallJumpSteps && !_playerBrain.GetCollisionDetector().IsRoofed() && !playerStateManager.IsLookingRight)
+            if (_stepsWallJumped < _maxWallJumpSteps && !_playerBrain.GetCollisionDetector().IsRoofed() && !_playerBrain.GetStateManager().IsLookingRight)
             {
-                playerRigidbody2d.velocity = new Vector2(wallJumpSpeed, jumpSpeed);
-                stepsWallJumped++;
+                _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_wallJumpSpeed, _jumpSpeed);
+                _stepsWallJumped++;
             }
-            else if (stepsWallJumped < wallJumpSteps && !_playerBrain.GetCollisionDetector().IsRoofed() && playerStateManager.IsLookingRight)
+            else if (_stepsWallJumped < _maxWallJumpSteps && !_playerBrain.GetCollisionDetector().IsRoofed() && _playerBrain.GetStateManager().IsLookingRight)
             {
-                playerRigidbody2d.velocity = new Vector2(-wallJumpSpeed, jumpSpeed);
-                stepsWallJumped++;
+                _playerBrain.PlayerRigidBody2D.velocity = new Vector2(-_wallJumpSpeed, _jumpSpeed);
+                _stepsWallJumped++;
             }
-            else             
+            else
             {
-                StopJumpSlow();
+                StopJump(false);
             }
         }
     }
 
-    void Dash()
+    private void Dash()
     {
-        if (playerStateManager.IsDashing) //Increase forward facing velocity if the player is in the dashing state
+        if (_playerBrain.GetStateManager().IsDashing) //Increase forward facing velocity if the player is in the dashing state
         {
-            if (stepsDashed <= dashSteps)
+            if (_stepsDashed <= _maxDashSteps)
             {
-                if (playerStateManager.IsLookingRight)
+                if (_playerBrain.GetStateManager().IsLookingRight)
                 {
-                    playerRigidbody2d.gravityScale = 0;
-                    playerRigidbody2d.velocity = new Vector2(dashSpeed, 0);
-                    stepsDashed++;
+                    _playerBrain.PlayerRigidBody2D.gravityScale = 0;
+                    _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_dashSpeed, 0);
+                    _stepsDashed++;
                 }
-                else if (!playerStateManager.IsLookingRight)
+                else if (!_playerBrain.GetStateManager().IsLookingRight)
                 {
-                    playerRigidbody2d.gravityScale = 0;
-                    playerRigidbody2d.velocity = new Vector2(-dashSpeed, 0);
-                    stepsDashed++;
+                    _playerBrain.PlayerRigidBody2D.gravityScale = 0;
+                    _playerBrain.PlayerRigidBody2D.velocity = new Vector2(-_dashSpeed, 0);
+                    _stepsDashed++;
                 }
             }
             else
             {
-                playerRigidbody2d.gravityScale = 1;
-                playerStateManager.IsDashing = false;
+                _playerBrain.PlayerRigidBody2D.gravityScale = 1;
+                _playerBrain.GetStateManager().IsDashing = false;
             }
         }
 
-        if (!playerStateManager.IsDashing && _playerBrain.GetCollisionDetector().IsGrounded()) //Prevent the player from dashing multiple times while in the air
+        if (!_playerBrain.GetStateManager().IsDashing && _playerBrain.GetCollisionDetector().IsGrounded()) //Prevent the player from dashing multiple times while in the air
         {
-            stepsDashed = 0;
+            _stepsDashed = 0;
         }
 
-        if (!playerStateManager.IsDashing) //Decrease dash cooldown once the dashing animation is finished
+        if (!_playerBrain.GetStateManager().IsDashing) //Decrease dash cooldown once the dashing animation is finished
         {
-            currentDashCooldown -= Time.fixedDeltaTime;
-            currentDashCooldown = Mathf.Clamp(currentDashCooldown, 0, maxDashCooldown);
+            _currentDashCooldown -= Time.fixedDeltaTime;
+            _currentDashCooldown = Mathf.Clamp(_currentDashCooldown, 0, _maxDashCooldown);
         }
     }
 
-    void CheckWallSliding()
+    private void PerformWallSliding()
     {
-        if (playerStateManager.IsTouchingWall && !_playerBrain.GetCollisionDetector().IsGrounded() && playerRigidbody2d.velocity.y < 0)
+        if (_playerBrain.GetStateManager().IsTouchingWall && !_playerBrain.GetCollisionDetector().IsGrounded() && _playerBrain.PlayerRigidBody2D.velocity.y < 0)
         {
-            playerStateManager.IsWallSliding = true;
+            _playerBrain.GetStateManager().IsWallSliding = true;
         }
         else
         {
-            playerStateManager.IsWallSliding = false;
+            _playerBrain.GetStateManager().IsWallSliding = false;
         }
     }
 
-    void StopJumpQuick()
+    private void StopJump(bool shouldStopInstantly)
     {
-        stepsJumped = 0;
-        playerStateManager.IsJumping = false;
-        playerRigidbody2d.velocity = new Vector2(playerRigidbody2d.velocity.x, 0);
-    }
+        _stepsJumped = 0;
+        _playerBrain.GetStateManager().IsJumping = false;
 
-    void StopJumpSlow()
-    {
-        stepsJumped = 0;
-        stepsWallJumped = 0;
-        playerStateManager.IsJumping = false;
-        playerStateManager.IsWallJumping = false;
+        if (shouldStopInstantly)
+        {
+            _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_playerBrain.PlayerRigidBody2D.velocity.x, 0);
+        }
+        else
+        {
+            _stepsWallJumped = 0;
+            _playerBrain.GetStateManager().IsWallJumping = false;
+        }
     }
 }
