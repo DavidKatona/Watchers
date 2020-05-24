@@ -5,33 +5,38 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(PlayerMovementHandler))]
+[RequireComponent(typeof(PlayerInputManager))]
+[RequireComponent(typeof(PlayerCollisionDetector))]
+[RequireComponent(typeof(PlayerStateManager))]
+[RequireComponent(typeof(PlayerAnimationController))]
 public class PlayerBrain : MonoBehaviour
 {
-    [SerializeField] private PlayerMovementHandler _playerMovementHandler;
+    private PlayerMovementHandler _playerMovementHandler;
     public PlayerMovementHandler GetMovementHandler()
     {
         return _playerMovementHandler;
     }
 
-    [SerializeField] private PlayerInputManager _playerInputManager;
+    private PlayerInputManager _playerInputManager;
     public PlayerInputManager GetInputManager()
     {
         return _playerInputManager;
     }
 
-    [SerializeField] private PlayerCollisionDetector _playerCollisionDetector;
+    private PlayerCollisionDetector _playerCollisionDetector;
     public PlayerCollisionDetector GetCollisionDetector()
     {
         return _playerCollisionDetector;
     }
 
-    [SerializeField] private PlayerStateManager _playerStateManager;
+    private PlayerStateManager _playerStateManager;
     public PlayerStateManager GetStateManager()
     {
         return _playerStateManager;
     }
 
-    [SerializeField] private PlayerAnimationController _playerAnimationController;
+    private PlayerAnimationController _playerAnimationController;
     public PlayerAnimationController GetAnimationController()
     {
         return _playerAnimationController;
@@ -42,6 +47,17 @@ public class PlayerBrain : MonoBehaviour
 
     private void Awake()
     {
+        InitializeComponents();
+    }
+
+    private void InitializeComponents()
+    {
+        _playerMovementHandler = GetComponent<PlayerMovementHandler>();
+        _playerInputManager = GetComponent<PlayerInputManager>();
+        _playerCollisionDetector = GetComponent<PlayerCollisionDetector>();
+        _playerStateManager = GetComponent<PlayerStateManager>();
+        _playerAnimationController = GetComponent<PlayerAnimationController>();
+
         PlayerRigidBody2D = GetComponent<Rigidbody2D>();
         PlayerAnimator = GetComponent<Animator>();
     }
