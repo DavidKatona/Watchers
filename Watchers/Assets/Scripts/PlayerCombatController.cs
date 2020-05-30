@@ -19,11 +19,11 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private LayerMask _attackableLayer;
     private float _timeElapsedSinceLastAttack;
     private float _horizontalRecoilSpeed = 5;
-    private float _verticalRecoilSpeed = 5;
+    private float _verticalRecoilSpeed = 10;
     private float _gravityScale;
     private int _horizontalRecoilSteps = 10;
     private int _stepsRecoiledHorizontally;
-    private int _verticalRecoilSteps = 10;
+    private int _verticalRecoilSteps = 5;
     private int _stepsRecoiledVertically;
 
 
@@ -48,6 +48,7 @@ public class PlayerCombatController : MonoBehaviour
         {
             StopHorizontalRecoil();
         }
+
         if (_playerBrain.GetStateManager().IsRecoilingY && _stepsRecoiledVertically < _verticalRecoilSteps)
         {
             _stepsRecoiledVertically++;
@@ -56,6 +57,7 @@ public class PlayerCombatController : MonoBehaviour
         {
             StopVerticalRecoil();
         }
+
         if (_playerBrain.GetCollisionDetector().IsGrounded())
         {
             StopVerticalRecoil();
@@ -76,7 +78,8 @@ public class PlayerCombatController : MonoBehaviour
             //Forward Attack
             if (yAxisInput == 0 || yAxisInput < 0 && _playerBrain.GetCollisionDetector().IsGrounded())
             {
-                //ToDo: Handle AnimationController
+                //ToDo: Handle this with the AnimationController
+                _playerBrain.PlayerAnimator.SetTrigger("AttackForward");
                 Debug.Log("Attacking forwards...");
                 Collider2D[] objectsToHit = Physics2D.OverlapCircleAll(_forwardAttackTransform.position, _forwardAttackRadius, _attackableLayer);
 

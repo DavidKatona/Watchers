@@ -6,7 +6,7 @@ public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] private PlayerBrain _playerBrain;
 
-    void Update()
+    private void Update()
     {
         SetGroundedState();
         SetFallingState();
@@ -15,7 +15,7 @@ public class PlayerAnimationController : MonoBehaviour
         SetDashingState();
     }
 
-    void SetGroundedState()
+    private void SetGroundedState()
     {
         if (_playerBrain.GetCollisionDetector().IsGrounded())
         {
@@ -28,7 +28,7 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    void SetFallingState()
+    private void SetFallingState()
     {
         //Falling Animation
         if (_playerBrain.PlayerRigidBody2D.velocity.y < 0 && !_playerBrain.GetCollisionDetector().IsGrounded())
@@ -37,7 +37,7 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    void SetRunningState()
+    private void SetRunningState()
     {
         //Running Animation
         if (Mathf.Abs(_playerBrain.PlayerRigidBody2D.velocity.x) > 0 && _playerBrain.GetCollisionDetector().IsGrounded())
@@ -50,7 +50,7 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    void SetJumpingState()
+    private void SetJumpingState()
     {
         //Jumping Animation
         if (_playerBrain.GetStateManager().IsJumping && !_playerBrain.GetStateManager().IsWallSliding)
@@ -63,7 +63,7 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    void SetDashingState()
+    private void SetDashingState()
     {
         //Dash Animation
         if (_playerBrain.GetStateManager().IsDashing)
@@ -73,5 +73,10 @@ public class PlayerAnimationController : MonoBehaviour
         {
             _playerBrain.PlayerAnimator.SetBool("IsDashing", false);
         }
+    }
+
+    private void TriggerAttack()
+    {
+
     }
 }
