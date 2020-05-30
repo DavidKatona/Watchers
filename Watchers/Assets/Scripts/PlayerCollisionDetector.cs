@@ -75,7 +75,7 @@ public class PlayerCollisionDetector : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
 
         //Draw lines for groundcheck raycasts
         Gizmos.DrawLine(_groundCheckTransform.position, _groundCheckTransform.position + new Vector3(0, -_groundCheckLengthY));

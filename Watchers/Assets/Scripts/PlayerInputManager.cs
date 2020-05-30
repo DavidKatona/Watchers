@@ -11,6 +11,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool IsJumpPressed { get; private set; }
     public bool IsJumpHeld { get; private set; }
     public bool IsDashPressed { get; private set; }
+    public bool IsAttackHeldDown { get; private set; }
 
     void Update()
     {
@@ -51,6 +52,16 @@ public class PlayerInputManager : MonoBehaviour
         else
         {
             IsDashPressed = false;
+        }
+
+        //Attacking
+        if (Input.GetButtonDown("Attack"))
+        {
+            IsAttackHeldDown = true;
+        }
+        else
+        {
+            IsAttackHeldDown = false;
         }
     }
 }

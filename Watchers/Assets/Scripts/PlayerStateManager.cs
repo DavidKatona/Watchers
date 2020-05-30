@@ -20,4 +20,6 @@ public class PlayerStateManager : MonoBehaviour
     public bool IsOnBench { get; set; }
     public bool IsNearNPC { get; set; }
     public bool IsUsingNPC { get; set; }
+    public bool IsRecoilingX { get; set; }
+    public bool IsRecoilingY { get; set; }
 }
