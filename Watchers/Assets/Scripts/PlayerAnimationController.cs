@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-    [SerializeField] private Animator playerAnimator;
-    [SerializeField] private Rigidbody2D playerRigidbody2d;
-    [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private PlayerStateList playerStateList;
+    [SerializeField] private PlayerBrain _playerBrain;
 
-    // Update is called once per frame
     void Update()
     {
         SetGroundedState();
@@ -21,61 +17,61 @@ public class PlayerAnimationController : MonoBehaviour
 
     void SetGroundedState()
     {
-        //Use the ground check method from the player movement script/component
-        if (playerMovement.GroundCheck())
+        if (_playerBrain.GetCollisionDetector().IsGrounded())
         {
-            playerAnimator.SetBool("IsGrounded", true);
-            playerAnimator.SetBool("IsFalling", false);
+            _playerBrain.PlayerAnimator.SetBool("IsGrounded", true);
+            _playerBrain.PlayerAnimator.SetBool("IsFalling", false);
         }
         else
         {
-            playerAnimator.SetBool("IsGrounded", false);
+            _playerBrain.PlayerAnimator.SetBool("IsGrounded", false);
         }
     }
 
     void SetFallingState()
     {
-        if (playerRigidbody2d.velocity.y < 0 && !playerMovement.GroundCheck())
+        //Falling Animation
+        if (_playerBrain.PlayerRigidBody2D.velocity.y < 0 && !_playerBrain.GetCollisionDetector().IsGrounded())
         {
-            playerAnimator.SetBool("IsFalling", true);
+            _playerBrain.PlayerAnimator.SetBool("IsFalling", true);
         }
     }
 
     void SetRunningState()
     {
         //Running Animation
-        if (Mathf.Abs(playerRigidbody2d.velocity.x) > 0 && playerMovement.GroundCheck())
+        if (Mathf.Abs(_playerBrain.PlayerRigidBody2D.velocity.x) > 0 && _playerBrain.GetCollisionDetector().IsGrounded())
         {
-            playerAnimator.SetBool("IsRunning", true);
+            _playerBrain.PlayerAnimator.SetBool("IsRunning", true);
         }
         else
         {
-            playerAnimator.SetBool("IsRunning", false);
+            _playerBrain.PlayerAnimator.SetBool("IsRunning", false);
         }
     }
 
     void SetJumpingState()
     {
         //Jumping Animation
-        if (playerStateList.IsJumping && !playerStateList.IsWallSliding)
+        if (_playerBrain.GetStateManager().IsJumping && !_playerBrain.GetStateManager().IsWallSliding)
         {
-            playerAnimator.SetBool("IsJumping", true);
+            _playerBrain.PlayerAnimator.SetBool("IsJumping", true);
         }
         else
         {
-            playerAnimator.SetBool("IsJumping", false);
+            _playerBrain.PlayerAnimator.SetBool("IsJumping", false);
         }
     }
 
     void SetDashingState()
     {
         //Dash Animation
-        if (playerStateList.IsDashing)
+        if (_playerBrain.GetStateManager().IsDashing)
         {
-            playerAnimator.SetBool("IsDashing", true);
+            _playerBrain.PlayerAnimator.SetBool("IsDashing", true);
         } else
         {
-            playerAnimator.SetBool("IsDashing", false);
+            _playerBrain.PlayerAnimator.SetBool("IsDashing", false);
         }
     }
 }

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateList : MonoBehaviour
+public class PlayerStateManager : MonoBehaviour
 {
-    //This class is used to track player state.
+    [SerializeField] private PlayerBrain _playerBrain;
+
     public bool IsWalking { get; set; }
     public bool IsInteracting { get; set; }
-    public bool IsLookingRight { get; set; }
+    public bool IsLookingRight { get; set; } = true;
     public bool IsJumping { get; set; }
     public bool IsDashing { get; set; }
     public bool IsTouchingWall { get; set; }
