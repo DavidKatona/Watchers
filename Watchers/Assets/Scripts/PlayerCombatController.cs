@@ -18,10 +18,48 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private float _downwardsAttackRadius = 1;
     [SerializeField] private LayerMask _attackableLayer;
     private float _timeElapsedSinceLastAttack;
+    private float _horizontalRecoilSpeed = 5;
+    private float _verticalRecoilSpeed = 5;
+    private float _gravityScale;
+    private int _horizontalRecoilSteps = 10;
+    private int _stepsRecoiledHorizontally;
+    private int _verticalRecoilSteps = 10;
+    private int _stepsRecoiledVertically;
+
+
+    private void Awake()
+    {
+        _gravityScale = GetComponent<Rigidbody2D>().gravityScale;
+    }
 
     void Update()
     {
+        Recoil();
         Attack();
+    }
+
+    private void FixedUpdate()
+    {
+        if (_playerBrain.GetStateManager().IsRecoilingX && _stepsRecoiledHorizontally < _horizontalRecoilSteps)
+        {
+            _stepsRecoiledHorizontally++;
+        }
+        else
+        {
+            StopHorizontalRecoil();
+        }
+        if (_playerBrain.GetStateManager().IsRecoilingY && _stepsRecoiledVertically < _verticalRecoilSteps)
+        {
+            _stepsRecoiledVertically++;
+        }
+        else
+        {
+            StopVerticalRecoil();
+        }
+        if (_playerBrain.GetCollisionDetector().IsGrounded())
+        {
+            StopVerticalRecoil();
+        }
     }
 
     private void Attack()
@@ -30,7 +68,7 @@ public class PlayerCombatController : MonoBehaviour
 
         float yAxisInput = _playerBrain.GetInputManager().VerticalInputModifier;
 
-        if (_playerBrain.GetInputManager().IsAttackHeldDown && _timeElapsedSinceLastAttack >= _timeBetweenAttacks)
+        if (_playerBrain.GetInputManager().IsAttackPressed && _timeElapsedSinceLastAttack >= _timeBetweenAttacks)
         {
             _timeElapsedSinceLastAttack = 0;
 
@@ -89,6 +127,38 @@ public class PlayerCombatController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Recoil()
+    {
+        if (_playerBrain.GetStateManager().IsRecoilingX)
+        {
+            var recoilModifier = _playerBrain.GetStateManager().IsLookingRight ? -1 : 1;
+            _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_horizontalRecoilSpeed * recoilModifier, 0);
+        }
+
+        if (_playerBrain.GetStateManager().IsRecoilingY)
+        {
+            var recoilModifier = _playerBrain.GetInputManager().VerticalInputModifier < 0 ? 1 : -1;
+            _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_playerBrain.PlayerRigidBody2D.velocity.x, _verticalRecoilSpeed * recoilModifier);
+            _playerBrain.PlayerRigidBody2D.gravityScale = 0;
+        }
+        else
+        {
+            _playerBrain.PlayerRigidBody2D.gravityScale = _gravityScale;
+        }
+    }
+
+    private void StopHorizontalRecoil()
+    {
+        _stepsRecoiledHorizontally = 0;
+        _playerBrain.GetStateManager().IsRecoilingX = false;
+    }
+
+    private void StopVerticalRecoil()
+    {
+        _stepsRecoiledVertically = 0;
+        _playerBrain.GetStateManager().IsRecoilingY = false;
     }
 
     private void OnDrawGizmos()

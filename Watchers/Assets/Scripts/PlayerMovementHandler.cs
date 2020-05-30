@@ -41,7 +41,7 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (!_playerBrain.GetStateManager().IsRecoilingX) Move();
         Jump();
         WallJump();
         Dash();
