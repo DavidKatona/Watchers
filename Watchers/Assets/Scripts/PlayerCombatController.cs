@@ -70,7 +70,7 @@ public class PlayerCombatController : MonoBehaviour
 
         float yAxisInput = _playerBrain.GetInputManager().VerticalInputModifier;
 
-        if (_playerBrain.GetInputManager().IsAttackPressed && _timeElapsedSinceLastAttack >= _timeBetweenAttacks)
+        if (_playerBrain.GetInputManager().IsAttackPressed && _timeElapsedSinceLastAttack >= _timeBetweenAttacks && !_playerBrain.GetStateManager().IsDashing)
         {
             _timeElapsedSinceLastAttack = 0;
 
