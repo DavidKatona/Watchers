@@ -12,7 +12,7 @@ public class PlayerAnimationController : MonoBehaviour
         SetFallingState();
         SetRunningState();
         SetJumpingState();
-        TriggerAttack();
+        SetDashingState();
     }
 
     private void SetGroundedState()
@@ -67,9 +67,15 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    private void TriggerAttack()
+    private void SetDashingState()
     {
-        //Attack Animations
-        
+        if (_playerBrain.GetStateManager().IsDashing)
+        {
+            _playerBrain.PlayerAnimator.SetBool("IsDashing", true);
+        }
+        else
+        {
+            _playerBrain.PlayerAnimator.SetBool("IsDashing", false);
+        }
     }
 }
