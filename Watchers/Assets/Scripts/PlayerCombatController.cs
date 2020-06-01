@@ -26,7 +26,6 @@ public class PlayerCombatController : MonoBehaviour
     private int _verticalRecoilSteps = 5;
     private int _stepsRecoiledVertically;
 
-
     private void Awake()
     {
         _gravityScale = GetComponent<Rigidbody2D>().gravityScale;
