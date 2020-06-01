@@ -89,6 +89,7 @@ public class PlayerMovementHandler : MonoBehaviour
         if (_playerBrain.GetInputManager().IsDashPressed && _currentDashCooldown == 0f && _stepsDashed < _maxDashSteps && !_playerBrain.GetStateManager().IsWallSliding)
         {
             _playerBrain.GetStateManager().IsDashing = true;
+            _playerBrain.PlayerAnimator.SetTrigger("Dash");
             _currentDashCooldown = _maxDashCooldown;
         }
     }
