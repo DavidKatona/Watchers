@@ -68,9 +68,6 @@ public class PlayerCombatController : MonoBehaviour
     {
         _timeElapsedSinceLastAttack += Time.deltaTime;
 
-        if (_timeElapsedSinceLastAttack >= _timeBetweenAttacks)
-            _playerBrain.GetStateManager().IsAttacking = false;
-
         float yAxisInput = _playerBrain.GetInputManager().VerticalInputModifier;
 
         if (_playerBrain.GetInputManager().IsAttackPressed && _timeElapsedSinceLastAttack >= _timeBetweenAttacks && !_playerBrain.GetStateManager().IsDashing)
@@ -82,7 +79,7 @@ public class PlayerCombatController : MonoBehaviour
             if (yAxisInput == 0 || yAxisInput < 0 && _playerBrain.GetCollisionDetector().IsGrounded())
             {
                 //ToDo: Handle this with the AnimationController
-                _playerBrain.GetStateManager().IsAttacking = true;
+                _playerBrain.PlayerAnimator.SetTrigger("Attack");
                 Debug.Log("Attacking forwards...");
                 Collider2D[] objectsToHit = Physics2D.OverlapCircleAll(_forwardAttackTransform.position, _forwardAttackRadius, _attackableLayer);
 

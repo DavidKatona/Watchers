@@ -14,7 +14,6 @@ public class PlayerStateManager : MonoBehaviour
     public bool IsTouchingWall { get; set; }
     public bool IsWallSliding { get; set; }
     public bool IsWallJumping { get; set; }
-    public bool IsAttacking { get; set; }
     public bool IsCasting { get; set; }
     public bool IsCastReleased { get; set; }
     public bool IsNearBench { get; set; }

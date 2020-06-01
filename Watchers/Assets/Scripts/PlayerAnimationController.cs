@@ -80,13 +80,6 @@ public class PlayerAnimationController : MonoBehaviour
     private void TriggerAttack()
     {
         //Attack Animations
-        if (_playerBrain.GetStateManager().IsAttacking)
-        {
-            _playerBrain.PlayerAnimator.SetBool("IsAttacking", true);
-        }
-        else
-        {
-            _playerBrain.PlayerAnimator.SetBool("IsAttacking", false);
-        }
+        
     }
 }
