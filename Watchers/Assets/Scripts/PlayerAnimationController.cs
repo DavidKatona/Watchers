@@ -12,7 +12,6 @@ public class PlayerAnimationController : MonoBehaviour
         SetFallingState();
         SetRunningState();
         SetJumpingState();
-        SetDashingState();
         TriggerAttack();
     }
 
@@ -36,6 +35,10 @@ public class PlayerAnimationController : MonoBehaviour
         {
             _playerBrain.PlayerAnimator.SetBool("IsFalling", true);
         }
+        else
+        {
+            _playerBrain.PlayerAnimator.SetBool("IsFalling", false);
+        }
     }
 
     private void SetRunningState()
@@ -54,26 +57,13 @@ public class PlayerAnimationController : MonoBehaviour
     private void SetJumpingState()
     {
         //Jumping Animation
-        if (_playerBrain.GetStateManager().IsJumping && !_playerBrain.GetStateManager().IsWallSliding)
+        if (_playerBrain.GetStateManager().IsJumping && !_playerBrain.GetStateManager().IsWallSliding && !_playerBrain.GetCollisionDetector().IsRoofed())
         {
             _playerBrain.PlayerAnimator.SetBool("IsJumping", true);
         }
         else
         {
             _playerBrain.PlayerAnimator.SetBool("IsJumping", false);
-        }
-    }
-
-    private void SetDashingState()
-    {
-        //Dash Animation
-        if (_playerBrain.GetStateManager().IsDashing)
-        {
-            _playerBrain.PlayerAnimator.SetBool("IsDashing", true);
-        } 
-        else
-        {
-            _playerBrain.PlayerAnimator.SetBool("IsDashing", false);
         }
     }
 
