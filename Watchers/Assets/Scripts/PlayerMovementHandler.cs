@@ -218,18 +218,9 @@ public class PlayerMovementHandler : MonoBehaviour
         {
             if (_stepsDashed <= _maxDashSteps)
             {
-                if (_playerBrain.GetStateManager().IsLookingRight)
-                {
                     _playerBrain.PlayerRigidBody2D.gravityScale = 0;
-                    _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_dashSpeed, 0);
+                    _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_dashSpeed * transform.localScale.x, 0);
                     _stepsDashed++;
-                }
-                else if (!_playerBrain.GetStateManager().IsLookingRight)
-                {
-                    _playerBrain.PlayerRigidBody2D.gravityScale = 0;
-                    _playerBrain.PlayerRigidBody2D.velocity = new Vector2(-_dashSpeed, 0);
-                    _stepsDashed++;
-                }
             }
             else
             {
