@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
@@ -8,11 +6,18 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Update()
     {
+        ControlVerticalInput();
         SetGroundedState();
         SetFallingState();
         SetRunningState();
         SetJumpingState();
         SetDashingState();
+    }
+
+    private void ControlVerticalInput()
+    {
+        var verticalInput = _playerBrain.GetInputManager().VerticalInputModifier;
+        _playerBrain.PlayerAnimator.SetFloat("VerticalInput", verticalInput);
     }
 
     private void SetGroundedState()
