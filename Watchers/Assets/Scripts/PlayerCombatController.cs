@@ -68,7 +68,9 @@ public class PlayerCombatController : MonoBehaviour
         _timeElapsedSinceLastAttack += Time.deltaTime;
 
         if (_timeElapsedSinceLastAttack > _timeBetweenAttacks)
+        {
             _playerBrain.PlayerAnimator.SetBool("IsAttacking", false);
+        }
 
         float yAxisInput = _playerBrain.GetInputManager().VerticalInputModifier;
 
@@ -101,6 +103,8 @@ public class PlayerCombatController : MonoBehaviour
             else if (yAxisInput > 0)
             {
                 //ToDo: Handle AnimationController
+                _playerBrain.PlayerAnimator.SetBool("IsAttacking", true);
+                _playerBrain.PlayerAnimator.SetTrigger("Attack");
                 Debug.Log("Attacking upwards...");
                 Collider2D[] objectsToHit = Physics2D.OverlapCircleAll(_upwardsAttackTransform.position, _upwardsAttackRadius, _attackableLayer);
 
@@ -116,9 +120,11 @@ public class PlayerCombatController : MonoBehaviour
             }
 
             //Downward Attack
-            else if (yAxisInput < 0)
+            else if (yAxisInput < 0 && !_playerBrain.GetCollisionDetector().IsGrounded())
             {
                 //ToDo: Handle AnimationController
+                _playerBrain.PlayerAnimator.SetBool("IsAttacking", true);
+                _playerBrain.PlayerAnimator.SetTrigger("Attack");
                 Debug.Log("Attacking downwards...");
                 Collider2D[] objectsToHit = Physics2D.OverlapCircleAll(_downwardsAttackTransform.position, _downwardsAttackRadius, _attackableLayer);
 

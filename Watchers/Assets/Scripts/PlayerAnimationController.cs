@@ -16,8 +16,11 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void ControlVerticalInput()
     {
-        var verticalInput = _playerBrain.GetInputManager().VerticalInputModifier;
-        _playerBrain.PlayerAnimator.SetFloat("VerticalInput", verticalInput);
+        if (!_playerBrain.PlayerAnimator.GetBool("IsAttacking"))
+        {
+            var verticalInput1 = _playerBrain.GetInputManager().VerticalInputModifier;
+            _playerBrain.PlayerAnimator.SetFloat("VerticalInput", verticalInput1);
+        }
     }
 
     private void SetGroundedState()
