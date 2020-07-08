@@ -9,6 +9,7 @@ public class PlayerAnimationController : MonoBehaviour
         ControlVerticalInput();
         SetGroundedState();
         SetFallingState();
+        SetWallSlidingState();
         SetRunningState();
         SetJumpingState();
         SetDashingState();
@@ -46,6 +47,19 @@ public class PlayerAnimationController : MonoBehaviour
         else
         {
             _playerBrain.PlayerAnimator.SetBool("IsFalling", false);
+        }
+    }
+
+    private void SetWallSlidingState()
+    {
+        //Wall Sliding Animation
+        if (_playerBrain.PlayerRigidBody2D.velocity.y < 0 && _playerBrain.GetStateManager().IsTouchingWall)
+        {
+            _playerBrain.PlayerAnimator.SetBool("IsWallSliding", true);
+        }
+        else
+        {
+            _playerBrain.PlayerAnimator.SetBool("IsWallSliding", false);
         }
     }
 
