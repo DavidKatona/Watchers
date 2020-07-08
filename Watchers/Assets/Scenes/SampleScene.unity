@@ -1111,9 +1111,9 @@ MonoBehaviour:
   _upwardsAttackTransform: {fileID: 1150120517}
   _downwardsAttackTransform: {fileID: 1828708278}
   _timeBetweenAttacks: 0.4
-  _forwardAttackRadius: 1
-  _upwardsAttackRadius: 1
-  _downwardsAttackRadius: 1
+  _forwardAttackRadius: 0.8
+  _upwardsAttackRadius: 0.7
+  _downwardsAttackRadius: 0.7
   _attackableLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -1518,7 +1518,7 @@ GameObject:
   - component: {fileID: 706877787}
   - component: {fileID: 706877786}
   m_Layer: 0
-  m_Name: CM vcam1
+  m_Name: CinemachineCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
