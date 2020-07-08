@@ -115,11 +115,11 @@ public class PlayerMovementHandler : MonoBehaviour
         }
 
         //Flip the player depending on whether they are looking right or left
-        if (_playerBrain.GetInputManager().HorizontalInputModifier > 0 && !_playerBrain.GetStateManager().IsLookingRight)
+        if (_playerBrain.GetInputManager().HorizontalInputModifier > 0 && !_playerBrain.GetStateManager().IsLookingRight && !_playerBrain.GetStateManager().IsWallJumping)
         {
             Flip();
         }
-        else if (_playerBrain.GetInputManager().HorizontalInputModifier < 0 && _playerBrain.GetStateManager().IsLookingRight)
+        else if (_playerBrain.GetInputManager().HorizontalInputModifier < 0 && _playerBrain.GetStateManager().IsLookingRight && !_playerBrain.GetStateManager().IsWallJumping)
         {
             Flip();
         }
@@ -145,7 +145,7 @@ public class PlayerMovementHandler : MonoBehaviour
     }
 
     private void Flip()
-    {
+    {        
         //Switch to true if playerState.lookingRight is false, and to true if playerState.lookingRight is false
         _playerBrain.GetStateManager().IsLookingRight = !_playerBrain.GetStateManager().IsLookingRight;
 
@@ -157,12 +157,6 @@ public class PlayerMovementHandler : MonoBehaviour
         //Flip wallcheck X
         var wallCheckLengthX = _playerBrain.GetCollisionDetector().GetWallCheckLengthX();
         _playerBrain.GetCollisionDetector().SetWallCheckLengthX(wallCheckLengthX * -1);
-
-        if (_playerBrain.GetStateManager().IsWallJumping)
-        {
-            _playerBrain.GetStateManager().IsWallJumping = false;
-            _stepsWallJumped = _maxWallJumpSteps;
-        }
     }
 
     private void Jump()
@@ -197,12 +191,12 @@ public class PlayerMovementHandler : MonoBehaviour
         {
             if (_stepsWallJumped < _maxWallJumpSteps && !_playerBrain.GetCollisionDetector().IsRoofed() && !_playerBrain.GetStateManager().IsLookingRight)
             {
-                _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_wallJumpSpeed, _jumpSpeed);
+                _playerBrain.PlayerRigidBody2D.velocity = new Vector2(-_wallJumpSpeed, _jumpSpeed);
                 _stepsWallJumped++;
             }
             else if (_stepsWallJumped < _maxWallJumpSteps && !_playerBrain.GetCollisionDetector().IsRoofed() && _playerBrain.GetStateManager().IsLookingRight)
             {
-                _playerBrain.PlayerRigidBody2D.velocity = new Vector2(-_wallJumpSpeed, _jumpSpeed);
+                _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_wallJumpSpeed, _jumpSpeed);
                 _stepsWallJumped++;
             }
             else
