@@ -3,6 +3,22 @@
 public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] private PlayerBrain _playerBrain;
+    private Animator _playerAnimator;
+    private Rigidbody2D _playerRigidBody2D;
+    private PlayerInputManager _playerInputManager;
+    private PlayerStateManager _playerStateManager;
+    private PlayerCollisionDetector _playerCollisionDetector;
+
+    private void Awake()
+    {
+        _playerAnimator = _playerBrain.PlayerAnimator;
+        _playerRigidBody2D = _playerBrain.PlayerRigidBody2D;
+
+        _playerInputManager = _playerBrain.GetInputManager();
+        _playerStateManager = _playerBrain.GetStateManager();
+        _playerCollisionDetector = _playerBrain.GetCollisionDetector();
+    }
+
 
     private void Update()
     {
@@ -17,87 +33,87 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void ControlVerticalInput()
     {
-        if (!_playerBrain.PlayerAnimator.GetBool("IsAttacking"))
+        if (!_playerAnimator.GetBool("IsAttacking"))
         {
-            var verticalInput1 = _playerBrain.GetInputManager().VerticalInputModifier;
-            _playerBrain.PlayerAnimator.SetFloat("VerticalInput", verticalInput1);
+            var verticalInput1 = _playerInputManager.VerticalInputModifier;
+            _playerAnimator.SetFloat("VerticalInput", verticalInput1);
         }
     }
 
     private void SetGroundedState()
     {
-        if (_playerBrain.GetCollisionDetector().IsGrounded())
+        if (_playerCollisionDetector.IsGrounded())
         {
-            _playerBrain.PlayerAnimator.SetBool("IsGrounded", true);
-            _playerBrain.PlayerAnimator.SetBool("IsFalling", false);
+            _playerAnimator.SetBool("IsGrounded", true);
+            _playerAnimator.SetBool("IsFalling", false);
         }
         else
         {
-            _playerBrain.PlayerAnimator.SetBool("IsGrounded", false);
+            _playerAnimator.SetBool("IsGrounded", false);
         }
     }
 
     private void SetFallingState()
     {
         //Falling Animation
-        if (_playerBrain.PlayerRigidBody2D.velocity.y < 0 && !_playerBrain.GetCollisionDetector().IsGrounded())
+        if (_playerRigidBody2D.velocity.y < 0 && !_playerCollisionDetector.IsGrounded())
         {
-            _playerBrain.PlayerAnimator.SetBool("IsFalling", true);
+            _playerAnimator.SetBool("IsFalling", true);
         }
         else
         {
-            _playerBrain.PlayerAnimator.SetBool("IsFalling", false);
+            _playerAnimator.SetBool("IsFalling", false);
         }
     }
 
     private void SetWallSlidingState()
     {
         //Wall Sliding Animation
-        if (_playerBrain.PlayerRigidBody2D.velocity.y < 0 && _playerBrain.GetStateManager().IsTouchingWall)
+        if (_playerRigidBody2D.velocity.y < 0 && _playerStateManager.IsTouchingWall)
         {
-            _playerBrain.PlayerAnimator.SetBool("IsWallSliding", true);
+            _playerAnimator.SetBool("IsWallSliding", true);
         }
         else
         {
-            _playerBrain.PlayerAnimator.SetBool("IsWallSliding", false);
+            _playerAnimator.SetBool("IsWallSliding", false);
         }
     }
 
     private void SetRunningState()
     {
         //Running Animation
-        if (Mathf.Abs(_playerBrain.PlayerRigidBody2D.velocity.x) > 0 && _playerBrain.GetCollisionDetector().IsGrounded())
+        if (Mathf.Abs(_playerRigidBody2D.velocity.x) > 0 && _playerCollisionDetector.IsGrounded())
         {
-            _playerBrain.PlayerAnimator.SetBool("IsRunning", true);
+            _playerAnimator.SetBool("IsRunning", true);
         }
         else
         {
-            _playerBrain.PlayerAnimator.SetBool("IsRunning", false);
+            _playerAnimator.SetBool("IsRunning", false);
         }
     }
 
     private void SetJumpingState()
     {
         //Jumping Animation
-        if (_playerBrain.GetStateManager().IsJumping && !_playerBrain.GetStateManager().IsWallSliding && !_playerBrain.GetCollisionDetector().IsRoofed())
+        if (_playerStateManager.IsJumping && !_playerStateManager.IsWallSliding && !_playerCollisionDetector.IsRoofed())
         {
-            _playerBrain.PlayerAnimator.SetBool("IsJumping", true);
+            _playerAnimator.SetBool("IsJumping", true);
         }
         else
         {
-            _playerBrain.PlayerAnimator.SetBool("IsJumping", false);
+            _playerAnimator.SetBool("IsJumping", false);
         }
     }
 
     private void SetDashingState()
     {
-        if (_playerBrain.GetStateManager().IsDashing)
+        if (_playerStateManager.IsDashing)
         {
-            _playerBrain.PlayerAnimator.SetBool("IsDashing", true);
+            _playerAnimator.SetBool("IsDashing", true);
         }
         else
         {
-            _playerBrain.PlayerAnimator.SetBool("IsDashing", false);
+            _playerAnimator.SetBool("IsDashing", false);
         }
     }
 }
