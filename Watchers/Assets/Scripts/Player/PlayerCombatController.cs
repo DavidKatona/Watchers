@@ -34,7 +34,7 @@ public class PlayerCombatController : MonoBehaviour
     void Update()
     {
         Recoil();
-        Attack();
+        if (!_playerBrain.GetStateManager().IsWallSliding) Attack();
     }
 
     private void FixedUpdate()
