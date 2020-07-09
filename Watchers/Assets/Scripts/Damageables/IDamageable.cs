@@ -1,4 +1,4 @@
-﻿public interface IDamagable
+﻿public interface IDamageable
 {
     int Health { get; set; }
 

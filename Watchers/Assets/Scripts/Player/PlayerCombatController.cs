@@ -93,7 +93,7 @@ public class PlayerCombatController : MonoBehaviour
 
                 foreach (var obj in objectsToHit)
                 {
-                    var damagable = obj.GetComponent<IDamagable>();
+                    var damagable = obj.GetComponent<IDamageable>();
 
                     if (damagable != null)
                     {

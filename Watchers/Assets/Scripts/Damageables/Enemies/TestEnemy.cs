@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Assets.Scripts.Damagables.Enemies
 {
-    public class TestEnemy : MonoBehaviour, IDamagable
+    public class TestEnemy : MonoBehaviour, IDamageable
     {
         // ToDo: Rewrite this to actual enemy classes with refined logic.
         // Enemy Factory creates enemies
