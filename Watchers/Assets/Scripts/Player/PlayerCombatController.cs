@@ -82,27 +82,30 @@ public class PlayerCombatController : MonoBehaviour
             //Forward Attack
             if (yAxisInput == 0 || yAxisInput < 0 && _playerBrain.GetCollisionDetector().IsGrounded())
             {
-                //ToDo: Handle this with the AnimationController
                 _playerBrain.PlayerAnimator.SetBool("IsAttacking", true);
                 _playerBrain.PlayerAnimator.SetTrigger("Attack");
                 Debug.Log("Attacking forwards...");
                 Collider2D[] objectsToHit = Physics2D.OverlapCircleAll(_forwardAttackTransform.position, _forwardAttackRadius, _attackableLayer);
 
-                if (objectsToHit.Length > 0)
-                {
-                    _playerBrain.GetStateManager().IsRecoilingX = true;
-                }
+                if (objectsToHit.Length == 0) return;
 
-                for (int i = 0; i < objectsToHit.Length; i++)
+                _playerBrain.GetStateManager().IsRecoilingX = true;
+
+                foreach (var obj in objectsToHit)
                 {
-                    Debug.Log($"{objectsToHit[i].name} has been hit.");
+                    var damagable = obj.GetComponent<IDamagable>();
+
+                    if (damagable != null)
+                    {
+                        // 2 is just a test number; Replace this later with actual damage stat.
+                        damagable.TakeDamage(2);
+                    }
                 }
             }
 
             //Upward Attack
             else if (yAxisInput > 0)
             {
-                //ToDo: Handle AnimationController
                 _playerBrain.PlayerAnimator.SetBool("IsAttacking", true);
                 _playerBrain.PlayerAnimator.SetTrigger("Attack");
                 Debug.Log("Attacking upwards...");
@@ -122,7 +125,6 @@ public class PlayerCombatController : MonoBehaviour
             //Downward Attack
             else if (yAxisInput < 0 && !_playerBrain.GetCollisionDetector().IsGrounded())
             {
-                //ToDo: Handle AnimationController
                 _playerBrain.PlayerAnimator.SetBool("IsAttacking", true);
                 _playerBrain.PlayerAnimator.SetTrigger("Attack");
                 Debug.Log("Attacking downwards...");
