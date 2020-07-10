@@ -98,7 +98,7 @@ public class PlayerCombatController : MonoBehaviour
                     if (damagable != null)
                     {
                         // 2 is just a test number; Replace this later with actual damage stat.
-                        damagable.TakeDamage(2);
+                        damagable.ApplyDamage(2);
                     }
                 }
             }

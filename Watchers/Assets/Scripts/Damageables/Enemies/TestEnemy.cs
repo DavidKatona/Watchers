@@ -22,7 +22,7 @@ namespace Assets.Scripts.Damagables.Enemies
             Died += OnDeath;
         }
 
-        public void TakeDamage(int damage)
+        public void ApplyDamage(int damage)
         {
             Health -= damage;
 

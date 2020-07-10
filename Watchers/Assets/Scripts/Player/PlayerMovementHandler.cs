@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerMovementHandler : MonoBehaviour
 {
     [SerializeField] private PlayerBrain _playerBrain;
+    [SerializeField] private ParticleSystem _particleJumpUp; //Trail particles
+    [SerializeField] private ParticleSystem _particleJumpDown; //Explosion particles
 
     //X Axis Movement
     private float _moveSpeed = 25.0f;
@@ -161,6 +163,12 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private void Jump()
     {
+        if (_playerBrain.GetCollisionDetector().IsGrounded() && _playerBrain.GetStateManager().IsJumping)
+        {
+            _particleJumpDown.Play();
+            _particleJumpUp.Play();
+        }
+
         if (_playerBrain.GetStateManager().IsJumping)
         {
             if (_stepsJumped < _maxJumpSteps && !_playerBrain.GetCollisionDetector().IsRoofed())
