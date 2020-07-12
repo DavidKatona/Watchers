@@ -3,7 +3,6 @@ using System.Collections;
 
 public static class AudioFadeOut
 {
-
     public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
     {
         float startVolume = audioSource.volume;
