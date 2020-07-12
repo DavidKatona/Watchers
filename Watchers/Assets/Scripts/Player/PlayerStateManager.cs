@@ -7,6 +7,7 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] private PlayerBrain _playerBrain;
 
     public bool IsWalking { get; set; }
+    public bool IsGrounded { get; set; }
     public bool IsInteracting { get; set; }
     public bool IsLookingRight { get; set; } = true;
     public bool IsJumping { get; set; }

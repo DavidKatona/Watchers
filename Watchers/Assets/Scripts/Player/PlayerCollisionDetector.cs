@@ -47,6 +47,24 @@ public class PlayerCollisionDetector : MonoBehaviour
         }
     }
 
+    public bool HasLanded(bool wasGrounded)
+    {
+        if (Physics2D.Raycast(_groundCheckTransform.position, Vector2.down, _groundCheckLengthY, _groundLayer) ||
+            Physics2D.Raycast(_groundCheckTransform.position + new Vector3(-_groundCheckLengthX, 0), Vector2.down, _groundCheckLengthY, _groundLayer) ||
+            Physics2D.Raycast(_groundCheckTransform.position + new Vector3(_groundCheckLengthX, 0), Vector2.down, _groundCheckLengthY, _groundLayer))
+        {
+            if (!wasGrounded)
+            {
+                Debug.Log("Just landed!");
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public bool IsRoofed()
     {
         if (Physics2D.Raycast(_roofCheckTransform.position, Vector2.up, _roofCheckLengthY, _groundLayer) ||

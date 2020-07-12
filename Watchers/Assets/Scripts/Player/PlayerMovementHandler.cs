@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovementHandler : MonoBehaviour
 {
@@ -98,6 +95,13 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private void Move()
     {
+        bool wasGrounded = _playerBrain.GetStateManager().IsGrounded;
+        if (!wasGrounded && _playerBrain.GetCollisionDetector().IsGrounded())
+        {
+            if (!_playerBrain.GetStateManager().IsWallSliding && !_playerBrain.GetStateManager().IsDashing)
+                _particleJumpDown.Play();
+        }
+
         //Handles movement such as walking, jumping, etc and is called under FixedUpdate
         if (!_playerBrain.GetStateManager().IsWallSliding)
         {
@@ -144,6 +148,8 @@ public class PlayerMovementHandler : MonoBehaviour
                 _stepsWallJumped = 0;
             }
         }
+
+        _playerBrain.GetStateManager().IsGrounded = _playerBrain.GetCollisionDetector().IsGrounded();
     }
 
     private void Flip()
