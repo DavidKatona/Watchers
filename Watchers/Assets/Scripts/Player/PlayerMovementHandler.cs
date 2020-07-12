@@ -23,7 +23,7 @@ public class PlayerMovementHandler : MonoBehaviour
     private int _maxWallJumpSteps = 7;
     private int _stepsWallJumped = 0;
     private float _fallSpeed = 10.0f;
-    
+
     //Movement Buffers
     private float _maxJumpBuffer = 0.05f;
     private float _currentJumpBuffer;
@@ -99,7 +99,9 @@ public class PlayerMovementHandler : MonoBehaviour
         if (!wasGrounded && _playerBrain.GetCollisionDetector().IsGrounded())
         {
             if (!_playerBrain.GetStateManager().IsWallSliding && !_playerBrain.GetStateManager().IsDashing)
+            {
                 _particleJumpDown.Play();
+            }
         }
 
         //Handles movement such as walking, jumping, etc and is called under FixedUpdate
@@ -153,7 +155,7 @@ public class PlayerMovementHandler : MonoBehaviour
     }
 
     private void Flip()
-    {        
+    {
         //Switch to true if playerState.lookingRight is false, and to true if playerState.lookingRight is false
         _playerBrain.GetStateManager().IsLookingRight = !_playerBrain.GetStateManager().IsLookingRight;
 
@@ -226,9 +228,9 @@ public class PlayerMovementHandler : MonoBehaviour
         {
             if (_stepsDashed <= _maxDashSteps)
             {
-                    _playerBrain.PlayerRigidBody2D.gravityScale = 0;
-                    _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_dashSpeed * transform.localScale.x, 0);
-                    _stepsDashed++;
+                _playerBrain.PlayerRigidBody2D.gravityScale = 0;
+                _playerBrain.PlayerRigidBody2D.velocity = new Vector2(_dashSpeed * transform.localScale.x, 0);
+                _stepsDashed++;
             }
             else
             {

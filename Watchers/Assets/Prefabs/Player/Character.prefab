@@ -312,6 +312,7 @@ MonoBehaviour:
   _playerBrain: {fileID: 4671008126943434846}
   _particleJumpUp: {fileID: 7691098711387794715}
   _particleJumpDown: {fileID: 3973260659898129948}
+  _landedAudioClip: {fileID: 8300000, guid: 49f41075d5577a64e976d0694a31c6da, type: 3}
 --- !u!114 &4671008126943434845
 MonoBehaviour:
   m_ObjectHideFlags: 0
