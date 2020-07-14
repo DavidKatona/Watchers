@@ -13,6 +13,9 @@ namespace Assets.Scripts.Damagables.Enemies
         // enemy.OnDeath += gameManager.IncrementDeadEnemiesCount()
         public delegate void DestroyHandler();
         public event DestroyHandler Died;
+        public Transform healthBar;
+        private AudioSource _audioSource;
+        public AudioClip audioClipHit;
 
         public int Health { get; set; } = 10;
 
@@ -20,11 +23,20 @@ namespace Assets.Scripts.Damagables.Enemies
         {
             // Leave subscription to be handle by another class like a GameManager or ScoreManager;
             Died += OnDeath;
+            _audioSource = GetComponent<AudioSource>();
         }
 
         public void ApplyDamage(int damage)
         {
+            Vector2 localScale = healthBar.localScale;
+            float unit = Health / localScale.x;
+            localScale.x = (Health - damage) / unit;
+            healthBar.localScale = localScale;
+            
             Health -= damage;
+
+            _audioSource.clip = audioClipHit;
+            _audioSource.Play();
 
             if (Health <= 0)
             {
