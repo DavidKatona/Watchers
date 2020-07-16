@@ -11,5 +11,10 @@ namespace Assets.Scripts.Attributes
         public Attribute Resilience = new Attribute(10);
         public Attribute Vitality = new Attribute(10);
         public Attribute Focus = new Attribute(10);
+
+        public void IncrementVigor()
+        {
+            Debug.Log("Incrementing Vigor");
+        }
     }
 }

@@ -5845,6 +5845,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3262137601889793723, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 94.8999
+      objectReference: {fileID: 0}
     - target: {fileID: 3262137602768817392, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
         type: 3}
       propertyPath: m_Name
@@ -5954,6 +5959,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281457028525440738, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -47.80005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e341d03d904d83e4e9be3b1e8c4ef7a1, type: 3}
@@ -6173,6 +6183,11 @@ PrefabInstance:
       propertyPath: menuCloseClip
       value: 
       objectReference: {fileID: 8300000, guid: bce284bc5ded17c49a0cbb798b7e4639, type: 3}
+    - target: {fileID: 3732416081826675831, guid: be144dda92d38f84e99573a7dcbee952,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5157433025095592568, guid: be144dda92d38f84e99573a7dcbee952,
         type: 3}
       propertyPath: m_LocalPosition.x
