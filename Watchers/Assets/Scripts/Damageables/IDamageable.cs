@@ -1,6 +1,7 @@
-﻿public interface IDamageable
+﻿namespace Assets.Scripts.Damagables
 {
-    int Health { get; set; }
-
-    void TakeDamage(int damage);
+    public interface IDamageable
+    {
+        void TakeDamage(int damage);
+    }
 }
