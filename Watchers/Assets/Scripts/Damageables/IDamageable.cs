@@ -2,5 +2,5 @@
 {
     int Health { get; set; }
 
-    void ApplyDamage(int damage);
+    void TakeDamage(int damage);
 }

@@ -26,7 +26,7 @@ namespace Assets.Scripts.Damagables.Enemies
             _audioSource = GetComponent<AudioSource>();
         }
 
-        public void ApplyDamage(int damage)
+        public void TakeDamage(int damage)
         {
             Vector2 localScale = healthBar.localScale;
             float unit = Health / localScale.x;
