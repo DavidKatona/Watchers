@@ -28,14 +28,5 @@ public class CharacterMenu : MonoBehaviour
 
             audioSource.Play();
         }
-
-        //if (_isOpened)
-        //{
-        //    CharacterMenuUI.SetActive(true);
-        //}
-        //else
-        //{
-        //    CharacterMenuUI.SetActive(false);
-        //}
     }
 }

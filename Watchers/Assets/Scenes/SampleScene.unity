@@ -6278,6 +6278,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5157433025095592570, guid: be144dda92d38f84e99573a7dcbee952,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157433025095592570, guid: be144dda92d38f84e99573a7dcbee952,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157433025095592570, guid: be144dda92d38f84e99573a7dcbee952,
+        type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5157433025095592572, guid: be144dda92d38f84e99573a7dcbee952,
         type: 3}
       propertyPath: m_Name
