@@ -8,7 +8,7 @@ namespace Assets.Scripts.Attributes
     {
         public event EventHandler OnAttributeChanged;
 
-        public static int ATTR_MIN = 0;
+        public static int ATTR_MIN = 11;
         public static int ATTR_MAX = 99;
 
         public enum AttributeType
