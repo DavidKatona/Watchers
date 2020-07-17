@@ -41,6 +41,12 @@ namespace Assets.Scripts.Attributes
             _focus = new SingleAttribute(focusAmount);
         }
 
+
+        /// <summary>
+        /// Gets a single attribute by an attribute type.
+        /// </summary>
+        /// <param name="attributeType">The type of attribute which will be returned.</param>
+        /// <returns></returns>
         private SingleAttribute GetSingleAttribute(AttributeType attributeType)
         {
             switch (attributeType)
@@ -63,27 +69,50 @@ namespace Assets.Scripts.Attributes
             }
         }
 
+        /// <summary>
+        /// Sets a given attribute type to the specified value.
+        /// </summary>
+        /// <param name="attributeType">The type of attribute which will be set.</param>
+        /// <param name="attributeAmount">The value the passed attribute will be set to.</param>
         public void SetAttribute(AttributeType attributeType, int attributeAmount)
         {
             GetSingleAttribute(attributeType).SetAttribute(attributeAmount);
             OnAttributeChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Increments a given attribute by one.
+        /// </summary>
+        /// <param name="attributeType">The type of attribute which will be incremented.</param>
         public void IncreaseAttribute(AttributeType attributeType)
         {
             SetAttribute(attributeType, GetAttributeAmount(attributeType) + 1);
         }
 
+        /// <summary>
+        /// Decrements a given attribute by one.
+        /// </summary>
+        /// <param name="attributeType">The type of attribute which will be decremented.</param>
         public void DecreaseAttribute(AttributeType attributeType)
         {
             SetAttribute(attributeType, GetAttributeAmount(attributeType) - 1);
         }
 
+        /// <summary>
+        /// Returns the value of a given attribute.
+        /// </summary>
+        /// <param name="attributeType">The type of attribute whose value will be returned.</param>
+        /// <returns></returns>
         public int GetAttributeAmount(AttributeType attributeType)
         {
             return GetSingleAttribute(attributeType).GetAttributeAmount();
         }
 
+        /// <summary>
+        /// Returns the normalized value of a given attribute (attribute/maximum value of attribute).
+        /// </summary>
+        /// <param name="attributeType">The type of attribute whose normalized value will be returned.</param>
+        /// <returns></returns>
         public float GetAttributeNormalized(AttributeType attributeType)
         {
             return GetSingleAttribute(attributeType).GetAttributeNormalized();
