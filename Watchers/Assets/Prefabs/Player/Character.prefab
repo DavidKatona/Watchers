@@ -1,68 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1980181213755444219
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4037752114787631442}
-  - component: {fileID: 3944915990882879833}
-  m_Layer: 0
-  m_Name: StatisticsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4037752114787631442
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1980181213755444219}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.85918236, y: 0.7371183, z: -2.289748}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4671008126943434821}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3944915990882879833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1980181213755444219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 992dd9310be419146a554dd76f676f2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attributes:
-  - _value: 0
-  - _value: 0
-  - _value: 0
-  - _value: 0
-  - _value: 0
-  Vigor:
-    _value: 10
-  Spirit:
-    _value: 10
-  Strength:
-    _value: 10
-  Intelligence:
-    _value: 10
-  Resilience:
-    _value: 10
-  Vitality:
-    _value: 10
-  Focus:
-    _value: 10
 --- !u!1 &3539719317273418622
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +120,6 @@ Transform:
   - {fileID: 3887362424546930804}
   - {fileID: 7526449788557125247}
   - {fileID: 2921087995515416988}
-  - {fileID: 4037752114787631442}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -818,15 +754,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cc4fbe9cea41a246b09c2c4f97fa702, type: 3}
---- !u!4 &7526449788557125247 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4416826757754200, guid: 6cc4fbe9cea41a246b09c2c4f97fa702,
-    type: 3}
-  m_PrefabInstance: {fileID: 7529142404426550055}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &7691098711387794715 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198341621129356860, guid: 6cc4fbe9cea41a246b09c2c4f97fa702,
+    type: 3}
+  m_PrefabInstance: {fileID: 7529142404426550055}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7526449788557125247 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4416826757754200, guid: 6cc4fbe9cea41a246b09c2c4f97fa702,
     type: 3}
   m_PrefabInstance: {fileID: 7529142404426550055}
   m_PrefabAsset: {fileID: 0}

@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 5157433023745807536}
   - component: {fileID: 5157433023745807539}
   m_Layer: 5
-  m_Name: StatBackgroundColor07
+  m_Name: FocusBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 5157433023863233493}
   - component: {fileID: 5157433023863233492}
   m_Layer: 5
-  m_Name: StatBackgroundColor04
+  m_Name: IntelligenceBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 5157433023923976691}
   - component: {fileID: 5157433023923976690}
   m_Layer: 5
-  m_Name: StatText
+  m_Name: AttributeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -950,7 +950,7 @@ GameObject:
   - component: {fileID: 5157433024033427645}
   - component: {fileID: 5157433024033427644}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: SpiritCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1027,7 +1027,7 @@ GameObject:
   - component: {fileID: 5157433024086317525}
   - component: {fileID: 5157433024086317524}
   m_Layer: 5
-  m_Name: StatText
+  m_Name: AttributeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1181,7 +1181,7 @@ GameObject:
   - component: {fileID: 5157433024094963030}
   - component: {fileID: 5157433024094963049}
   m_Layer: 5
-  m_Name: StatText
+  m_Name: AttributeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1335,7 +1335,7 @@ GameObject:
   - component: {fileID: 5157433024200532751}
   - component: {fileID: 5157433024200532750}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: StrengthCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1489,7 +1489,7 @@ GameObject:
   - component: {fileID: 5157433024277917419}
   - component: {fileID: 5157433024277917418}
   m_Layer: 5
-  m_Name: StatText
+  m_Name: AttributeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1716,7 +1716,7 @@ GameObject:
   - component: {fileID: 5157433024369125516}
   - component: {fileID: 5157433024369125519}
   m_Layer: 5
-  m_Name: StatBackgroundColor02
+  m_Name: SpiritBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2093,7 +2093,7 @@ GameObject:
   - component: {fileID: 5157433024620695177}
   - component: {fileID: 5157433024620695176}
   m_Layer: 5
-  m_Name: StatText
+  m_Name: AttributeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2170,7 +2170,7 @@ GameObject:
   - component: {fileID: 5157433024636555160}
   - component: {fileID: 5157433024636555163}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: IntelligenceCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2291,7 +2291,7 @@ GameObject:
   - component: {fileID: 5157433024694139716}
   - component: {fileID: 5157433024694139719}
   m_Layer: 5
-  m_Name: StatBackgroundColor03
+  m_Name: StrengthBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2440,7 +2440,7 @@ GameObject:
   - component: {fileID: 5157433024871184299}
   - component: {fileID: 5157433024871184298}
   m_Layer: 5
-  m_Name: StatText
+  m_Name: AttributeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2517,7 +2517,7 @@ GameObject:
   - component: {fileID: 5157433024888310237}
   - component: {fileID: 5157433024888310236}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: VitalityCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2744,7 +2744,7 @@ GameObject:
   - component: {fileID: 5157433025020251695}
   - component: {fileID: 5157433025020251694}
   m_Layer: 5
-  m_Name: StatText
+  m_Name: AttributeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2821,7 +2821,7 @@ GameObject:
   - component: {fileID: 5157433025027806000}
   - component: {fileID: 5157433025027806003}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: ResilienceCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3259,7 +3259,7 @@ GameObject:
   - component: {fileID: 5157433025180860182}
   - component: {fileID: 5157433025180860201}
   m_Layer: 5
-  m_Name: StatBackgroundColor05
+  m_Name: ResilienceBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3682,7 +3682,7 @@ GameObject:
   - component: {fileID: 5157433025430080357}
   - component: {fileID: 5157433025430080356}
   m_Layer: 5
-  m_Name: StatBackgroundColor01
+  m_Name: VigorBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3832,7 +3832,7 @@ GameObject:
   - component: {fileID: 5157433025510551828}
   - component: {fileID: 5157433025510551831}
   m_Layer: 5
-  m_Name: StatBackgroundColor06
+  m_Name: VitalityBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4290,7 +4290,7 @@ GameObject:
   - component: {fileID: 5157433025611816005}
   - component: {fileID: 5157433025611816004}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: VigorCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4485,7 +4485,7 @@ GameObject:
   - component: {fileID: 5157433025667275627}
   - component: {fileID: 5157433025667275626}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: FocusCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
