@@ -41,7 +41,6 @@ namespace Assets.Scripts.Attributes
             _focus = new SingleAttribute(focusAmount);
         }
 
-
         /// <summary>
         /// Gets a single attribute by an attribute type.
         /// </summary>

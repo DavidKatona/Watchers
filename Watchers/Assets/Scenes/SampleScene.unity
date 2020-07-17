@@ -4522,12 +4522,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506878337}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!82 &1511670608 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1460749214756993522, guid: be144dda92d38f84e99573a7dcbee952,
-    type: 3}
-  m_PrefabInstance: {fileID: 5157433023920777526}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1522293846
 GameObject:
   m_ObjectHideFlags: 0
@@ -6706,31 +6700,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 744893923623376596, guid: be144dda92d38f84e99573a7dcbee952,
-        type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 1511670608}
-    - target: {fileID: 744893923623376596, guid: be144dda92d38f84e99573a7dcbee952,
-        type: 3}
-      propertyPath: audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: d3cf9ee7dac01f540b2b4d526724373c, type: 3}
-    - target: {fileID: 744893923623376596, guid: be144dda92d38f84e99573a7dcbee952,
-        type: 3}
-      propertyPath: menuOpenClip
-      value: 
-      objectReference: {fileID: 8300000, guid: d3cf9ee7dac01f540b2b4d526724373c, type: 3}
-    - target: {fileID: 744893923623376596, guid: be144dda92d38f84e99573a7dcbee952,
-        type: 3}
-      propertyPath: menuCloseClip
-      value: 
-      objectReference: {fileID: 8300000, guid: bce284bc5ded17c49a0cbb798b7e4639, type: 3}
-    - target: {fileID: 3732416081826675831, guid: be144dda92d38f84e99573a7dcbee952,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5157433025095592568, guid: be144dda92d38f84e99573a7dcbee952,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6834,21 +6803,6 @@ PrefabInstance:
     - target: {fileID: 5157433025095592568, guid: be144dda92d38f84e99573a7dcbee952,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157433025095592570, guid: be144dda92d38f84e99573a7dcbee952,
-        type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157433025095592570, guid: be144dda92d38f84e99573a7dcbee952,
-        type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 5157433025095592570, guid: be144dda92d38f84e99573a7dcbee952,
-        type: 3}
-      propertyPath: m_ScreenMatchMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5157433025095592572, guid: be144dda92d38f84e99573a7dcbee952,

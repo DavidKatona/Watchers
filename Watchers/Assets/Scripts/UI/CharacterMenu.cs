@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CharacterMenu : MonoBehaviour
 {
+    private const string attributePath = "CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/Attributes/";
+
     public GameObject CharacterMenuUI;
     public AudioSource audioSource;
     public AudioClip menuOpenClip;
@@ -23,6 +25,14 @@ public class CharacterMenu : MonoBehaviour
     {
         // Update visuals.
         UpdateStatisticsVisuals();
+    }
+
+    public void Close()
+    {
+        _isOpened = false;
+        CharacterMenuUI.SetActive(_isOpened);
+        audioSource.clip = menuCloseClip;
+        audioSource.Play();
     }
 
     void Update()
@@ -48,12 +58,12 @@ public class CharacterMenu : MonoBehaviour
 
     private void UpdateStatisticsVisuals()
     {
-        transform.Find("CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/Attributes/VigorBackgroundColor/VigorCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Vigor).ToString();
-        transform.Find("CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/Attributes/SpiritBackgroundColor/SpiritCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Spirit).ToString();
-        transform.Find("CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/Attributes/StrengthBackgroundColor/StrengthCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Strength).ToString();
-        transform.Find("CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/Attributes/IntelligenceBackgroundColor/IntelligenceCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Intelligence).ToString();
-        transform.Find("CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/Attributes/ResilienceBackgroundColor/ResilienceCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Resilience).ToString();
-        transform.Find("CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/Attributes/VitalityBackgroundColor/VitalityCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Vitality).ToString();
-        transform.Find("CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/Attributes/FocusBackgroundColor/FocusCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Focus).ToString();
+        transform.Find(attributePath + "VigorBackgroundColor/VigorCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Vigor).ToString();
+        transform.Find(attributePath + "SpiritBackgroundColor/SpiritCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Spirit).ToString();
+        transform.Find(attributePath + "StrengthBackgroundColor/StrengthCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Strength).ToString();
+        transform.Find(attributePath + "IntelligenceBackgroundColor/IntelligenceCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Intelligence).ToString();
+        transform.Find(attributePath + "ResilienceBackgroundColor/ResilienceCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Resilience).ToString();
+        transform.Find(attributePath + "VitalityBackgroundColor/VitalityCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Vitality).ToString();
+        transform.Find(attributePath + "FocusBackgroundColor/FocusCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Focus).ToString();
     }
 }
