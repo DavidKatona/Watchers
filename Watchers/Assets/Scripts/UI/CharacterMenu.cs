@@ -6,8 +6,11 @@ using UnityEngine.UI;
 public class CharacterMenu : MonoBehaviour
 {
     private const string attributePath = "CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/Attributes/";
+    private const string mainStatsPath = "CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/MainStatistics/";
+    private const string additionalStatsPath = "CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/AdditionalStatistics/";
 
     public GameObject CharacterMenuUI;
+    public StatManager StatManager;
     public AudioSource audioSource;
     public AudioClip menuOpenClip;
     public AudioClip menuCloseClip;
@@ -58,6 +61,7 @@ public class CharacterMenu : MonoBehaviour
 
     private void UpdateStatisticsVisuals()
     {
+        // Update attributes.
         transform.Find(attributePath + "VigorBackgroundColor/VigorCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Vigor).ToString();
         transform.Find(attributePath + "SpiritBackgroundColor/SpiritCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Spirit).ToString();
         transform.Find(attributePath + "StrengthBackgroundColor/StrengthCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Strength).ToString();
@@ -65,5 +69,14 @@ public class CharacterMenu : MonoBehaviour
         transform.Find(attributePath + "ResilienceBackgroundColor/ResilienceCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Resilience).ToString();
         transform.Find(attributePath + "VitalityBackgroundColor/VitalityCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Vitality).ToString();
         transform.Find(attributePath + "FocusBackgroundColor/FocusCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Focus).ToString();
+
+        // Update statistics.
+        transform.Find(mainStatsPath + "HealthBackgroundColor/HealthCounter").GetComponent<Text>().text = $"{StatManager.CurrentHealth}/{StatManager.MaxHealth}";
+        transform.Find(mainStatsPath + "ManaBackgroundColor/ManaCounter").GetComponent<Text>().text = $"{StatManager.CurrentMana}/{StatManager.MaxMana}";
+        transform.Find(mainStatsPath + "PhysicalDamageBackgroundColor/PhysicalDamageCounter").GetComponent<Text>().text = $"+{StatManager.PhysicalDamage}";
+        transform.Find(mainStatsPath + "MagicalDamageBackgroundColor/MagicalDamageCounter").GetComponent<Text>().text = $"+{StatManager.MagicalDamage}";
+        transform.Find(mainStatsPath + "ArmorBackgroundColor/ArmorCounter").GetComponent<Text>().text = StatManager.Armor.ToString();
+        transform.Find(additionalStatsPath + "HealthRegenBackgroundColor/HealthRegenCounter").GetComponent<Text>().text = $"{StatManager.HealthRegen}/s";
+        transform.Find(additionalStatsPath + "ManaRegenBackgroundColor/ManaRegenCounter").GetComponent<Text>().text = $"{StatManager.ManaRegen}/s";
     }
 }

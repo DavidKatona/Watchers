@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 5157433023739670078}
   - component: {fileID: 5157433023739670065}
   m_Layer: 5
-  m_Name: StatBackgroundColor05
+  m_Name: ArmorBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 5157433023742479662}
   - component: {fileID: 5157433023742479649}
   m_Layer: 5
-  m_Name: StatBackgroundColor04
+  m_Name: MagicalDamageBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 5157433023838739747}
   - component: {fileID: 5157433023838739746}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: ManaCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -645,8 +645,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 85, y: 20.6}
+  m_AnchoredPosition: {x: -20, y: 0}
+  m_SizeDelta: {x: 106.32, y: 20.6}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &5157433023838739747
 CanvasRenderer:
@@ -681,7 +681,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1233,7 +1233,7 @@ GameObject:
   - component: {fileID: 5157433024094576432}
   - component: {fileID: 5157433024094576435}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: HealthRegenCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1541,7 +1541,7 @@ GameObject:
   - component: {fileID: 5157433024244553532}
   - component: {fileID: 5157433024244553535}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: HealthCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1563,8 +1563,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 85, y: 20.6}
+  m_AnchoredPosition: {x: -20, y: 0}
+  m_SizeDelta: {x: 106.32, y: 20.6}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &5157433024244553532
 CanvasRenderer:
@@ -1599,7 +1599,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1993,7 +1993,7 @@ GameObject:
   - component: {fileID: 5157433024471360284}
   - component: {fileID: 5157433024471360287}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: ArmorCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2015,8 +2015,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 85, y: 20.6}
+  m_AnchoredPosition: {x: -20, y: 0}
+  m_SizeDelta: {x: 106.32, y: 20.6}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &5157433024471360284
 CanvasRenderer:
@@ -2051,7 +2051,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -2650,7 +2650,7 @@ GameObject:
   - component: {fileID: 5157433024987324663}
   - component: {fileID: 5157433024987324662}
   m_Layer: 5
-  m_Name: StatBackgroundColor02
+  m_Name: ManaBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2725,7 +2725,7 @@ GameObject:
   - component: {fileID: 5157433024987742544}
   - component: {fileID: 5157433024987742547}
   m_Layer: 5
-  m_Name: StatBackgroundColor03
+  m_Name: PhysicalDamageBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2954,7 +2954,7 @@ GameObject:
   - component: {fileID: 5157433025044189424}
   - component: {fileID: 5157433025044189427}
   m_Layer: 5
-  m_Name: StatBackgroundColor02
+  m_Name: ManaRegenBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3131,6 +3131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterMenuUI: {fileID: 3023165838666328115}
+  StatManager: {fileID: 0}
   audioSource: {fileID: 1460749214756993522}
   menuOpenClip: {fileID: 8300000, guid: d3cf9ee7dac01f540b2b4d526724373c, type: 3}
   menuCloseClip: {fileID: 8300000, guid: bce284bc5ded17c49a0cbb798b7e4639, type: 3}
@@ -3813,7 +3814,7 @@ GameObject:
   - component: {fileID: 5157433025506891126}
   - component: {fileID: 5157433025506891017}
   m_Layer: 5
-  m_Name: StatBackgroundColor01
+  m_Name: HealthRegenBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4040,7 +4041,7 @@ GameObject:
   - component: {fileID: 5157433025559211890}
   - component: {fileID: 5157433025559211893}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: MagicalDamageCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4062,8 +4063,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 85, y: 20.6}
+  m_AnchoredPosition: {x: -20, y: 0}
+  m_SizeDelta: {x: 106.32, y: 20.6}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &5157433025559211890
 CanvasRenderer:
@@ -4098,7 +4099,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -4117,7 +4118,7 @@ GameObject:
   - component: {fileID: 5157433025580441928}
   - component: {fileID: 5157433025580441931}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: ManaRegenCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4271,7 +4272,7 @@ GameObject:
   - component: {fileID: 5157433025596011975}
   - component: {fileID: 5157433025596011974}
   m_Layer: 5
-  m_Name: StatBackgroundColor01
+  m_Name: HealthBackgroundColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4772,7 +4773,7 @@ GameObject:
   - component: {fileID: 5157433025738178982}
   - component: {fileID: 5157433025738179001}
   m_Layer: 5
-  m_Name: StatCounter
+  m_Name: PhysicalDamageCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4794,8 +4795,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 85, y: 20.6}
+  m_AnchoredPosition: {x: -20, y: 0}
+  m_SizeDelta: {x: 106.32, y: 20.6}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &5157433025738178982
 CanvasRenderer:
@@ -4830,7 +4831,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

@@ -1,11 +1,11 @@
 ﻿using Assets.Scripts.Damagables;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class PlayerCombatController : MonoBehaviour
+public class PlayerCombatController : MonoBehaviour, IDamageable
 {
     [SerializeField] private PlayerBrain _playerBrain;
+    [SerializeField] private StatManager _statManager;
 
     [Header("Components")]
     [SerializeField] private Transform _forwardAttackTransform;
@@ -18,6 +18,8 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private float _upwardsAttackRadius = 1;
     [SerializeField] private float _downwardsAttackRadius = 1;
     [SerializeField] private LayerMask _attackableLayer;
+
+    public event EventHandler OnDamaged;
     private float _timeElapsedSinceLastAttack;
     private float _horizontalRecoilSpeed = 5;
     private float _verticalRecoilSpeed = 10;
@@ -142,6 +144,11 @@ public class PlayerCombatController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        OnDamaged?.Invoke(this, EventArgs.Empty);
     }
 
     private void Recoil()
