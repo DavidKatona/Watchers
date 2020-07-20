@@ -9,6 +9,7 @@ public class StatManager : MonoBehaviour
     [SerializeField] private PlayerHUD _playerHUD;
     private Attributes _attributes;
 
+    // Encapsulate stats to SingleStat private class similar to Attributes.
     public float MaxHealth { get; private set; }
     public float CurrentHealth { get; set; }
     public float MaxMana { get; private set; }
@@ -77,7 +78,7 @@ public class StatManager : MonoBehaviour
     private void CalculatMana()
     {
         // Mana is equal to points spent on spirit multiplied by 5.
-        MaxMana = _attributes.GetAttributeAmount(Attributes.AttributeType.Spirit) * 5;
+        MaxMana = _attributes.GetAttributeAmount(Attributes.AttributeType.Spirit) * 10;
     }
 
     private void CalculatePhysicalDamage()
@@ -100,11 +101,11 @@ public class StatManager : MonoBehaviour
 
     private void CalculateHealthRegen()
     {
-        HealthRegen = _attributes.GetAttributeAmount(Attributes.AttributeType.Vitality) * 0.2f;
+        HealthRegen = _attributes.GetAttributeAmount(Attributes.AttributeType.Vitality) * 0.1f;
     }
 
     private void CalculateManaRegen()
     {
-        ManaRegen = _attributes.GetAttributeAmount(Attributes.AttributeType.Focus) * 0.2f;
+        ManaRegen = _attributes.GetAttributeAmount(Attributes.AttributeType.Focus) * 0.1f;
     }
 }
