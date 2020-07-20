@@ -9,7 +9,7 @@ public class StatManager : MonoBehaviour
     [SerializeField] private PlayerHUD _playerHUD;
     private Attributes _attributes;
 
-    // Encapsulate stats to SingleStat private class similar to Attributes.
+    // Encapsulate stats to SingleStat private class similar to Attributes or use interfaces (since the implementation of their calculations differ).
     public float MaxHealth { get; private set; }
     public float CurrentHealth { get; set; }
     public float MaxMana { get; private set; }
@@ -24,7 +24,7 @@ public class StatManager : MonoBehaviour
     {
         Attributes attributes = new Attributes(11, 11, 11, 11, 11, 11, 11);
 
-        this.SetAttributes(attributes);
+        SetAttributes(attributes);
         RecalculateAllStats();
 
         _characterMenu.SetAttributes(attributes);
