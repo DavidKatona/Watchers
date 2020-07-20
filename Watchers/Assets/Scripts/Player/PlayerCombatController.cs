@@ -92,6 +92,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
                 if (objectsToHit.Length == 0) return;
 
+                var outgoingDamage = _statManager.PhysicalDamage;
                 _playerBrain.GetStateManager().IsRecoilingX = true;
 
                 foreach (var obj in objectsToHit)
@@ -101,7 +102,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
                     if (damagable != null)
                     {
                         // 2 is just a test number; Replace this later with actual damage stat.
-                        damagable.TakeDamage(2);
+                        damagable.TakeDamage((int) outgoingDamage);
                     }
                 }
             }

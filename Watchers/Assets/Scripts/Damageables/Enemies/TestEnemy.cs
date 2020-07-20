@@ -15,7 +15,7 @@ namespace Assets.Scripts.Damagables.Enemies
         private AudioSource _audioSource;
         public AudioClip audioClipHit;
 
-        public int Health { get; set; } = 10;
+        public int Health { get; set; } = 200;
 
         private void Awake()
         {
