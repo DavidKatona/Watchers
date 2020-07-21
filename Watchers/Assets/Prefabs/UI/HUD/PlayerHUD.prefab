@@ -115,9 +115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _statManager: {fileID: 0}
-  _playerCombatController: {fileID: 0}
   _healthPool: {fileID: 6281457028704919995}
   _manaPool: {fileID: 3262137602070817250}
+  _soulsCounter: {fileID: 6883078634799614033}
 --- !u!1001 &612277866229024760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -291,6 +291,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoulsCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 4580143254634047679, guid: 8641dd5672504ad40b4b93191d9a5f77,
+        type: 3}
+      propertyPath: m_Name
+      value: SoulsCounterText
+      objectReference: {fileID: 0}
     - target: {fileID: 6307297626958170178, guid: 8641dd5672504ad40b4b93191d9a5f77,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -401,6 +406,12 @@ PrefabInstance:
 --- !u!224 &7809575560210932949 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6307297626958170178, guid: 8641dd5672504ad40b4b93191d9a5f77,
+    type: 3}
+  m_PrefabInstance: {fileID: 4317028302829153431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6883078634799614033 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7236354219853194438, guid: 8641dd5672504ad40b4b93191d9a5f77,
     type: 3}
   m_PrefabInstance: {fileID: 4317028302829153431}
   m_PrefabAsset: {fileID: 0}

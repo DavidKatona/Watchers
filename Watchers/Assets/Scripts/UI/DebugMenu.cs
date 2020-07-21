@@ -1,7 +1,8 @@
-﻿using Assets.Scripts.Attributes;
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.Attributes;
+using static Assets.Scripts.Attributes.Attributes;
 
 public class DebugMenu : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class DebugMenu : MonoBehaviour
         transform.Find("DebugCanvas/incrFocus").GetComponent<Button>().onClick.AddListener(() => attributes.IncreaseAttribute(Attributes.AttributeType.Focus));
         transform.Find("DebugCanvas/decrFocus").GetComponent<Button>().onClick.AddListener(() => attributes.DecreaseAttribute(Attributes.AttributeType.Focus));
 
+        transform.Find("DebugCanvas/addSouls").GetComponent<Button>().onClick.AddListener(() => attributes.SetSouls(attributes.GetSouls() + 100000));
+        transform.Find("DebugCanvas/maxLevel").GetComponent<Button>().onClick.AddListener(MaxAllAttributes);
+
         attributes.OnAttributeChanged += Attributes_OnAttributesChanged;
     }
 
@@ -49,5 +53,15 @@ public class DebugMenu : MonoBehaviour
         transform.Find("DebugCanvas/textResilience").GetComponent<Text>().text = "Resilience: " + _attributes.GetAttributeAmount(Attributes.AttributeType.Resilience);
         transform.Find("DebugCanvas/textVitality").GetComponent<Text>().text = "Vitality: " + _attributes.GetAttributeAmount(Attributes.AttributeType.Vitality);
         transform.Find("DebugCanvas/textFocus").GetComponent<Text>().text = "Focus: " + _attributes.GetAttributeAmount(Attributes.AttributeType.Focus);
+    }
+
+    private void MaxAllAttributes()
+    {
+        var attributeCollection = Enum.GetValues(typeof(AttributeType));
+
+        foreach (var attribute in attributeCollection)
+        {
+            _attributes.SetAttribute((AttributeType) attribute, 99);
+        }
     }
 }

@@ -8,6 +8,8 @@ public class CharacterMenu : MonoBehaviour
     private const string attributePath = "CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/Attributes/";
     private const string mainStatsPath = "CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/MainStatistics/";
     private const string additionalStatsPath = "CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/AdditionalStatistics/";
+    private const string levelInfoPath = "CharacterMenuUI/CharacterMenuFrame/CharacterLevelInformation/";
+    private const string inventoryFrame = "CharacterMenuUI/CharacterInventoryFrame/";
 
     public GameObject CharacterMenuUI;
     public StatManager StatManager;
@@ -21,6 +23,7 @@ public class CharacterMenu : MonoBehaviour
     {
         _attributes = attributes;
         _attributes.OnAttributeChanged += Attributes_OnAttributesChanged;
+        _attributes.OnSoulsChanged += Attributes_OnSoulsChanged;
         StatManager.OnHealthChanged += StatManager_OnHealthChanged;
         StatManager.OnManaChanged += StatManager_OnManaChanged;
         UpdateStatisticsVisuals();
@@ -30,6 +33,11 @@ public class CharacterMenu : MonoBehaviour
     {
         // Update visuals.
         UpdateStatisticsVisuals();
+    }
+
+    private void Attributes_OnSoulsChanged(object sender, EventArgs e)
+    {
+        UpdateSoulsCounter();
     }
 
     private void StatManager_OnHealthChanged(object sender, EventArgs e)
@@ -90,6 +98,13 @@ public class CharacterMenu : MonoBehaviour
         transform.Find(mainStatsPath + "ArmorBackgroundColor/ArmorCounter").GetComponent<Text>().text = StatManager.Armor.ToString();
         transform.Find(additionalStatsPath + "HealthRegenBackgroundColor/HealthRegenCounter").GetComponent<Text>().text = $"{StatManager.HealthRegen}/s";
         transform.Find(additionalStatsPath + "ManaRegenBackgroundColor/ManaRegenCounter").GetComponent<Text>().text = $"{StatManager.ManaRegen}/s";
+
+        // Update level information.
+        transform.Find(levelInfoPath + "WatcherLevelBackgroundColor/WatcherLevelCounter").GetComponent<Text>().text = $"{_attributes.GetLevel()}";
+        transform.Find(levelInfoPath + "SoulsRequiredBackgroundColor/SoulsRequiredCounter").GetComponent<Text>().text = $"{_attributes.GetSoulsRequired():#,0}";
+
+        // Update inventory currency.
+        transform.Find(inventoryFrame + "InventoryCurrency/SoulCounter").GetComponent<Text>().text = $"Souls: {_attributes.GetSouls():#,0}";
     }
 
     private void UpdateHealthStatistics()
@@ -100,5 +115,10 @@ public class CharacterMenu : MonoBehaviour
     private void UpdateManaStatistics()
     {
         transform.Find(mainStatsPath + "ManaBackgroundColor/ManaCounter").GetComponent<Text>().text = $"{StatManager.CurrentMana}/{StatManager.MaxMana}";
+    }
+
+    private void UpdateSoulsCounter()
+    {
+        transform.Find(inventoryFrame + "InventoryCurrency/SoulCounter").GetComponent<Text>().text = $"Souls: {_attributes.GetSouls():#,0}";
     }
 }

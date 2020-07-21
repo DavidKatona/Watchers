@@ -7,6 +7,7 @@ namespace Assets.Scripts.Attributes
     public class Attributes
     {
         public event EventHandler OnAttributeChanged;
+        public event EventHandler OnSoulsChanged;
 
         private const int baseLevel = 1;
         private const int baseSoulsRequired = 50;
@@ -33,11 +34,35 @@ namespace Assets.Scripts.Attributes
         private SingleAttribute _focus;
 
         private int _watcherLevel = baseLevel;
+        public int GetLevel()
+        {
+            return _watcherLevel;
+        }
+
         private void SetLevel(int amount)
         {
             _watcherLevel = baseLevel + amount;
         }
+
+        // This should probably be part of an inventory class or something else that keeps track of resources.
+        private int _souls;
+        public int GetSouls()
+        {
+            return _souls;
+        }
+
+        public void SetSouls(int amount)
+        {
+            _souls = amount;
+            OnSoulsChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         private int _soulsRequired = baseSoulsRequired;
+        public int GetSoulsRequired()
+        {
+            return _soulsRequired;
+        }
+
         private void SetSoulsRequired(int amount)
         {
             _soulsRequired = baseSoulsRequired + amount;
@@ -100,7 +125,11 @@ namespace Assets.Scripts.Attributes
         /// <param name="attributeType">The type of attribute which will be incremented.</param>
         public void IncreaseAttribute(AttributeType attributeType)
         {
-            SetAttribute(attributeType, GetAttributeAmount(attributeType) + 1);
+            if (_souls >= _soulsRequired)
+            {
+                _souls -= _soulsRequired;
+                SetAttribute(attributeType, GetAttributeAmount(attributeType) + 1);
+            }
         }
 
         /// <summary>
@@ -149,7 +178,7 @@ namespace Assets.Scripts.Attributes
 
             return totalInvestmentInAttributes;
         }
-        
+
         /// <summary>
         /// Calculates the amount of souls required for the next level.
         /// </summary>
@@ -157,7 +186,7 @@ namespace Assets.Scripts.Attributes
         private int CalculateSoulsRequired()
         {
             var soulsMultiplier = 100;
-            return (int) (Mathf.Pow(GetTotalAmountOfAttributes(), 2) * soulsMultiplier);
+            return (int)(Mathf.Pow(GetTotalAmountOfAttributes(), 2) * soulsMultiplier);
         }
 
         // Represents a single attribute of any type.
