@@ -8,6 +8,8 @@ namespace Assets.Scripts.Attributes
     {
         public event EventHandler OnAttributeChanged;
 
+        private const int baseLevel = 1;
+        private const int baseSoulsRequired = 50;
         public static int ATTR_MIN = 11;
         public static int ATTR_MAX = 99;
 
@@ -29,6 +31,17 @@ namespace Assets.Scripts.Attributes
         private SingleAttribute _resilience;
         private SingleAttribute _vitality;
         private SingleAttribute _focus;
+
+        private int _watcherLevel = baseLevel;
+        private void SetLevel(int amount)
+        {
+            _watcherLevel = baseLevel + amount;
+        }
+        private int _soulsRequired = baseSoulsRequired;
+        private void SetSoulsRequired(int amount)
+        {
+            _soulsRequired = baseSoulsRequired + amount;
+        }
 
         public Attributes(int vigorAmount, int spiritAmount, int strengthAmount, int intelligenceAmount, int resilienceAmount, int vitalityAmount, int focusAmount)
         {
@@ -76,6 +89,8 @@ namespace Assets.Scripts.Attributes
         public void SetAttribute(AttributeType attributeType, int attributeAmount)
         {
             GetSingleAttribute(attributeType).SetAttribute(attributeAmount);
+            SetLevel(GetTotalAmountOfAttributes());
+            SetSoulsRequired(CalculateSoulsRequired());
             OnAttributeChanged?.Invoke(this, EventArgs.Empty);
         }
 
@@ -115,6 +130,34 @@ namespace Assets.Scripts.Attributes
         public float GetAttributeNormalized(AttributeType attributeType)
         {
             return GetSingleAttribute(attributeType).GetAttributeNormalized();
+        }
+
+        /// <summary>
+        /// Gets the total amount of points invested into attributes.
+        /// </summary>
+        /// <returns></returns>
+        private int GetTotalAmountOfAttributes()
+        {
+            var totalInvestmentInAttributes = 0;
+            var attributeCollection = Enum.GetValues(typeof(AttributeType));
+
+            foreach (var attribute in attributeCollection)
+            {
+                // We calculate the amount of points we have invested onto attributes by getting their current amount and subtracting the attribute minimum.
+                totalInvestmentInAttributes += GetAttributeAmount((AttributeType)attribute) - ATTR_MIN;
+            }
+
+            return totalInvestmentInAttributes;
+        }
+        
+        /// <summary>
+        /// Calculates the amount of souls required for the next level.
+        /// </summary>
+        /// <returns></returns>
+        private int CalculateSoulsRequired()
+        {
+            var soulsMultiplier = 100;
+            return (int) (Mathf.Pow(GetTotalAmountOfAttributes(), 2) * soulsMultiplier);
         }
 
         // Represents a single attribute of any type.
