@@ -6160,6 +6160,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DebugMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 1198199935685703778, guid: 5ca62df0f63d5554aa869d417e21eac0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1198199935685703779, guid: 5ca62df0f63d5554aa869d417e21eac0,
         type: 3}
       propertyPath: m_LocalPosition.x
