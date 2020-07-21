@@ -5,8 +5,6 @@ using UnityEngine;
 public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] private StatManager _statManager;
-    // This class should not communicate directly with the combat controller. Related events should be fired from the StatManager and this class should listen to them.
-    [SerializeField] private PlayerCombatController _playerCombatController;
     [SerializeField] private Transform _healthPool;
     [SerializeField] private Transform _manaPool;
     private Attributes _attributes;
@@ -15,12 +13,8 @@ public class PlayerHUD : MonoBehaviour
     {
         _attributes = attributes;
         _attributes.OnAttributeChanged += Attributes_OnAttributeChanged;
-        _playerCombatController.OnDamaged += Player_OnDamaged;
-        UpdateStatistics();
-    }
-
-    private void Player_OnDamaged(object sender, EventArgs e)
-    {
+        _statManager.OnHealthChanged += StatManager_OnHealthChanged;
+        _statManager.OnManaChanged += StatManager_OnManaChanged;
         UpdateStatistics();
     }
 
@@ -29,9 +23,28 @@ public class PlayerHUD : MonoBehaviour
         UpdateStatistics();
     }
 
+    private void StatManager_OnHealthChanged(object sender, EventArgs e)
+    {
+        UpdateHealthBar();
+    }
+    private void StatManager_OnManaChanged(object sender, EventArgs e)
+    {
+        UpdateManaBar();
+    }
+
     private void UpdateStatistics()
     {
         _healthPool.localScale = new Vector2(_statManager.GetHealthPercentage(), _healthPool.localScale.y);
+        _manaPool.localScale = new Vector2(_statManager.GetManaPercentage(), _manaPool.localScale.y);
+    }
+
+    private void UpdateHealthBar()
+    {
+        _healthPool.localScale = new Vector2(_statManager.GetHealthPercentage(), _healthPool.localScale.y);
+    }
+
+    private void UpdateManaBar()
+    {
         _manaPool.localScale = new Vector2(_statManager.GetManaPercentage(), _manaPool.localScale.y);
     }
 }

@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class StatManager : MonoBehaviour
 {
+    public event EventHandler OnHealthChanged;
+    public event EventHandler OnManaChanged;
+
     [SerializeField] private CharacterMenu _characterMenu;
     [SerializeField] private DebugMenu _debugMenu;
     [SerializeField] private PlayerHUD _playerHUD;
     private Attributes _attributes;
 
-    // Encapsulate stats to SingleStat private class similar to Attributes or use interfaces (since the implementation of their calculations differ).
     public float MaxHealth { get; private set; }
-    public float CurrentHealth { get; set; }
+    public float CurrentHealth { get; private set; }
     public float MaxMana { get; private set; }
     public float CurrentMana { get; private set; }
     public float PhysicalDamage { get; private set; }
@@ -26,10 +28,16 @@ public class StatManager : MonoBehaviour
 
         SetAttributes(attributes);
         RecalculateAllStats();
+        RestoreHealthAndMana();
 
         _characterMenu.SetAttributes(attributes);
         _debugMenu.SetAttributes(attributes);
         _playerHUD.SetAttributes(attributes);
+    }
+    public void SetAttributes(Attributes attributes)
+    {
+        _attributes = attributes;
+        attributes.OnAttributeChanged += Attributes_OnAttributesChanged;
     }
 
     public float GetHealthPercentage()
@@ -37,20 +45,27 @@ public class StatManager : MonoBehaviour
         return CurrentHealth / MaxHealth;
     }
 
+    public void SetCurrentHealth(float amount)
+    {
+        CurrentHealth = Mathf.Clamp(amount, 0, MaxHealth);
+        OnHealthChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     public float GetManaPercentage()
     {
         return CurrentMana / MaxMana;
     }
 
-    public void SetAttributes(Attributes attributes)
+    public void SetCurrentMana(float amount)
     {
-        _attributes = attributes;
-        attributes.OnAttributeChanged += Attributes_OnAttributesChanged;
+        CurrentMana = Mathf.Clamp(amount, 0, MaxMana);
+        OnManaChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void Attributes_OnAttributesChanged(object sender, EventArgs e)
     {
         RecalculateAllStats();
+        RestoreHealthAndMana();
     }
 
     private void RecalculateAllStats()
@@ -63,12 +78,16 @@ public class StatManager : MonoBehaviour
         CalculateArmor();
         CalculateHealthRegen();
         CalculateManaRegen();
+    }
 
+    private void RestoreHealthAndMana()
+    {
         // Restore all missing health and manapoints.
         CurrentHealth = MaxHealth;
         CurrentMana = MaxMana;
     }
 
+    // Sould there be more stats, it would be wise to abstract stats away to an interface.
     private void CalculateHealth()
     {
         // Health is equal to points spent on vigor multiplied by 10.

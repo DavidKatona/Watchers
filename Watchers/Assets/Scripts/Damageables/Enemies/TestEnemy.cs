@@ -15,7 +15,7 @@ namespace Assets.Scripts.Damagables.Enemies
         private AudioSource _audioSource;
         public AudioClip audioClipHit;
 
-        public int Health { get; set; } = 200;
+        public float Health { get; set; } = 200;
 
         private void Awake()
         {
@@ -24,7 +24,7 @@ namespace Assets.Scripts.Damagables.Enemies
             _audioSource = GetComponent<AudioSource>();
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             Vector2 localScale = healthBar.localScale;
             float unit = Health / localScale.x;

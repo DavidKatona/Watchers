@@ -147,8 +147,11 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
+        float currentHealth = _statManager.CurrentHealth;
+        _statManager.SetCurrentHealth(currentHealth - damage);
+
         OnDamaged?.Invoke(this, EventArgs.Empty);
     }
 

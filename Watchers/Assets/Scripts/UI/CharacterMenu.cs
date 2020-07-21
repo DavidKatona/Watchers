@@ -14,13 +14,15 @@ public class CharacterMenu : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip menuOpenClip;
     public AudioClip menuCloseClip;
-    private bool _isOpened;
     private Attributes _attributes;
+    private bool _isOpened;
 
     public void SetAttributes(Attributes attributes)
     {
         _attributes = attributes;
         _attributes.OnAttributeChanged += Attributes_OnAttributesChanged;
+        StatManager.OnHealthChanged += StatManager_OnHealthChanged;
+        StatManager.OnManaChanged += StatManager_OnManaChanged;
         UpdateStatisticsVisuals();
     }
 
@@ -28,6 +30,16 @@ public class CharacterMenu : MonoBehaviour
     {
         // Update visuals.
         UpdateStatisticsVisuals();
+    }
+
+    private void StatManager_OnHealthChanged(object sender, EventArgs e)
+    {
+        UpdateHealthStatistics();
+    }
+
+    private void StatManager_OnManaChanged(object sender, EventArgs e)
+    {
+        UpdateManaStatistics();
     }
 
     public void Close()
@@ -78,5 +90,15 @@ public class CharacterMenu : MonoBehaviour
         transform.Find(mainStatsPath + "ArmorBackgroundColor/ArmorCounter").GetComponent<Text>().text = StatManager.Armor.ToString();
         transform.Find(additionalStatsPath + "HealthRegenBackgroundColor/HealthRegenCounter").GetComponent<Text>().text = $"{StatManager.HealthRegen}/s";
         transform.Find(additionalStatsPath + "ManaRegenBackgroundColor/ManaRegenCounter").GetComponent<Text>().text = $"{StatManager.ManaRegen}/s";
+    }
+
+    private void UpdateHealthStatistics()
+    {
+        transform.Find(mainStatsPath + "HealthBackgroundColor/HealthCounter").GetComponent<Text>().text = $"{StatManager.CurrentHealth}/{StatManager.MaxHealth}";
+    }
+
+    private void UpdateManaStatistics()
+    {
+        transform.Find(mainStatsPath + "ManaBackgroundColor/ManaCounter").GetComponent<Text>().text = $"{StatManager.CurrentMana}/{StatManager.MaxMana}";
     }
 }
