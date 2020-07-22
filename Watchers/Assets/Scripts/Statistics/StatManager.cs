@@ -17,6 +17,8 @@ public class StatManager : MonoBehaviour
     public float MaxMana { get; private set; }
     public float CurrentMana { get; private set; }
     public float PhysicalDamage { get; private set; }
+    public float PhysicalDamageLowerBound { get; private set; }
+    public float PhysicalDamageUpperBound { get; private set; }
     public float MagicalDamage { get; private set; }
     public float Armor { get; private set; }
     public float HealthRegen { get; private set; }
@@ -62,6 +64,11 @@ public class StatManager : MonoBehaviour
         OnManaChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    public float GetRandomPhysicalDamage()
+    {
+        return UnityEngine.Random.Range(PhysicalDamageLowerBound, PhysicalDamageUpperBound);
+    }
+
     private void Attributes_OnAttributesChanged(object sender, EventArgs e)
     {
         RecalculateAllStats();
@@ -104,6 +111,9 @@ public class StatManager : MonoBehaviour
     {
         // Physical damage is equal to points spent on strength multiplied by 2.
         PhysicalDamage = _attributes.GetAttributeAmount(Attributes.AttributeType.Strength) * 2;
+        // Determine lower and upper bounds of physical damage.
+        PhysicalDamageLowerBound = _attributes.GetAttributeAmount(Attributes.AttributeType.Strength) * 1.7f;
+        PhysicalDamageUpperBound = _attributes.GetAttributeAmount(Attributes.AttributeType.Strength) * 2.1f;
     }
 
     private void CalculateMagicalDamage()

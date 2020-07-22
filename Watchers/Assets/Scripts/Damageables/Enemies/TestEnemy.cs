@@ -43,6 +43,11 @@ namespace Assets.Scripts.Damagables.Enemies
             }
         }
 
+        public Vector3 GetPosition()
+        {
+            return transform.position;
+        }
+
         public void OnDeath()
         {
             // Granting points should be done from a separate class like a GameManager or ScoreManager and not done here.
