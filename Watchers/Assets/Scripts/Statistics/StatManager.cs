@@ -98,43 +98,43 @@ public class StatManager : MonoBehaviour
     private void CalculateHealth()
     {
         // Health is equal to points spent on vigor multiplied by 10.
-        MaxHealth = _attributes.GetAttributeAmount(Attributes.AttributeType.Vigor) * 10;
+        MaxHealth = _attributes.GetAttributeAmount(AttributeType.Vigor) * 10;
     }
 
     private void CalculatMana()
     {
         // Mana is equal to points spent on spirit multiplied by 5.
-        MaxMana = _attributes.GetAttributeAmount(Attributes.AttributeType.Spirit) * 10;
+        MaxMana = _attributes.GetAttributeAmount(AttributeType.Spirit) * 10;
     }
 
     private void CalculatePhysicalDamage()
     {
         // Physical damage is equal to points spent on strength multiplied by 2.
-        PhysicalDamage = _attributes.GetAttributeAmount(Attributes.AttributeType.Strength) * 2;
+        PhysicalDamage = _attributes.GetAttributeAmount(AttributeType.Strength) * 2;
         // Determine lower and upper bounds of physical damage.
-        PhysicalDamageLowerBound = _attributes.GetAttributeAmount(Attributes.AttributeType.Strength) * 1.7f;
-        PhysicalDamageUpperBound = _attributes.GetAttributeAmount(Attributes.AttributeType.Strength) * 2.1f;
+        PhysicalDamageLowerBound = _attributes.GetAttributeAmount(AttributeType.Strength) * 1.7f;
+        PhysicalDamageUpperBound = _attributes.GetAttributeAmount(AttributeType.Strength) * 2.1f;
     }
 
     private void CalculateMagicalDamage()
     {
         // Magical damage is equal to points spent on intelligence multiplied  by 3.
-        MagicalDamage = _attributes.GetAttributeAmount(Attributes.AttributeType.Intelligence) * 3;
+        MagicalDamage = _attributes.GetAttributeAmount(AttributeType.Intelligence) * 3;
     }
 
     private void CalculateArmor()
     {
         // Armor is equal to points spent on resilience halved.
-        Armor = _attributes.GetAttributeAmount(Attributes.AttributeType.Resilience) * 0.5f;
+        Armor = _attributes.GetAttributeAmount(AttributeType.Resilience) * 0.5f;
     }
 
     private void CalculateHealthRegen()
     {
-        HealthRegen = _attributes.GetAttributeAmount(Attributes.AttributeType.Vitality) * 0.1f;
+        HealthRegen = _attributes.GetAttributeAmount(AttributeType.Vitality) * 0.1f;
     }
 
     private void CalculateManaRegen()
     {
-        ManaRegen = _attributes.GetAttributeAmount(Attributes.AttributeType.Focus) * 0.1f;
+        ManaRegen = _attributes.GetAttributeAmount(AttributeType.Focus) * 0.1f;
     }
 }

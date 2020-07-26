@@ -82,13 +82,13 @@ public class CharacterMenu : MonoBehaviour
     private void UpdateStatisticsVisuals()
     {
         // Update attributes.
-        transform.Find(attributePath + "VigorBackgroundColor/VigorCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Vigor).ToString();
-        transform.Find(attributePath + "SpiritBackgroundColor/SpiritCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Spirit).ToString();
-        transform.Find(attributePath + "StrengthBackgroundColor/StrengthCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Strength).ToString();
-        transform.Find(attributePath + "IntelligenceBackgroundColor/IntelligenceCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Intelligence).ToString();
-        transform.Find(attributePath + "ResilienceBackgroundColor/ResilienceCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Resilience).ToString();
-        transform.Find(attributePath + "VitalityBackgroundColor/VitalityCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Vitality).ToString();
-        transform.Find(attributePath + "FocusBackgroundColor/FocusCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(Attributes.AttributeType.Focus).ToString();
+        transform.Find(attributePath + "VigorBackgroundColor/VigorCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(AttributeType.Vigor).ToString();
+        transform.Find(attributePath + "SpiritBackgroundColor/SpiritCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(AttributeType.Spirit).ToString();
+        transform.Find(attributePath + "StrengthBackgroundColor/StrengthCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(AttributeType.Strength).ToString();
+        transform.Find(attributePath + "IntelligenceBackgroundColor/IntelligenceCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(AttributeType.Intelligence).ToString();
+        transform.Find(attributePath + "ResilienceBackgroundColor/ResilienceCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(AttributeType.Resilience).ToString();
+        transform.Find(attributePath + "VitalityBackgroundColor/VitalityCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(AttributeType.Vitality).ToString();
+        transform.Find(attributePath + "FocusBackgroundColor/FocusCounter").GetComponent<Text>().text = _attributes.GetAttributeAmount(AttributeType.Focus).ToString();
 
         // Update statistics.
         transform.Find(mainStatsPath + "HealthBackgroundColor/HealthCounter").GetComponent<Text>().text = $"{StatManager.CurrentHealth}/{StatManager.MaxHealth}";

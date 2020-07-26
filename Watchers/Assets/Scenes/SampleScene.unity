@@ -121,6 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &17510309 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7925648516927595742, guid: 646a566c746eb1740af55fd9b7b7dd77,
+    type: 3}
+  m_PrefabInstance: {fileID: 4671008126636979119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec01b381b862c814384a16ec04203f0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &18863079
 GameObject:
   m_ObjectHideFlags: 0
@@ -3759,18 +3771,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4671008126636979119}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1256428885 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1256428885, guid: 646a566c746eb1740af55fd9b7b7dd77,
-    type: 3}
-  m_PrefabInstance: {fileID: 4671008126636979119}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1256428884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec01b381b862c814384a16ec04203f0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1256428888 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4671008126943434845, guid: 646a566c746eb1740af55fd9b7b7dd77,
@@ -6576,12 +6576,12 @@ PrefabInstance:
         type: 3}
       propertyPath: StatManager
       value: 
-      objectReference: {fileID: 1256428885}
+      objectReference: {fileID: 0}
     - target: {fileID: 6500467903027649332, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
         type: 3}
       propertyPath: _statManager
       value: 
-      objectReference: {fileID: 1256428885}
+      objectReference: {fileID: 17510309}
     - target: {fileID: 6500467903027649332, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
         type: 3}
       propertyPath: _playerCombatController
@@ -6752,6 +6752,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 4671008126943434845, guid: 646a566c746eb1740af55fd9b7b7dd77,
+        type: 3}
+      propertyPath: _statManager
+      value: 
+      objectReference: {fileID: 17510309}
+    - target: {fileID: 7925648516927595742, guid: 646a566c746eb1740af55fd9b7b7dd77,
+        type: 3}
+      propertyPath: _characterMenu
+      value: 
+      objectReference: {fileID: 1593200632}
+    - target: {fileID: 7925648516927595742, guid: 646a566c746eb1740af55fd9b7b7dd77,
+        type: 3}
+      propertyPath: _debugMenu
+      value: 
+      objectReference: {fileID: 1875778977}
+    - target: {fileID: 7925648516927595742, guid: 646a566c746eb1740af55fd9b7b7dd77,
+        type: 3}
+      propertyPath: _playerHUD
+      value: 
+      objectReference: {fileID: 1055133820}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 646a566c746eb1740af55fd9b7b7dd77, type: 3}
 --- !u!1001 &5157433023920777526
@@ -6765,7 +6785,7 @@ PrefabInstance:
         type: 3}
       propertyPath: StatManager
       value: 
-      objectReference: {fileID: 1256428885}
+      objectReference: {fileID: 17510309}
     - target: {fileID: 5157433025095592568, guid: be144dda92d38f84e99573a7dcbee952,
         type: 3}
       propertyPath: m_LocalPosition.x

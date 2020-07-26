@@ -14,17 +14,6 @@ namespace Assets.Scripts.Attributes
         public static int ATTR_MIN = 11;
         public static int ATTR_MAX = 99;
 
-        public enum AttributeType
-        {
-            Vigor,
-            Spirit,
-            Strength,
-            Intelligence,
-            Resilience,
-            Vitality,
-            Focus
-        }
-
         private SingleAttribute _vigor;
         private SingleAttribute _spirit;
         private SingleAttribute _strength;
