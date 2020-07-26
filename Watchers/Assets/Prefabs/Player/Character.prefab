@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerBrain: {fileID: 4671008126943434846}
+  _skillManager: {fileID: 3488151263867076390}
   _particleJumpUp: {fileID: 7691098711387794715}
   _particleJumpDown: {fileID: 3973260659898129948}
 --- !u!114 &4671008126943434845
@@ -774,6 +775,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7338873462429168369}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3488151263867076390 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6174590739243191767, guid: e847ff7d5c74f504e80a23f19a132575,
+    type: 3}
+  m_PrefabInstance: {fileID: 7338873462429168369}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a40700f331ec4424885dcd6b3dbc3554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7529142404426550055
 PrefabInstance:
   m_ObjectHideFlags: 0

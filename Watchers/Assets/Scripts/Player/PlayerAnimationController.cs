@@ -69,7 +69,7 @@ public class PlayerAnimationController : MonoBehaviour
     private void SetWallSlidingState()
     {
         //Wall Sliding Animation
-        if (_playerRigidBody2D.velocity.y < 0 && _playerStateManager.IsTouchingWall)
+        if (_playerStateManager.IsWallSliding)
         {
             _playerAnimator.SetBool("IsWallSliding", true);
         }

@@ -24,7 +24,7 @@ public class StatManager : MonoBehaviour
     public float HealthRegen { get; private set; }
     public float ManaRegen { get; private set; }
 
-    void Start()
+    private void Start()
     {
         Attributes attributes = new Attributes(11, 11, 11, 11, 11, 11, 11);
 

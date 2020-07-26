@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Player.Skills;
+using UnityEngine;
 
 public class PlayerMovementHandler : MonoBehaviour
 {
     [SerializeField] private PlayerBrain _playerBrain;
+    [SerializeField] private SkillManager _skillManager;
     [SerializeField] private ParticleSystem _particleJumpUp; //Trail particles
     [SerializeField] private ParticleSystem _particleJumpDown; //Explosion particles
 
@@ -35,15 +37,32 @@ public class PlayerMovementHandler : MonoBehaviour
     private void Update()
     {
         ManageMovementBuffers();
-        SetWallSliding();
+
+        if (_skillManager.CanWallJump())
+        {
+            SetWallSliding();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (!_playerBrain.GetStateManager().IsRecoilingX) Move();
+        if (!_playerBrain.GetStateManager().IsRecoilingX)
+        {
+            Move();
+        }
+
         Jump();
-        WallJump();
-        Dash();
+
+        if (_skillManager.CanWallJump())
+        {
+            WallJump();
+        }
+
+        if (_skillManager.CanDash())
+        {
+            Dash();
+        }
+
         LimitFallSpeed();
     }
 
@@ -87,9 +106,12 @@ public class PlayerMovementHandler : MonoBehaviour
 
         if (_playerBrain.GetInputManager().IsDashPressed && _currentDashCooldown == 0f && _stepsDashed < _maxDashSteps && !_playerBrain.GetStateManager().IsWallSliding)
         {
-            _playerBrain.GetStateManager().IsDashing = true;
-            _playerBrain.PlayerAnimator.SetTrigger("Dash");
-            _currentDashCooldown = _maxDashCooldown;
+            if (_skillManager.CanDash())
+            {
+                _playerBrain.GetStateManager().IsDashing = true;
+                _playerBrain.PlayerAnimator.SetTrigger("Dash");
+                _currentDashCooldown = _maxDashCooldown;
+            }
         }
     }
 
