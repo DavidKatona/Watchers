@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Damagables;
+using Assets.Scripts.Player.Combat;
 using System;
 using UnityEngine;
 
@@ -81,69 +82,53 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
         {
             _timeElapsedSinceLastAttack = 0;
 
-            //ToDo: Extract attack variations to separate methods
-            //Forward Attack
+            _playerBrain.PlayerAnimator.SetBool("IsAttacking", true);
+            _playerBrain.PlayerAnimator.SetTrigger("Attack");
+
+            // Forward Attack
             if (yAxisInput == 0 || yAxisInput < 0 && _playerBrain.GetCollisionDetector().IsGrounded())
             {
-                _playerBrain.PlayerAnimator.SetBool("IsAttacking", true);
-                _playerBrain.PlayerAnimator.SetTrigger("Attack");
-                Debug.Log("Attacking forwards...");
-                Collider2D[] objectsToHit = Physics2D.OverlapCircleAll(_forwardAttackTransform.position, _forwardAttackRadius, _attackableLayer);
-
-                if (objectsToHit.Length == 0) return;
-
-                var outgoingDamage = _statManager.GetRandomPhysicalDamage();
-                _playerBrain.GetStateManager().IsRecoilingX = true;
-
-                foreach (var obj in objectsToHit)
-                {
-                    var damagable = obj.GetComponent<IDamageable>();
-
-                    if (damagable != null)
-                    {
-                        // 2 is just a test number; Replace this later with actual damage stat.
-                        damagable.TakeDamage((int) outgoingDamage);
-                        DamagePopup.Create(damagable.GetPosition(), (int) outgoingDamage);
-                    }
-                }
+                PerformDirectionalAttack(_forwardAttackTransform.position, _forwardAttackRadius, AttackMotion.Horizontal, _attackableLayer);
             }
 
-            //Upward Attack
+            // Upward Attack
             else if (yAxisInput > 0)
             {
-                _playerBrain.PlayerAnimator.SetBool("IsAttacking", true);
-                _playerBrain.PlayerAnimator.SetTrigger("Attack");
-                Debug.Log("Attacking upwards...");
-                Collider2D[] objectsToHit = Physics2D.OverlapCircleAll(_upwardsAttackTransform.position, _upwardsAttackRadius, _attackableLayer);
-
-                if (objectsToHit.Length > 0)
-                {
-                    _playerBrain.GetStateManager().IsRecoilingY = true;
-                }
-
-                for (int i = 0; i < objectsToHit.Length; i++)
-                {
-                    Debug.Log($"{objectsToHit[i].name} has been hit.");
-                }
+                PerformDirectionalAttack(_upwardsAttackTransform.position, _upwardsAttackRadius, AttackMotion.Vertical, _attackableLayer);
             }
 
-            //Downward Attack
+            // Downward Attack
             else if (yAxisInput < 0 && !_playerBrain.GetCollisionDetector().IsGrounded())
             {
-                _playerBrain.PlayerAnimator.SetBool("IsAttacking", true);
-                _playerBrain.PlayerAnimator.SetTrigger("Attack");
-                Debug.Log("Attacking downwards...");
-                Collider2D[] objectsToHit = Physics2D.OverlapCircleAll(_downwardsAttackTransform.position, _downwardsAttackRadius, _attackableLayer);
+                PerformDirectionalAttack(_downwardsAttackTransform.position, _downwardsAttackRadius, AttackMotion.Vertical, _attackableLayer);
+            }
+        }
+    }
 
-                if (objectsToHit.Length > 0)
-                {
-                    _playerBrain.GetStateManager().IsRecoilingY = true;
-                }
+    private void PerformDirectionalAttack(Vector2 attackDirection, float radius, AttackMotion attackMotion, LayerMask attackableLayer)
+    {
+        Collider2D[] objectsToHit = Physics2D.OverlapCircleAll(attackDirection, radius, attackableLayer);
 
-                for (int i = 0; i < objectsToHit.Length; i++)
-                {
-                    Debug.Log($"{objectsToHit[i].name} has been hit.");
-                }
+        if (objectsToHit.Length == 0) return;
+
+        if (attackMotion == AttackMotion.Horizontal)
+        {
+            _playerBrain.GetStateManager().IsRecoilingX = true;
+        }
+        else if (attackMotion == AttackMotion.Vertical)
+        {
+            _playerBrain.GetStateManager().IsRecoilingY = true;
+        }
+
+        var outgoingDamage = _statManager.GetRandomPhysicalDamage();
+        foreach (var obj in objectsToHit)
+        {
+            var damagable = obj.GetComponent<IDamageable>();
+
+            if (damagable != null)
+            {
+                damagable.TakeDamage((int)outgoingDamage);
+                DamagePopup.Create(damagable.GetPosition(), (int)outgoingDamage);
             }
         }
     }
@@ -155,7 +140,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
         OnDamaged?.Invoke(this, EventArgs.Empty);
     }
-    
+
     public Vector3 GetPosition()
     {
         return transform.position;
