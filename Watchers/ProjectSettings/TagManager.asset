@@ -17,7 +17,7 @@ TagManager:
   - Ground
   - Post Processing
   - Attackable
-  - 
+  - Tutorial
   - 
   - 
   - 
@@ -44,4 +44,7 @@ TagManager:
     locked: 0
   - name: DamagePopup
     uniqueID: 940008935
+    locked: 0
+  - name: Tutorial
+    uniqueID: 1221572415
     locked: 0

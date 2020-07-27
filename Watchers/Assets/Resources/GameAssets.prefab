@@ -45,3 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabDamagePopup: {fileID: 1369394313512831519, guid: 7edd4df9ece14ec4387ee9e919b15a57,
     type: 3}
+  prefabTutorialPopup: {fileID: 5394112045896257782, guid: 5b580b86916887645b75ca22fe798485,
+    type: 3}

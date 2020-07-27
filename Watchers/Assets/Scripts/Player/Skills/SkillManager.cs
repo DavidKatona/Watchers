@@ -10,7 +10,7 @@ namespace Assets.Scripts.Player.Skills
         private void Start()
         {
             _playerSkills = new PlayerSkills();
-            //StartCoroutine(UnlockSkills());
+            StartCoroutine(UnlockSkills());
         }
 
         public bool CanDash()
