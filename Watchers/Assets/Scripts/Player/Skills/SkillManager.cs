@@ -31,11 +31,11 @@ namespace Assets.Scripts.Player.Skills
         // This is just for testing purposes
         IEnumerator UnlockSkills()
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
             _playerSkills.UnlockSkill(SkillType.Dash);
             Debug.Log("You can dash now!");
 
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
             _playerSkills.UnlockSkill(SkillType.WallJump);
             Debug.Log("You can wall jump now!");
         }
