@@ -117,6 +117,7 @@ public class PlayerMovementHandler : MonoBehaviour
 
     private void Move()
     {
+        // Used to check if the player has just landed.
         bool wasGrounded = _playerBrain.GetStateManager().IsGrounded;
         if (!wasGrounded && _playerBrain.GetCollisionDetector().IsGrounded())
         {
