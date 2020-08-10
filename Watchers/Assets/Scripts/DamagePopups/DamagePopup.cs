@@ -32,6 +32,9 @@ public class DamagePopup : MonoBehaviour
         _disappearTimer = DISAPPER_TIMER_MAX;
 
         _moveVector = new Vector3(1, 1) * MOVE_VECTOR_MODIFIER;
+
+        var randomDirection = Random.Range(-1, 1);
+        _moveVector.x = (randomDirection >= 0) ? _moveVector.x * 1 : _moveVector.x * -1;
     }
 
     private void Update()
