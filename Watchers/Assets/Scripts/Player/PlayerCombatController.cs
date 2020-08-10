@@ -128,10 +128,10 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
             if (damagable != null)
             {
                 // Add screenshake.
+                CinemachineShake.Instance.Shake(1f, 0.1f);
 
                 // Handle damage calculations.
                 damagable.TakeDamage((int)outgoingDamage);
-                CinemachineShake.Instance.Shake(1f, 0.1f);
                 DamagePopup.Create(damagable.GetPosition(), (int)outgoingDamage);
             }
         }
@@ -142,6 +142,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
         float currentHealth = _statManager.CurrentHealth;
         _statManager.SetCurrentHealth(currentHealth - damage);
 
+        // This might not even be needed.
         OnDamaged?.Invoke(this, EventArgs.Empty);
     }
 

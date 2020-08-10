@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Damagables;
+using UnityEngine;
 
 public class TutorialZone : MonoBehaviour
 {
