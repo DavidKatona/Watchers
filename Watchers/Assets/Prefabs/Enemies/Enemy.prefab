@@ -309,6 +309,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 4602060447135968087}
   audioClipHit: {fileID: 8300000, guid: 71ae7d8f7c3729944a5d881f1b1fb837, type: 3}
+  deathEffect: {fileID: 7488813369635195235, guid: a4d68de683bca954993ecae0164c63b1,
+    type: 3}
 --- !u!82 &4602060448118178648
 AudioSource:
   m_ObjectHideFlags: 0

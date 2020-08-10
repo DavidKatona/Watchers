@@ -12,8 +12,9 @@ namespace Assets.Scripts.Damagables.Enemies
         public delegate void DestroyHandler();
         public event DestroyHandler Died;
         public Transform healthBar;
-        private AudioSource _audioSource;
         public AudioClip audioClipHit;
+        public GameObject deathEffect;
+        private AudioSource _audioSource;
 
         public float Health { get; set; } = 100;
 
@@ -39,6 +40,7 @@ namespace Assets.Scripts.Damagables.Enemies
             if (Health <= 0)
             {
                 Destroy(gameObject);
+                Instantiate(deathEffect, transform.position, Quaternion.identity);
                 Died?.Invoke();
             }
         }
