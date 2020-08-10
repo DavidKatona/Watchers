@@ -44,6 +44,7 @@ namespace Assets.Scripts.Damagables.Enemies
 
             if (Health <= 0)
             {
+                HitStop.Instance.Stop(0.04f);
                 Destroy(gameObject);
                 Died?.Invoke();
             }
