@@ -238,7 +238,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: db0a8bfd22a7d6c4a8b5e72b74111d38, type: 3}
-  m_Color: {r: 0.9716981, g: 0.132921, b: 0.132921, a: 1}
+  m_Color: {r: 1, g: 0.5613208, b: 0.572129, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -309,8 +309,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 4602060447135968087}
   audioClipHit: {fileID: 8300000, guid: 71ae7d8f7c3729944a5d881f1b1fb837, type: 3}
-  deathEffect: {fileID: 7488813369635195235, guid: a4d68de683bca954993ecae0164c63b1,
-    type: 3}
+  spriteRenderer: {fileID: 4602060448118177957}
+  damagedColor: {r: 0.46226418, g: 0.18098077, b: 0.18098077, a: 1}
 --- !u!82 &4602060448118178648
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Assets.Scripts.Damagables.Enemies
 {
@@ -13,6 +14,9 @@ namespace Assets.Scripts.Damagables.Enemies
         public event DestroyHandler Died;
         public Transform healthBar;
         public AudioClip audioClipHit;
+        public SpriteRenderer spriteRenderer;
+        public Color damagedColor;
+        private Color _originalColor;
         private AudioSource _audioSource;
 
         public float Health { get; set; } = 100;
@@ -22,6 +26,7 @@ namespace Assets.Scripts.Damagables.Enemies
             // Leave subscription to be handle by another class like a GameManager or ScoreManager;
             Died += OnDeath;
             _audioSource = GetComponent<AudioSource>();
+            _originalColor = spriteRenderer.color;
         }
 
         public void TakeDamage(float damage)
@@ -33,6 +38,7 @@ namespace Assets.Scripts.Damagables.Enemies
             
             Health -= damage;
 
+            StartCoroutine(Flash());
             _audioSource.clip = audioClipHit;
             _audioSource.Play();
 
@@ -46,6 +52,13 @@ namespace Assets.Scripts.Damagables.Enemies
         public Vector3 GetPosition()
         {
             return transform.position;
+        }
+
+        private IEnumerator Flash()
+        {
+            spriteRenderer.color = damagedColor;
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.color = _originalColor;
         }
 
         public void OnDeath()

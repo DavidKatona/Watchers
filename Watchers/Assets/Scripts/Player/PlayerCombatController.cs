@@ -128,7 +128,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
             if (damagable != null)
             {
                 // Add screenshake.
-                CinemachineShake.Instance.Shake(1f, 0.1f);
+                CinemachineShake.Instance.Shake(0.5f, 0.1f);
 
                 // Handle damage calculations.
                 damagable.TakeDamage((int)outgoingDamage);

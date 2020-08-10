@@ -263,7 +263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7164893715146504217}
   - component: {fileID: 7164893715146504216}
-  - component: {fileID: 9024932453792165557}
+  - component: {fileID: 3671779182734966314}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -322,7 +322,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 7164893714564944934}
---- !u!114 &9024932453792165557
+--- !u!114 &3671779182734966314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
