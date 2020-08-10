@@ -120,9 +120,9 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
             _playerBrain.GetStateManager().IsRecoilingY = true;
         }
 
-        var outgoingDamage = _statManager.GetRandomPhysicalDamage();
         foreach (var obj in objectsToHit)
         {
+            var outgoingDamage = _statManager.GetRandomPhysicalDamage();
             var damagable = obj.GetComponent<IDamageable>();
 
             if (damagable != null)

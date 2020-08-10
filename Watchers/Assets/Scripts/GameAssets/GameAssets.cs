@@ -17,5 +17,6 @@ namespace Assets.Scripts.GameAssets
 
         public Transform prefabDamagePopup;
         public Transform prefabTutorialPopup;
+        public Transform prefabDeathEffect;
     }
 }

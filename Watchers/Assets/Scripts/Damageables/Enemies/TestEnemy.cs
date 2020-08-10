@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.GameAssets;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Damagables.Enemies
@@ -44,6 +45,7 @@ namespace Assets.Scripts.Damagables.Enemies
 
             if (Health <= 0)
             {
+                Instantiate(GameAssets.GameAssets.i.prefabDeathEffect, transform.position, Quaternion.identity);
                 HitStop.Instance.Stop(0.04f);
                 Destroy(gameObject);
                 Died?.Invoke();
