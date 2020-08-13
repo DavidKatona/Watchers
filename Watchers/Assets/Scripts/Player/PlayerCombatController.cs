@@ -4,6 +4,7 @@ using Assets.Scripts.Player.Combat;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerCombatController : MonoBehaviour, IDamageable
 {
@@ -24,13 +25,13 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
     [Header("Getting Hit")]
     [SerializeField] private Color _damagedColor;
+    [SerializeField] UnityEvent OnDamaged;
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
     private bool _isInvulnerable;
     private bool _isFlashing;
     private float _invulnerabilityTime = 0.8f;
 
-    public event EventHandler OnDamaged;
     private float _timeElapsedSinceLastAttack;
     private float _horizontalRecoilSpeed = 5;
     private float _verticalRecoilSpeed = 10;
@@ -157,7 +158,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
         // We make the player invulnerable for a certain amount of time, preventing further incoming damage and running the same coroutine twice.
         StartCoroutine(AddInvulnerabilityWindow(_invulnerabilityTime));
-        StartCoroutine(WaitForEffects());
+        StartCoroutine(DelayHitStop());
 
         float currentHealth = _statManager.CurrentHealth;
         _statManager.SetCurrentHealth(currentHealth - damage);
@@ -171,8 +172,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
         CinemachineShake.Instance.Shake(2f, 0.5f);
          if (!_isFlashing) StartCoroutine(Flash());
 
-        // This might not even be needed.
-        OnDamaged?.Invoke(this, EventArgs.Empty);
+        OnDamaged?.Invoke();
     }
 
     public Vector3 GetPosition()
@@ -189,7 +189,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
         _isFlashing = false;
     }
 
-    private IEnumerator WaitForEffects()
+    private IEnumerator DelayHitStop()
     {
         yield return new WaitForSeconds(0.1f);
         HitStop.Instance.Stop(0.2f);
@@ -197,11 +197,9 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
     private IEnumerator AddInvulnerabilityWindow(float duration)
     {
-        _playerBrain.GetStateManager().IsDamaged = true;
         _isInvulnerable = true;
         yield return new WaitForSeconds(duration);
         _isInvulnerable = false;
-        _playerBrain.GetStateManager().IsDamaged = false;
     }
 
     private void Recoil()
