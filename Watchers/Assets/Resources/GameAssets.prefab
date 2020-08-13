@@ -47,5 +47,7 @@ MonoBehaviour:
     type: 3}
   prefabTutorialPopup: {fileID: 5394112045896257782, guid: 5b580b86916887645b75ca22fe798485,
     type: 3}
-  prefabDeathEffect: {fileID: 6235303019671827692, guid: 74c4e39acc755cc4b9b7856370853b34,
+  prefabHitEffect: {fileID: 400000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
+  prefabDeathEffect: {fileID: 400004, guid: 5b8fe054f1d0ecf46b60297682618a92, type: 3}
+  prefabPlayerBeingHitEffect: {fileID: 4733340085621846, guid: bac230fe3bfb8e34c90e2be5d0308a77,
     type: 3}

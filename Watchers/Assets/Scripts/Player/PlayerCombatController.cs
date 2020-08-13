@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.Damagables;
+using Assets.Scripts.GameAssets;
 using Assets.Scripts.Player.Combat;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerCombatController : MonoBehaviour, IDamageable
@@ -20,6 +22,13 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
     [SerializeField] private float _downwardsAttackRadius = 1;
     [SerializeField] private LayerMask _attackableLayer;
 
+    [Header("Gettting Hit")]
+    [SerializeField] private Color _damagedColor;
+    private SpriteRenderer _spriteRenderer;
+    private Color _originalColor;
+    private bool _isInvulnerable;
+    private float _invulnerabilityTime = 0.8f;
+
     public event EventHandler OnDamaged;
     private float _timeElapsedSinceLastAttack;
     private float _horizontalRecoilSpeed = 5;
@@ -33,6 +42,8 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
     private void Awake()
     {
         _gravityScale = GetComponent<Rigidbody2D>().gravityScale;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _originalColor = GetComponent<SpriteRenderer>().color;
     }
 
     void Update()
@@ -111,6 +122,8 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
         if (objectsToHit.Length == 0) return;
 
+        var hitEffect = Instantiate(GameAssets.i.prefabHitEffect, attackDirection, Quaternion.identity);
+
         if (attackMotion == AttackMotion.Horizontal)
         {
             _playerBrain.GetStateManager().IsRecoilingX = true;
@@ -139,16 +152,42 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        float currentHealth = _statManager.CurrentHealth;
-        _statManager.SetCurrentHealth(currentHealth - damage);
+        if (!_isInvulnerable)
+        {
+            StartCoroutine(AddInvulnerabilityWindow(_invulnerabilityTime));
 
-        // This might not even be needed.
-        OnDamaged?.Invoke(this, EventArgs.Empty);
+            float currentHealth = _statManager.CurrentHealth;
+            _statManager.SetCurrentHealth(currentHealth - damage);
+
+            _playerBrain.GetStateManager().IsRecoilingX = true;
+
+            Instantiate(GameAssets.i.prefabPlayerBeingHitEffect, transform.position, Quaternion.identity);
+            CinemachineShake.Instance.Shake(2f, 0.5f);
+            StartCoroutine(Flash());
+            HitStop.Instance.Stop(0.2f);
+
+            // This might not even be needed.
+            OnDamaged?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    private IEnumerator Flash()
+    {
+        _spriteRenderer.color = _damagedColor;
+        yield return new WaitForSeconds(0.2f);
+        _spriteRenderer.color = _originalColor;
+    }
+
+    private IEnumerator AddInvulnerabilityWindow(float duration)
+    {
+        _isInvulnerable = true;
+        yield return new WaitForSeconds(duration);
+        _isInvulnerable = false;
     }
 
     private void Recoil()

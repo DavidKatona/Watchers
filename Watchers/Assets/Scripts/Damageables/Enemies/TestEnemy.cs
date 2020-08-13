@@ -40,12 +40,12 @@ namespace Assets.Scripts.Damagables.Enemies
             Health -= damage;
 
             StartCoroutine(Flash());
-            var hitEffect = Instantiate(GameAssets.GameAssets.i.prefabDeathEffect, transform.position, Quaternion.identity);
             _audioSource.clip = audioClipHit;
             _audioSource.Play();
 
             if (Health <= 0)
             {
+                Instantiate(GameAssets.GameAssets.i.prefabDeathEffect, transform.position, Quaternion.identity);
                 HitStop.Instance.Stop(0.04f);
                 Destroy(gameObject);
                 Died?.Invoke();
