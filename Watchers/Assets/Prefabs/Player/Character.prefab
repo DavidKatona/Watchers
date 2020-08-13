@@ -215,6 +215,7 @@ MonoBehaviour:
   _audioSource: {fileID: 8568552822144382234}
   _audioClips:
   - {fileID: 8300000, guid: 020f1c93eaacc61469314f5889b6dc96, type: 3}
+  _callOnAwake: 0
 --- !u!1 &4671008126943434825
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +469,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9740206554087051}
-        m_MethodName: PlayDamageSound
+        m_MethodName: PlayRandomClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

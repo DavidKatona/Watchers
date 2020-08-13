@@ -20,7 +20,6 @@ namespace Assets.Scripts.Damagables.Enemies
         public Color damagedColor;
         private Color _originalColor;
         private AudioSource _audioSource;
-        public UnityEvent OnDied;
 
         public float Health { get; set; } = 100;
 
@@ -51,7 +50,6 @@ namespace Assets.Scripts.Damagables.Enemies
                 HitStop.Instance.Stop(0.04f);
                 Destroy(gameObject);
                 Died?.Invoke();
-                OnDied?.Invoke();
             }
         }
 

@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageSound : MonoBehaviour
+public class SoundPlayer : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip[] _audioClips;
+    [SerializeField] private bool _callOnAwake;
 
-    public void PlayDamageSound()
+    private void Awake()
+    {
+        if (_callOnAwake)
+        {
+            PlayRandomClip();
+        }
+    }
+
+    public void PlayRandomClip()
     {
         if (_audioSource != null)
         {
