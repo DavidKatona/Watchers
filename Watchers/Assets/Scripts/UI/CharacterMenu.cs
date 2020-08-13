@@ -109,12 +109,12 @@ public class CharacterMenu : MonoBehaviour
 
     private void UpdateHealthStatistics()
     {
-        transform.Find(mainStatsPath + "HealthBackgroundColor/HealthCounter").GetComponent<Text>().text = $"{StatManager.CurrentHealth}/{StatManager.MaxHealth}";
+        transform.Find(mainStatsPath + "HealthBackgroundColor/HealthCounter").GetComponent<Text>().text = $"{StatManager.CurrentHealth.ToString("0.00")}/{StatManager.MaxHealth}";
     }
 
     private void UpdateManaStatistics()
     {
-        transform.Find(mainStatsPath + "ManaBackgroundColor/ManaCounter").GetComponent<Text>().text = $"{StatManager.CurrentMana}/{StatManager.MaxMana}";
+        transform.Find(mainStatsPath + "ManaBackgroundColor/ManaCounter").GetComponent<Text>().text = $"{StatManager.CurrentMana.ToString("0.00")}/{StatManager.MaxMana}";
     }
 
     private void UpdateSoulsCounter()

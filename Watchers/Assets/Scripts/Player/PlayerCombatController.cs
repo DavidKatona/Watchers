@@ -27,6 +27,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
     private bool _isInvulnerable;
+    private bool _isFlashing;
     private float _invulnerabilityTime = 0.8f;
 
     public event EventHandler OnDamaged;
@@ -152,23 +153,27 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        if (!_isInvulnerable)
-        {
-            StartCoroutine(AddInvulnerabilityWindow(_invulnerabilityTime));
+        if (_isInvulnerable) return;
 
-            float currentHealth = _statManager.CurrentHealth;
-            _statManager.SetCurrentHealth(currentHealth - damage);
+        // We make the player invulnerable for a certain amount of time, preventing further incoming damage and running the same coroutine twice.
+        StartCoroutine(AddInvulnerabilityWindow(_invulnerabilityTime));
 
-            _playerBrain.GetStateManager().IsRecoilingX = true;
+        float currentHealth = _statManager.CurrentHealth;
+        _statManager.SetCurrentHealth(currentHealth - damage);
 
-            Instantiate(GameAssets.i.prefabPlayerBeingHitEffect, transform.position, Quaternion.identity);
-            CinemachineShake.Instance.Shake(2f, 0.5f);
-            StartCoroutine(Flash());
-            HitStop.Instance.Stop(0.2f);
+        // We make the player recoil.
+        _playerBrain.GetStateManager().IsRecoilingX = true;
 
-            // This might not even be needed.
-            OnDamaged?.Invoke(this, EventArgs.Empty);
-        }
+        // We add combat effects.
+        Instantiate(GameAssets.i.prefabPlayerBeingHitEffect, transform.position, Quaternion.identity);
+        CinemachineShake.Instance.Shake(2f, 0.5f);
+         if (!_isFlashing) StartCoroutine(Flash());
+
+        // We add the hitstop effect after all effects have been instantiated for a nice visual experience.
+        HitStop.Instance.Stop(0.2f);
+
+        // This might not even be needed.
+        OnDamaged?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector3 GetPosition()
@@ -178,9 +183,11 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
     private IEnumerator Flash()
     {
+        _isFlashing = true;
         _spriteRenderer.color = _damagedColor;
         yield return new WaitForSeconds(0.2f);
         _spriteRenderer.color = _originalColor;
+        _isFlashing = false;
     }
 
     private IEnumerator AddInvulnerabilityWindow(float duration)

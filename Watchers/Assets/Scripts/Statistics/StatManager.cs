@@ -36,6 +36,12 @@ public class StatManager : MonoBehaviour
         _debugMenu.SetAttributes(attributes);
         _playerHUD.SetAttributes(attributes);
     }
+
+    private void Update()
+    {
+        RegenerateHealthAndMana();
+    }
+
     public void SetAttributes(Attributes attributes)
     {
         _attributes = attributes;
@@ -92,6 +98,19 @@ public class StatManager : MonoBehaviour
         // Restore all missing health and manapoints.
         CurrentHealth = MaxHealth;
         CurrentMana = MaxMana;
+    }
+
+    private void RegenerateHealthAndMana()
+    {
+        if (CurrentHealth != MaxHealth)
+        {
+            SetCurrentHealth(CurrentHealth += HealthRegen * Time.deltaTime);
+        }
+
+        if (CurrentMana != MaxMana)
+        {
+            SetCurrentMana(CurrentMana += ManaRegen * Time.deltaTime);
+        }
     }
 
     // Sould there be more stats, it would be wise to abstract stats away to an interface.
