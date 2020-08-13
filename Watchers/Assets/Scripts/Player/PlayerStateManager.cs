@@ -8,6 +8,7 @@ public class PlayerStateManager : MonoBehaviour
 
     public bool IsWalking { get; set; }
     public bool IsGrounded { get; set; }
+    public bool IsDamaged { get; set; }
     public bool IsInteracting { get; set; }
     public bool IsLookingRight { get; set; } = true;
     public bool IsJumping { get; set; }

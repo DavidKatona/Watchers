@@ -312,6 +312,7 @@ MonoBehaviour:
   _forwardAttackTransform: {fileID: 4671008127052525859}
   _upwardsAttackTransform: {fileID: 4671008127785992682}
   _downwardsAttackTransform: {fileID: 4671008127386594329}
+  _audioSource: {fileID: 9135920353335537725}
   _timeBetweenAttacks: 0.4
   _forwardAttackRadius: 0.8
   _upwardsAttackRadius: 0.7
@@ -319,7 +320,8 @@ MonoBehaviour:
   _attackableLayer:
     serializedVersion: 2
     m_Bits: 1024
-  _damagedColor: {r: 0, g: 0, b: 0, a: 0}
+  _damagedColor: {r: 0.46226418, g: 0.18098077, b: 0.18098077, a: 1}
+  _playerHitClip: {fileID: 8300000, guid: 6ed54e97395ac614bb7248bf89e78e06, type: 3}
 --- !u!114 &4671008126943434820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,12 +335,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerBrain: {fileID: 4671008126943434846}
-  _groundCheckLengthX: 0.3
+  _groundCheckLengthX: 0.2
   _groundCheckLengthY: 0.2
   _groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  _roofCheckLengthX: 0.3
+  _roofCheckLengthX: 0.2
   _roofCheckLengthY: 0.2
   _wallCheckLengthX: 0.4
   _groundCheckTransform: {fileID: 4671008127011546170}

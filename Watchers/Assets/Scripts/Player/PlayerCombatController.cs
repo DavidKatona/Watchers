@@ -22,7 +22,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
     [SerializeField] private float _downwardsAttackRadius = 1;
     [SerializeField] private LayerMask _attackableLayer;
 
-    [Header("Gettting Hit")]
+    [Header("Getting Hit")]
     [SerializeField] private Color _damagedColor;
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
@@ -157,20 +157,19 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
         // We make the player invulnerable for a certain amount of time, preventing further incoming damage and running the same coroutine twice.
         StartCoroutine(AddInvulnerabilityWindow(_invulnerabilityTime));
+        StartCoroutine(WaitForEffects());
 
         float currentHealth = _statManager.CurrentHealth;
         _statManager.SetCurrentHealth(currentHealth - damage);
 
         // We make the player recoil.
         _playerBrain.GetStateManager().IsRecoilingX = true;
+        _playerBrain.PlayerAnimator.SetTrigger("TakeDamage");
 
         // We add combat effects.
         Instantiate(GameAssets.i.prefabPlayerBeingHitEffect, transform.position, Quaternion.identity);
         CinemachineShake.Instance.Shake(2f, 0.5f);
          if (!_isFlashing) StartCoroutine(Flash());
-
-        // We add the hitstop effect after all effects have been instantiated for a nice visual experience.
-        HitStop.Instance.Stop(0.2f);
 
         // This might not even be needed.
         OnDamaged?.Invoke(this, EventArgs.Empty);
@@ -190,11 +189,19 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
         _isFlashing = false;
     }
 
+    private IEnumerator WaitForEffects()
+    {
+        yield return new WaitForSeconds(0.1f);
+        HitStop.Instance.Stop(0.2f);
+    }
+
     private IEnumerator AddInvulnerabilityWindow(float duration)
     {
+        _playerBrain.GetStateManager().IsDamaged = true;
         _isInvulnerable = true;
         yield return new WaitForSeconds(duration);
         _isInvulnerable = false;
+        _playerBrain.GetStateManager().IsDamaged = false;
     }
 
     private void Recoil()
