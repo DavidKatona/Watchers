@@ -3,18 +3,19 @@ using UnityEngine;
 
 public class HitStop : MonoBehaviour
 {
-    public static HitStop Instance { get; private set; }
+    private static HitStop _instance;
+    public static HitStop Instance { get { return _instance; } }
     private bool _isWaiting;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            Instance = this;
+            _instance = this;
         }
     }
 
