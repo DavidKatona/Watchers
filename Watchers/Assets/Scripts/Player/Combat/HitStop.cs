@@ -32,7 +32,12 @@ public class HitStop : MonoBehaviour
     {
         _isWaiting = true;
         yield return new WaitForSecondsRealtime(duration);
-        Time.timeScale = 1.0f;
+
+        if (!PauseMenu.GameIsPaused)
+        {
+            Time.timeScale = 1.0f;
+        }
+
         _isWaiting = false;
     }
 }
