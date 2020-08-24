@@ -13,7 +13,10 @@ public class PlayerInputManager : MonoBehaviour
 
     void Update()
     {
-        GetInput();
+        if (!PauseMenu.GameIsPaused)
+        {
+            GetInput();
+        }
     }
 
     void GetInput()
@@ -53,7 +56,7 @@ public class PlayerInputManager : MonoBehaviour
         }
 
         //Attacking
-        if (Input.GetButtonDown("Attack"))
+        if (Input.GetButtonDown("Attack") && !CharacterMenu.IsOpened)
         {
             IsAttackPressed = true;
         }

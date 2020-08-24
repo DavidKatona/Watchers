@@ -11,13 +11,13 @@ public class CharacterMenu : MonoBehaviour
     private const string levelInfoPath = "CharacterMenuUI/CharacterMenuFrame/CharacterLevelInformation/";
     private const string inventoryFrame = "CharacterMenuUI/CharacterInventoryFrame/";
 
+    public static bool IsOpened;
     public GameObject CharacterMenuUI;
     public StatManager StatManager;
     public AudioSource audioSource;
     public AudioClip menuOpenClip;
     public AudioClip menuCloseClip;
     private Attributes _attributes;
-    private bool _isOpened;
 
     public void SetAttributes(Attributes attributes)
     {
@@ -52,21 +52,23 @@ public class CharacterMenu : MonoBehaviour
 
     public void Close()
     {
-        _isOpened = false;
-        CharacterMenuUI.SetActive(_isOpened);
+        IsOpened = false;
+        CharacterMenuUI.SetActive(IsOpened);
         audioSource.clip = menuCloseClip;
         audioSource.Play();
     }
 
     void Update()
     {
+        if (PauseMenu.GameIsPaused) return;
+
         if (Input.GetButtonDown("OpenCharacterMenu"))
         {
-            _isOpened = !_isOpened;
+            IsOpened = !IsOpened;
 
-            CharacterMenuUI.SetActive(_isOpened);
+            CharacterMenuUI.SetActive(IsOpened);
 
-            if (_isOpened)
+            if (IsOpened)
             {
                 audioSource.clip = menuOpenClip;
             }
