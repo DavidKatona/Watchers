@@ -5,6 +5,8 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseMenuUI;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _audioClip;
     public static bool GameIsPaused = false;
 
     void Update()
@@ -18,6 +20,8 @@ public class PauseMenu : MonoBehaviour
             else
             {
                 Pause();
+                _audioSource.clip = _audioClip;
+                _audioSource.Play();
             }
         }
     }
