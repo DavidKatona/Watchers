@@ -33,6 +33,7 @@ public class HitStop : MonoBehaviour
         _isWaiting = true;
         yield return new WaitForSecondsRealtime(duration);
 
+        // We set the timscale back to it's default value only if the game is not paused by a menu.
         if (!PauseMenu.GameIsPaused)
         {
             Time.timeScale = 1.0f;
