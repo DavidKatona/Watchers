@@ -5,7 +5,7 @@ namespace Assets.Scripts.SceneManagement
 {
     public class LoaderCallback : MonoBehaviour
     {
-        [SerializeField] bool _simulateLoadingTime = true;
+        [SerializeField] bool _delayLoadingTime = true;
         private bool _isFirstUpdate = true;
 
         // Update is called once per frame
@@ -15,7 +15,7 @@ namespace Assets.Scripts.SceneManagement
             {
                 _isFirstUpdate = false;
 
-                if (_simulateLoadingTime)
+                if (_delayLoadingTime)
                 {
                     StartCoroutine(WaitForLoad());
                 }
