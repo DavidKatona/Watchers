@@ -3,5 +3,7 @@
 /// </summary>
 public enum Scene
 {
-    LoadingScene
+    LoadingScene,
+    MainMenu,
+    DemoLevel
 }
