@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 4671008126943434845}
   - component: {fileID: 4671008126943434820}
   - component: {fileID: 4671008126943434817}
+  - component: {fileID: 1256428885}
   - component: {fileID: 9135920353335537725}
   m_Layer: 12
   m_Name: Character
@@ -515,6 +516,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerBrain: {fileID: 4671008126943434846}
+--- !u!114 &1256428885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671008126943434825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d658fde87f93e604a9b242b456e2058e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTransform: {fileID: 4671008126943434821}
+  _statManager: {fileID: 7925648516927595742}
+  _skillManager: {fileID: 3488151263867076390}
 --- !u!82 &9135920353335537725
 AudioSource:
   m_ObjectHideFlags: 0

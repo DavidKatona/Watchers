@@ -11,6 +11,10 @@ public class StatManager : MonoBehaviour
     [SerializeField] private DebugMenu _debugMenu;
     [SerializeField] private PlayerHUD _playerHUD;
     private Attributes _attributes;
+    public Attributes GetAttributes()
+    {
+        return _attributes;
+    }
 
     public float MaxHealth { get; private set; }
     public float CurrentHealth { get; private set; }
