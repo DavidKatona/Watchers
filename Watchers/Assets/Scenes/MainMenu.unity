@@ -662,11 +662,12 @@ GameObject:
   - component: {fileID: 1365685726}
   - component: {fileID: 1365685725}
   - component: {fileID: 1365685724}
-  - component: {fileID: 1365685727}
   - component: {fileID: 1365685729}
+  - component: {fileID: 1365685731}
+  - component: {fileID: 1365685727}
   - component: {fileID: 1365685728}
   - component: {fileID: 1365685730}
-  - component: {fileID: 1365685731}
+  - component: {fileID: 1365685732}
   m_Layer: 5
   m_Name: NewGameButton
   m_TagString: Untagged
@@ -951,6 +952,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1365685732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365685722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f0d49ed89c67d419d47ffbf652b68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1381791613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,6 +1280,8 @@ GameObject:
   - component: {fileID: 1803012271}
   - component: {fileID: 1803012273}
   - component: {fileID: 1803012274}
+  - component: {fileID: 1803012275}
+  - component: {fileID: 1803012276}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -1361,7 +1376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1538,6 +1553,31 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1803012275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803012266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db9567b5f10d1446b7ee0d8242b7125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneToLoad: 2
+--- !u!114 &1803012276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803012266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232ef015893b5db44923a41b40317f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1829065833
 GameObject:
   m_ObjectHideFlags: 0

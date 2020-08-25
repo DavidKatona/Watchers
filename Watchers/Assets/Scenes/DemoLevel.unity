@@ -7627,6 +7627,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797731197}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1836400680 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2393283630373318602, guid: c674b4e7b631d0d489a881d02c5a9e66,
+    type: 3}
+  m_PrefabInstance: {fileID: 2242527160615943694}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1839645499
 GameObject:
   m_ObjectHideFlags: 0
@@ -9347,6 +9353,11 @@ PrefabInstance:
       propertyPath: _saveablePlayerGameObject
       value: 
       objectReference: {fileID: 1256428884}
+    - target: {fileID: 3035266035855892969, guid: c674b4e7b631d0d489a881d02c5a9e66,
+        type: 3}
+      propertyPath: _cinemachineCamera
+      value: 
+      objectReference: {fileID: 7164893714506998083}
     - target: {fileID: 7531237912750826205, guid: c674b4e7b631d0d489a881d02c5a9e66,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9480,6 +9491,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1664139851093955820, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3262137601889793723, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -9600,6 +9616,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5759147033500772083, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
+        type: 3}
+      propertyPath: _saveSystemObject
+      value: 
+      objectReference: {fileID: 1836400680}
     - target: {fileID: 6281457028525440738, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -10150,6 +10171,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2312a48d2fa01c8418fd63c7319649c5, type: 3}
+--- !u!1 &7164893714506998083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7164893715146504219, guid: 2312a48d2fa01c8418fd63c7319649c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 7164893714506998082}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7922959733258382632
 PrefabInstance:
   m_ObjectHideFlags: 0

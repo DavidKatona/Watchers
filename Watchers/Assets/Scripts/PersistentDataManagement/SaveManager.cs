@@ -6,13 +6,22 @@ namespace Assets.Scripts.PersistentDataManagement
 {
     public class SaveManager : MonoBehaviour
     {
+        public event EventHandler onGameSaved;
+
         [SerializeField] private GameObject _saveablePlayerGameObject;
         private ISaveablePlayer _saveablePlayer;
 
         private void Awake()
         {
             _saveablePlayer = _saveablePlayerGameObject.GetComponent<ISaveablePlayer>();
-            PlayerPrefs.DeleteAll();
+        }
+
+        private void Start()
+        {
+            if (PlayerPrefs.HasKey("hasSaved"))
+            {
+                LoadPlayerData();
+            }
         }
 
         private void Update()
@@ -30,6 +39,8 @@ namespace Assets.Scripts.PersistentDataManagement
 
         private void SavePlayerData()
         {
+            PlayerPrefs.SetInt("hasSaved", 1);
+
             SaveAttributes();
 
             float playerPositionX = _saveablePlayer.GetPositionX();
@@ -45,9 +56,9 @@ namespace Assets.Scripts.PersistentDataManagement
             PlayerPrefs.SetFloat("playerCurrentHealth", playerCurrentHealth);
             PlayerPrefs.SetFloat("playerCurrentMana", playerCurrentMana);
 
-
             PlayerPrefs.Save();
-            Debug.Log("Game saved!");
+
+            onGameSaved?.Invoke(this, EventArgs.Empty);
         }
 
         private void LoadPlayerData()
@@ -71,8 +82,6 @@ namespace Assets.Scripts.PersistentDataManagement
                 _saveablePlayer.SetHealth(playerCurrentHealth);
                 _saveablePlayer.SetMana(playerCurrentMana);
             }
-
-            Debug.Log("Game loaded!");
         }
 
         private void LoadAttributes()
