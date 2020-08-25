@@ -57,17 +57,7 @@ namespace Assets.Scripts.PersistentDataManagement
 
         public void SetSouls(int value)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public int GetSoulsRequired()
-        {
-            return _statManager.GetAttributes().GetSouls();
-        }
-
-        public void SetSoulsRequired(int value)
-        {
-            throw new System.NotImplementedException();
+            _statManager.GetAttributes().SetSouls(value);
         }
 
         public int GetAttribute(AttributeType attributeType)

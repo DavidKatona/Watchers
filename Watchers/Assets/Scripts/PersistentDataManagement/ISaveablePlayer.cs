@@ -10,8 +10,6 @@ namespace Assets.Scripts.PersistentDataManagement
         void SetMana(float value);
         int GetSouls();
         void SetSouls(int value);
-        int GetSoulsRequired();
-        void SetSoulsRequired(int value);
         int GetAttribute(Attributes.AttributeType attributeType);
         void SetAttribute(Attributes.AttributeType attributeType, int value);
     }
