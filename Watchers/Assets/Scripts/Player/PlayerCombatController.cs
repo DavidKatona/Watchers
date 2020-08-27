@@ -161,7 +161,8 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
         StartCoroutine(DelayHitStop());
 
         float currentHealth = _statManager.CurrentHealth;
-        _statManager.SetCurrentHealth(currentHealth - damage);
+        float actualDamage = damage / 100 * (100 - _statManager.Armor);
+        _statManager.SetCurrentHealth(currentHealth - actualDamage);
 
         // We make the player recoil.
         _playerBrain.GetStateManager().IsRecoilingX = true;
