@@ -13,7 +13,7 @@ namespace Assets.Scripts.UI
         private void Awake()
         {
             _saveManager = _saveSystemObject.GetComponent<SaveManager>();
-            _saveManager.onGameSaved += SaveSystem_OnGameSaved;
+            _saveManager.OnGameSaved += SaveSystem_OnGameSaved;
 
             gameObject.SetActive(false);
         }

@@ -1,19 +1,22 @@
 ﻿using System;
 using UnityEngine;
 using Assets.Scripts.Attributes;
+using Assets.Scripts.BattleSystem;
 
 namespace Assets.Scripts.PersistentDataManagement
 {
     public class SaveManager : MonoBehaviour
     {
-        public event EventHandler onGameSaved;
+        public event EventHandler OnGameSaved;
 
+        [SerializeField] private BattleSystemManager _battleSystem;
         [SerializeField] private GameObject _saveablePlayerGameObject;
         private ISaveablePlayer _saveablePlayer;
 
         private void Awake()
         {
             _saveablePlayer = _saveablePlayerGameObject.GetComponent<ISaveablePlayer>();
+            _battleSystem.OnWaveEnded += BattleSystem_OnWaveEnded;
         }
 
         private void Start()
@@ -58,7 +61,7 @@ namespace Assets.Scripts.PersistentDataManagement
 
             PlayerPrefs.Save();
 
-            onGameSaved?.Invoke(this, EventArgs.Empty);
+            OnGameSaved?.Invoke(this, EventArgs.Empty);
         }
 
         private void LoadPlayerData()
@@ -103,6 +106,11 @@ namespace Assets.Scripts.PersistentDataManagement
                 int currentAttributeValue = _saveablePlayer.GetAttribute(attributeType);
                 PlayerPrefs.SetInt($"player{attributeType}", currentAttributeValue);
             }
+        }
+
+        private void BattleSystem_OnWaveEnded(object sender, EventArgs e)
+        {
+            SavePlayerData();
         }
     }
 }
