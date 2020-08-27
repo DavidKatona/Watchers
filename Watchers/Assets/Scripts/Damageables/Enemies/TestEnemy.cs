@@ -1,19 +1,14 @@
-﻿using Assets.Scripts.GameAssets;
+﻿using Assets.Scripts.BattleSystem;
+using Assets.Scripts.GameAssets;
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Assets.Scripts.Damagables.Enemies
 {
-    public class TestEnemy : MonoBehaviour, IDamageable
+    public class TestEnemy : MonoBehaviour, IDamageable, ISpawnable
     {
-        // ToDo: Rewrite this to actual enemy classes with refined logic.
-        // Enemy Factory creates enemies
-        // It also hooks up the events of enemy to the components of interest
-        // var enemy = new Enemy();
-        // enemy.OnDeath += gameManager.IncrementDeadEnemiesCount()
-        public delegate void DestroyHandler();
-        public event DestroyHandler Died;
+        public event EventHandler OnSpawnableDestroyed;
         public Transform healthBar;
         public AudioClip audioClipHit;
         public SpriteRenderer spriteRenderer;
@@ -25,8 +20,6 @@ namespace Assets.Scripts.Damagables.Enemies
 
         private void Awake()
         {
-            // Leave subscription to be handle by another class like a GameManager or ScoreManager;
-            Died += OnDeath;
             _audioSource = GetComponent<AudioSource>();
             _originalColor = spriteRenderer.color;
         }
@@ -49,7 +42,7 @@ namespace Assets.Scripts.Damagables.Enemies
                 Instantiate(GameAssets.GameAssets.i.prefabDeathEffect, new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z), Quaternion.identity);
                 HitStop.Instance.Stop(0.04f);
                 Destroy(gameObject);
-                Died?.Invoke();
+                OnSpawnableDestroyed?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -63,12 +56,6 @@ namespace Assets.Scripts.Damagables.Enemies
             spriteRenderer.color = damagedColor;
             yield return new WaitForSeconds(0.1f);
             spriteRenderer.color = _originalColor;
-        }
-
-        public void OnDeath()
-        {
-            // Granting points should be done from a separate class like a GameManager or ScoreManager and not done here.
-            Debug.Log($"{gameObject.name} died. +1 point");
         }
     }
 }
