@@ -4,6 +4,7 @@
     {
         Dash,
         WallJump,
-        Heal
+        Heal,
+        AbyssBolt
     }
 }

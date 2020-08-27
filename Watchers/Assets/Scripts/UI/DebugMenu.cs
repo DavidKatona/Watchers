@@ -2,11 +2,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.Attributes;
-using static Assets.Scripts.Attributes.Attributes;
 
 public class DebugMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject _debugMenu;
     private Attributes _attributes;
+    private bool _isOpened;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            _isOpened = !_isOpened;
+
+            _debugMenu.SetActive(_isOpened);
+        }
+    }
 
     public void SetAttributes(Attributes attributes)
     {

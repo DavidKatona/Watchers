@@ -9818,6 +9818,16 @@ PrefabInstance:
       propertyPath: StatManager
       value: 
       objectReference: {fileID: 17510309}
+    - target: {fileID: 5157433024597392300, guid: be144dda92d38f84e99573a7dcbee952,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 16.524984
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157433024597392300, guid: be144dda92d38f84e99573a7dcbee952,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 33.05
+      objectReference: {fileID: 0}
     - target: {fileID: 5157433025095592568, guid: be144dda92d38f84e99573a7dcbee952,
         type: 3}
       propertyPath: m_LocalPosition.x

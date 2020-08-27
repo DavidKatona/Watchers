@@ -9,7 +9,7 @@ public class CharacterMenu : MonoBehaviour
     private const string mainStatsPath = "CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/MainStatistics/";
     private const string additionalStatsPath = "CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/AdditionalStatistics/";
     private const string levelInfoPath = "CharacterMenuUI/CharacterMenuFrame/CharacterLevelInformation/";
-    private const string inventoryFrame = "CharacterMenuUI/CharacterInventoryFrame/";
+    private const string abilityFrame = "CharacterMenuUI/CharacterAttributesFrame/";
 
     public static bool IsOpened;
     public GameObject CharacterMenuUI;
@@ -104,9 +104,7 @@ public class CharacterMenu : MonoBehaviour
         // Update level information.
         transform.Find(levelInfoPath + "WatcherLevelBackgroundColor/WatcherLevelCounter").GetComponent<Text>().text = $"{_attributes.GetLevel()}";
         transform.Find(levelInfoPath + "SoulsRequiredBackgroundColor/SoulsRequiredCounter").GetComponent<Text>().text = $"{_attributes.GetSoulsRequired():#,0}";
-
-        // Update inventory currency.
-        transform.Find(inventoryFrame + "InventoryCurrency/SoulCounter").GetComponent<Text>().text = $"Souls: {_attributes.GetSouls():#,0}";
+        transform.Find(levelInfoPath + "CurrentSoulsBackgroundColor/CurrentSoulsCounter").GetComponent<Text>().text = $"{_attributes.GetSouls():#,0}";
     }
 
     private void UpdateHealthStatistics()
@@ -121,6 +119,6 @@ public class CharacterMenu : MonoBehaviour
 
     private void UpdateSoulsCounter()
     {
-        transform.Find(inventoryFrame + "InventoryCurrency/SoulCounter").GetComponent<Text>().text = $"Souls: {_attributes.GetSouls():#,0}";
+        transform.Find(levelInfoPath + "CurrentSoulsBackgroundColor/CurrentSoulsCounter").GetComponent<Text>().text = $"{_attributes.GetSouls():#,0}";
     }
 }
