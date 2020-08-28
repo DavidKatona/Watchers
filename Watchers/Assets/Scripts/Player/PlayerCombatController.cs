@@ -52,6 +52,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
     {
         Recoil();
         if (!_playerBrain.GetStateManager().IsWallSliding) Attack();
+        if (!_playerBrain.GetStateManager().IsWallSliding) CastAbyssBolt();
     }
 
     private void FixedUpdate()
@@ -152,6 +153,24 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
         }
     }
 
+    private void CastAbyssBolt()
+    {
+        if (_playerBrain.GetInputManager().IsAbyssBoltPressed)
+        {
+            _playerBrain.GetStateManager().IsRecoilingX = true;
+
+            CinemachineShake.Instance.Shake(2f, 0.1f);
+            var objectToInstantiate = Instantiate(GameAssets.i.prefabAbyssBolt, _forwardAttackTransform.position, Quaternion.identity);
+            var projectile = objectToInstantiate.GetComponent<Projectile>();
+
+            if (projectile != null)
+            {
+                var direction = _playerBrain.GetStateManager().IsLookingRight ? 1 : -1;
+                projectile.Setup(direction);
+            }
+        }
+    }
+
     public void TakeDamage(float damage)
     {
         if (_isInvulnerable) return;
@@ -171,7 +190,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
         // We add combat effects.
         Instantiate(GameAssets.i.prefabPlayerBeingHitEffect, transform.position, Quaternion.identity);
         CinemachineShake.Instance.Shake(2f, 0.5f);
-         if (!_isFlashing) StartCoroutine(Flash());
+        if (!_isFlashing) StartCoroutine(Flash());
 
         OnDamaged?.Invoke();
     }

@@ -10,6 +10,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool IsJumpHeld { get; private set; }
     public bool IsDashPressed { get; private set; }
     public bool IsAttackPressed { get; private set; }
+    public bool IsAbyssBoltPressed { get; private set; }
 
     void Update()
     {
@@ -63,6 +64,16 @@ public class PlayerInputManager : MonoBehaviour
         else
         {
             IsAttackPressed = false;
+        }
+
+        //Casting Abyss Bolt
+        if (Input.GetButtonDown("CastAbyssBolt") && !CharacterMenu.IsOpened)
+        {
+            IsAbyssBoltPressed = true;
+        }
+        else
+        {
+            IsAbyssBoltPressed = false;
         }
     }
 }

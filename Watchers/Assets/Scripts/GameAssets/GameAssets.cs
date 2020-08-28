@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+using UnityEngine;
 
 namespace Assets.Scripts.GameAssets
 {
@@ -20,5 +21,6 @@ namespace Assets.Scripts.GameAssets
         public Transform prefabHitEffect;
         public Transform prefabDeathEffect;
         public Transform prefabPlayerBeingHitEffect;
+        public Transform prefabAbyssBolt;
     }
 }

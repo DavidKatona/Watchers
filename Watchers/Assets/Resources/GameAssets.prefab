@@ -51,3 +51,5 @@ MonoBehaviour:
   prefabDeathEffect: {fileID: 400004, guid: 5b8fe054f1d0ecf46b60297682618a92, type: 3}
   prefabPlayerBeingHitEffect: {fileID: 4733340085621846, guid: bac230fe3bfb8e34c90e2be5d0308a77,
     type: 3}
+  prefabAbyssBolt: {fileID: 5199343647463690833, guid: 91b8aa4b270900b4eab32837d75a3ccb,
+    type: 3}

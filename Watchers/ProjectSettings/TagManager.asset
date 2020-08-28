@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Attackable
   - BattleSystem
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Attackable
   - Tutorial
   - Player
-  - 
+  - PlayerSpell
   - 
   - 
   - 
