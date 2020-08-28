@@ -6,7 +6,7 @@ namespace Assets.Scripts.Player.Skills
     {
         private readonly SkillType _skillType;
 
-        SkillType GetSkillType()
+        public SkillType GetSkillType()
         {
             return _skillType;
         }

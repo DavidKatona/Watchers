@@ -1,10 +1,12 @@
 ﻿using Assets.Scripts.Damagables;
 using Assets.Scripts.GameAssets;
 using Assets.Scripts.Player.Combat;
+using Assets.Scripts.Spells;
 using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class PlayerCombatController : MonoBehaviour, IDamageable
 {
@@ -50,6 +52,8 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
     void Update()
     {
+        _timeElapsedSinceLastAttack += Time.deltaTime;
+
         Recoil();
         if (!_playerBrain.GetStateManager().IsWallSliding) Attack();
         if (!_playerBrain.GetStateManager().IsWallSliding) CastAbyssBolt();
@@ -83,8 +87,6 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
     private void Attack()
     {
-        _timeElapsedSinceLastAttack += Time.deltaTime;
-
         if (_timeElapsedSinceLastAttack > _timeBetweenAttacks)
         {
             _playerBrain.PlayerAnimator.SetBool("IsAttacking", false);
@@ -155,11 +157,20 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
     private void CastAbyssBolt()
     {
-        if (_playerBrain.GetInputManager().IsAbyssBoltPressed)
+        if (_playerBrain.GetInputManager().IsAbyssBoltPressed && _timeElapsedSinceLastAttack >= _timeBetweenAttacks && !_playerBrain.GetStateManager().IsDashing)
         {
+            var manaCost = 20f;
+
+            if (_statManager.CurrentMana < manaCost)
+                return;
+
+            _statManager.SetCurrentMana(_statManager.CurrentMana - manaCost);
+
+            _timeElapsedSinceLastAttack = 0;
             _playerBrain.GetStateManager().IsRecoilingX = true;
 
             CinemachineShake.Instance.Shake(2f, 0.1f);
+            Instantiate(GameAssets.i.prefabAbyssBoltCastEffect, transform.position, Quaternion.identity);
             var objectToInstantiate = Instantiate(GameAssets.i.prefabAbyssBolt, _forwardAttackTransform.position, Quaternion.identity);
             var projectile = objectToInstantiate.GetComponent<Projectile>();
 
@@ -167,6 +178,25 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
             {
                 var direction = _playerBrain.GetStateManager().IsLookingRight ? 1 : -1;
                 projectile.Setup(direction);
+                projectile.OnEnemyDamaged += Projectile_OnEnemyDamaged;
+            }
+        }
+    }
+
+    private void Projectile_OnEnemyDamaged(object sender, OnAreaWideDamageEventArgs e)
+    {
+        var collidedObjects = e.GetCollidedObjects();
+
+        foreach (var obj in collidedObjects)
+        {
+            var outgoingDamage = _statManager.MagicalDamage * e.GetDamageModifier();
+            var damagable = obj.GetComponent<IDamageable>();
+
+            if (damagable != null)
+            {
+                // Handle damage calculations.
+                damagable.TakeDamage((int)outgoingDamage);
+                DamagePopup.Create(damagable.GetPosition(), (int)outgoingDamage);
             }
         }
     }

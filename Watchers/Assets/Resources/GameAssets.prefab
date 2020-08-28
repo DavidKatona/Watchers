@@ -53,3 +53,7 @@ MonoBehaviour:
     type: 3}
   prefabAbyssBolt: {fileID: 5199343647463690833, guid: 91b8aa4b270900b4eab32837d75a3ccb,
     type: 3}
+  prefabAbyssBoltExplosionEffect: {fileID: 4882558394911734, guid: ffd247f52bd892e44a117d589849e1e1,
+    type: 3}
+  prefabAbyssBoltCastEffect: {fileID: 4888592692647344, guid: baad44d3f9d2b4d4b94d4397d7d85ba1,
+    type: 3}

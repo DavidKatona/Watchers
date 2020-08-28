@@ -22,5 +22,7 @@ namespace Assets.Scripts.GameAssets
         public Transform prefabDeathEffect;
         public Transform prefabPlayerBeingHitEffect;
         public Transform prefabAbyssBolt;
+        public Transform prefabAbyssBoltExplosionEffect;
+        public Transform prefabAbyssBoltCastEffect;
     }
 }
