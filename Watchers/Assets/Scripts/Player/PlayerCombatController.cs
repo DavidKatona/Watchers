@@ -2,11 +2,9 @@
 using Assets.Scripts.GameAssets;
 using Assets.Scripts.Player.Combat;
 using Assets.Scripts.Spells;
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 public class PlayerCombatController : MonoBehaviour, IDamageable
 {
@@ -157,6 +155,8 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
     private void CastAbyssBolt()
     {
+        // ToDo: Refactor this function heavily. Break it up into smaller parts and remove magic numbers.
+
         if (_playerBrain.GetInputManager().IsAbyssBoltPressed && _timeElapsedSinceLastAttack >= _timeBetweenAttacks && !_playerBrain.GetStateManager().IsDashing)
         {
             var manaCost = 20f;
@@ -169,15 +169,30 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
             _timeElapsedSinceLastAttack = 0;
             _playerBrain.GetStateManager().IsRecoilingX = true;
 
+            var horizontalDirection = _playerBrain.GetStateManager().IsLookingRight ? 1 : -1;
+            var verticalDirection = 0;
+            var attackTransform = _forwardAttackTransform;
+            var yAxisInput = _playerBrain.GetInputManager().VerticalInputModifier;
+
+            if (yAxisInput > 0)
+            {
+                verticalDirection = 1;
+                attackTransform = _upwardsAttackTransform;
+            }
+            else if (yAxisInput < 0 && !_playerBrain.GetCollisionDetector().IsGrounded())
+            {
+                verticalDirection = -1;
+                attackTransform = _downwardsAttackTransform;
+            }
+
             CinemachineShake.Instance.Shake(2f, 0.1f);
             Instantiate(GameAssets.i.prefabAbyssBoltCastEffect, transform.position, Quaternion.identity);
-            var objectToInstantiate = Instantiate(GameAssets.i.prefabAbyssBolt, _forwardAttackTransform.position, Quaternion.identity);
+            var objectToInstantiate = Instantiate(GameAssets.i.prefabAbyssBolt, attackTransform.position, Quaternion.identity);
             var projectile = objectToInstantiate.GetComponent<Projectile>();
 
             if (projectile != null)
             {
-                var direction = _playerBrain.GetStateManager().IsLookingRight ? 1 : -1;
-                projectile.Setup(direction);
+                projectile.Setup(horizontalDirection, verticalDirection);
                 projectile.OnEnemyDamaged += Projectile_OnEnemyDamaged;
             }
         }

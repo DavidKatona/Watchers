@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileSpeed: 20
-  _projectileRadius: 3
+  _projectileRadius: 1.5
   _projectileDamageModifier: 0.85
   _projectileRigidBody: {fileID: 4999567599040681350}
   _damagableLayer:

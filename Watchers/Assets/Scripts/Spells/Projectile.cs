@@ -12,10 +12,20 @@ public class Projectile : MonoBehaviour
     [SerializeField] private Rigidbody2D _projectileRigidBody;
     [SerializeField] private LayerMask _damagableLayer;
 
-    public void Setup(float projectileDirection)
+    public void Setup(float yAxisRotation, float zAxisRotation)
     {
-        var rotation = projectileDirection > 0 ? 0 : 180;
-        transform.Rotate(0, rotation, 0);
+        var yRotation = yAxisRotation > 0 ? 0 : 180;
+        var zRotation = 0;
+        if (zAxisRotation > 0)
+        {
+            zRotation = 90;
+        }
+        else if (zAxisRotation < 0)
+        {
+            zRotation = -90;
+        }
+
+        transform.Rotate(0, yRotation, zRotation);
         _projectileRigidBody.velocity = transform.right * _projectileSpeed;
     }
 
