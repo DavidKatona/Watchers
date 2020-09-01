@@ -5,14 +5,14 @@ namespace Assets.Scripts.GameAssets
 {
     public class GameAssets : MonoBehaviour
     {
-        private static GameAssets _i;
+        private static GameAssets _instance;
 
-        public static GameAssets i
+        public static GameAssets Instance
         {
             get
             {
-                if (_i == null) _i = Instantiate(Resources.Load<GameAssets>("GameAssets"));
-                return _i;
+                if (_instance == null) _instance = Instantiate(Resources.Load<GameAssets>("GameAssets"));
+                return _instance;
             }
         }
 

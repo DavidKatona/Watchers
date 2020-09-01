@@ -125,7 +125,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
         if (objectsToHit.Length == 0) return;
 
-        var hitEffect = Instantiate(GameAssets.i.prefabHitEffect, attackDirection, Quaternion.identity);
+        var hitEffect = Instantiate(GameAssets.Instance.prefabHitEffect, attackDirection, Quaternion.identity);
 
         if (attackMotion == AttackMotion.Horizontal)
         {
@@ -186,8 +186,8 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
             }
 
             CinemachineShake.Instance.Shake(2f, 0.1f);
-            Instantiate(GameAssets.i.prefabAbyssBoltCastEffect, transform.position, Quaternion.identity);
-            var objectToInstantiate = Instantiate(GameAssets.i.prefabAbyssBolt, attackTransform.position, Quaternion.identity);
+            Instantiate(GameAssets.Instance.prefabAbyssBoltCastEffect, transform.position, Quaternion.identity);
+            var objectToInstantiate = Instantiate(GameAssets.Instance.prefabAbyssBolt, attackTransform.position, Quaternion.identity);
             var projectile = objectToInstantiate.GetComponent<Projectile>();
 
             if (projectile != null)
@@ -233,7 +233,7 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
         _playerBrain.PlayerAnimator.SetTrigger("TakeDamage");
 
         // We add combat effects.
-        Instantiate(GameAssets.i.prefabPlayerBeingHitEffect, transform.position, Quaternion.identity);
+        Instantiate(GameAssets.Instance.prefabPlayerBeingHitEffect, transform.position, Quaternion.identity);
         CinemachineShake.Instance.Shake(2f, 0.5f);
         if (!_isFlashing) StartCoroutine(Flash());
 

@@ -39,7 +39,7 @@ namespace Assets.Scripts.Damagables.Enemies
 
             if (Health <= 0)
             {
-                Instantiate(GameAssets.GameAssets.i.prefabDeathEffect, new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z), Quaternion.identity);
+                Instantiate(GameAssets.GameAssets.Instance.prefabDeathEffect, new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z), Quaternion.identity);
                 HitStop.Instance.Stop(0.04f);
                 Destroy(gameObject);
                 OnSpawnableDestroyed?.Invoke(this, EventArgs.Empty);

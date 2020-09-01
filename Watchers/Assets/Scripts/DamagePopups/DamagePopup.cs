@@ -13,7 +13,7 @@ public class DamagePopup : MonoBehaviour
 
     public static DamagePopup Create(Vector3 position, int damageAmount)
     {
-        Transform damagePopupTransform = Instantiate(GameAssets.i.prefabDamagePopup, position, Quaternion.identity);
+        Transform damagePopupTransform = Instantiate(GameAssets.Instance.prefabDamagePopup, position, Quaternion.identity);
         DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
 
         damagePopup.Setup(damageAmount);

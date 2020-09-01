@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
 
     private void OnDestroy()
     {
-        Instantiate(GameAssets.i.prefabAbyssBoltExplosionEffect, transform.position, Quaternion.identity);
+        Instantiate(GameAssets.Instance.prefabAbyssBoltExplosionEffect, transform.position, Quaternion.identity);
         CinemachineShake.Instance.Shake(2f, 0.2f);
         GenerateAreaWideDamage(_projectileRadius, _damagableLayer);
     }

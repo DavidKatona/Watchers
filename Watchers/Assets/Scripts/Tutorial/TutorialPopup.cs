@@ -21,7 +21,7 @@ public class TutorialPopup : MonoBehaviour
 
     public static TutorialPopup Create(string tutorialMessage, float duration, Transform parentCanvas)
     {
-        Transform tutorialPopupTransform = Instantiate(GameAssets.i.prefabTutorialPopup, parentCanvas);
+        Transform tutorialPopupTransform = Instantiate(GameAssets.Instance.prefabTutorialPopup, parentCanvas);
         TutorialPopup tutorialPopup = tutorialPopupTransform.GetComponent<TutorialPopup>();
 
         tutorialPopup.Setup(tutorialMessage, duration);
