@@ -6479,6 +6479,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1553694011}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!224 &1559013858 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1017998826457796751, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3262137603563201323}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1565380124
 GameObject:
   m_ObjectHideFlags: 0
@@ -8986,37 +8992,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 431274312419565479, guid: b8a8c4b6ce4035442be32ffa96b8fc91,
         type: 3}
-      propertyPath: _spawnableEnemies.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 431274312419565479, guid: b8a8c4b6ce4035442be32ffa96b8fc91,
-        type: 3}
-      propertyPath: _enemySpawnPoints.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 431274312419565479, guid: b8a8c4b6ce4035442be32ffa96b8fc91,
-        type: 3}
       propertyPath: _enemySpawnPoints.Array.data[0]
       value: 
       objectReference: {fileID: 1257558012}
-    - target: {fileID: 431274312419565479, guid: b8a8c4b6ce4035442be32ffa96b8fc91,
-        type: 3}
-      propertyPath: _spawnableEnemies.Array.data[1]
-      value: 
-      objectReference: {fileID: 1383418444051284, guid: 33f986fbee565ce4c9e2dce4c9086fb1,
-        type: 3}
-    - target: {fileID: 431274312419565479, guid: b8a8c4b6ce4035442be32ffa96b8fc91,
-        type: 3}
-      propertyPath: _spawnableEnemies.Array.data[0]
-      value: 
-      objectReference: {fileID: 4602060448118177954, guid: ea44b51ea2ba3fb419b3608aa3124537,
-        type: 3}
-    - target: {fileID: 431274312419565479, guid: b8a8c4b6ce4035442be32ffa96b8fc91,
-        type: 3}
-      propertyPath: _spawnableEnemies.Array.data[2]
-      value: 
-      objectReference: {fileID: 1966325769923070, guid: 6cc4fbe9cea41a246b09c2c4f97fa702,
-        type: 3}
     - target: {fileID: 431274312419565479, guid: b8a8c4b6ce4035442be32ffa96b8fc91,
         type: 3}
       propertyPath: _enemySpawnPoints.Array.data[1]
@@ -9838,6 +9816,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3705936830636370647, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
+        type: 3}
+      propertyPath: _battleSystemManager
+      value: 
+      objectReference: {fileID: 517292436}
+    - target: {fileID: 3705936830636370647, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
+        type: 3}
+      propertyPath: _waveHealthPool
+      value: 
+      objectReference: {fileID: 1559013858}
     - target: {fileID: 5759147033500772083, guid: e341d03d904d83e4e9be3b1e8c4ef7a1,
         type: 3}
       propertyPath: _saveSystemObject

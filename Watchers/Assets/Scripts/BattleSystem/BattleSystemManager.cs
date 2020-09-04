@@ -8,12 +8,16 @@ namespace Assets.Scripts.BattleSystem
     {
         public event EventHandler OnWaveStarted;
         public event EventHandler OnWaveEnded;
-        public int numberOfEnemiesRemaining { get; set; }
+        public event EventHandler OnEnemyNumbersReduced;
+        public int WaveNumber { get; private set; } = 1;
+        public int NumberOfEnemiesRemaining { get; private set; }
 
         [SerializeField] private Transform[] _enemySpawnPoints;
         [SerializeField] private GameObject[] _spawnableEnemies;
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _waveStartSound;
+        [SerializeField] private AudioClip _waveEndSound;
         private BattleState _battleState;
-        private int _waveNumber = 1;
         private float _difficultyModifier = 1f;
         private int _minNumOfEnemies = 5;
         private int _maxNumOfEnemies = 10;
@@ -23,7 +27,7 @@ namespace Assets.Scripts.BattleSystem
             _battleState = BattleState.Idle;
         }
 
-        void Update()
+        private void Update()
         {
             if (Input.GetButtonDown("Interact"))
             {
@@ -35,7 +39,8 @@ namespace Assets.Scripts.BattleSystem
 
         public void StartWave()
         {
-            Debug.Log($"Wave {_waveNumber} started!");
+            Debug.Log($"Wave {WaveNumber} started!");
+            PlayWaveStartSound();
 
             _battleState = BattleState.Active;
             InitializeWave(_minNumOfEnemies, _maxNumOfEnemies);
@@ -44,10 +49,11 @@ namespace Assets.Scripts.BattleSystem
 
         public void EndWave()
         {
-            Debug.Log($"Wave {_waveNumber} ended!");
+            Debug.Log($"Wave {WaveNumber} ended!");
+            PlayWaveEndSound();
 
             _battleState = BattleState.Idle;
-            _waveNumber++;
+            WaveNumber++;
 
             IncrementWaveDifficulty(_difficultyModifier);
             OnWaveEnded?.Invoke(this, EventArgs.Empty);
@@ -55,18 +61,18 @@ namespace Assets.Scripts.BattleSystem
 
         private void IncrementWaveDifficulty(float difficultyModifier)
         {
-            _difficultyModifier += (_waveNumber / 10f);
+            _difficultyModifier += (WaveNumber / 10f);
 
-            _minNumOfEnemies += _waveNumber;
+            _minNumOfEnemies += WaveNumber;
             _minNumOfEnemies = Mathf.Clamp(_minNumOfEnemies, 5, 50);
-            _maxNumOfEnemies += _waveNumber;
+            _maxNumOfEnemies += WaveNumber;
             _maxNumOfEnemies = Mathf.Clamp(_maxNumOfEnemies, 10, 100);
         }
 
         private void InitializeWave(int minNumberOfEnemies, int maxNumberOfEnemies)
         {
             int numberOfEnemiesToSpawn = UnityEngine.Random.Range(minNumberOfEnemies, maxNumberOfEnemies + 1);
-            numberOfEnemiesRemaining = numberOfEnemiesToSpawn;
+            NumberOfEnemiesRemaining = numberOfEnemiesToSpawn;
 
             StartCoroutine(SpawnEnemies(numberOfEnemiesToSpawn, 1.0f));
         }
@@ -95,7 +101,8 @@ namespace Assets.Scripts.BattleSystem
 
         private GameObject GenerateRandomEnemy()
         {
-            // This loop ensures that we only return GameObjects which implement the ISpawnable interface.
+            // This loop ensures that we only return GameObjects which implement the ISpawnable interface. Probably not the best implementation as having an array with no ISpawnable objects will result
+            // in an infinite loop.
             while (true)
             {
                 var randomIndex = UnityEngine.Random.Range(0, _spawnableEnemies.Length);
@@ -110,11 +117,28 @@ namespace Assets.Scripts.BattleSystem
 
         private void ISpawnable_OnSpawnableDestroyed(object sender, EventArgs e)
         {
-            numberOfEnemiesRemaining--;
+            NumberOfEnemiesRemaining--;
+            OnEnemyNumbersReduced?.Invoke(this, EventArgs.Empty);
 
-            if (numberOfEnemiesRemaining == 0)
+            if (NumberOfEnemiesRemaining == 0)
             {
                 EndWave();
+            }
+        }
+
+        private void PlayWaveStartSound()
+        {
+            if (_audioSource != null && _waveStartSound != null)
+            {
+                _audioSource.PlayOneShot(_waveStartSound);
+            }
+        }
+
+        private void PlayWaveEndSound()
+        {
+            if (_audioSource != null && _waveEndSound != null)
+            {
+                _audioSource.PlayOneShot(_waveEndSound);
             }
         }
     }

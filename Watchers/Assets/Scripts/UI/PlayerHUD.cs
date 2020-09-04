@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Attributes;
 using System;
-using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
