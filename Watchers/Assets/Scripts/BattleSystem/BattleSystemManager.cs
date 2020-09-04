@@ -126,6 +126,7 @@ namespace Assets.Scripts.BattleSystem
             }
         }
 
+        // Should move these to a different component/class.
         private void PlayWaveStartSound()
         {
             if (_audioSource != null && _waveStartSound != null)
