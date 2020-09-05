@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Attributes;
+using Assets.Scripts.BattleSystem;
 using System;
 using UnityEngine;
 
@@ -117,7 +118,6 @@ public class StatManager : MonoBehaviour
         }
     }
 
-    // Sould there be more stats, it would be wise to abstract stats away to an interface.
     private void CalculateHealth()
     {
         // Health is equal to points spent on vigor multiplied by 10.

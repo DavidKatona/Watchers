@@ -12,6 +12,6 @@ public class SceneSwitcher : MonoBehaviour
 
     private void LoadScene()
     {
-        Loader.Load(_sceneToLoad);
+        Loader.Load(_sceneToLoad, true);
     }
 }

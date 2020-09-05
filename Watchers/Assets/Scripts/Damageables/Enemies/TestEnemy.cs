@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.BattleSystem;
-using Assets.Scripts.GameAssets;
 using System;
 using System.Collections;
 using UnityEngine;

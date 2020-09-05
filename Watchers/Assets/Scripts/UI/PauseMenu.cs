@@ -42,7 +42,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        Loader.Load(Scene.MainMenu);
+        Loader.Load(Scene.MainMenu, true);
         Resume();
     }
 

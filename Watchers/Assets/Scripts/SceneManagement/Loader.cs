@@ -13,17 +13,25 @@ public static class Loader
     private static Action _onLoaderCallback;
     private static AsyncOperation _loadingAsyncOperation;
 
-    public static void Load(Scene scene)
+    public static void Load(Scene scene, bool shouldGoToLoadingScreen)
     {
-        // Before we load the loading scene, we assign an anonymous function to our static onLoaderCallback action, which will be called by the LoaderCallback method.
-        _onLoaderCallback = () =>
+        if (shouldGoToLoadingScreen)
         {
+            // Before we load the loading scene, we assign an anonymous function to our static onLoaderCallback action, which will be called by the LoaderCallback method.
+            _onLoaderCallback = () =>
+            {
             // We create an empty GameObject which will hold a component that implements MonoBehaviour so we can call StartCoroutine on that object.
             GameObject loadingGameObject = new GameObject("Loading Game Object");
-            loadingGameObject.AddComponent<LoadingMonoBehaviour>().StartCoroutine(LoadSceneAsync(scene));
-        };
+                loadingGameObject.AddComponent<LoadingMonoBehaviour>().StartCoroutine(LoadSceneAsync(scene));
+            };
 
-        SceneManager.LoadScene(Scene.LoadingScene.ToString());
+            SceneManager.LoadScene(Scene.LoadingScene.ToString());
+        }
+        else
+        {
+            GameObject loadingGameObject = new GameObject("Loading Game Object");
+            loadingGameObject.AddComponent<LoadingMonoBehaviour>().StartCoroutine(LoadSceneAsync(scene));
+        }
     }
 
     /// <summary>

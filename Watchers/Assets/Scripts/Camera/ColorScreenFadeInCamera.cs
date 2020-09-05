@@ -40,10 +40,10 @@ public class ColorScreenFadeInCamera : MonoBehaviour
             return;
         }
 
-        calculateTexture();
+        CalculateTexture();
     }
 
-    private void calculateTexture()
+    private void CalculateTexture()
     {
         _alpha -= Time.deltaTime / fadeTime;
         _texture.SetPixel(0, 0, new Color(fadeColor.r, fadeColor.g, fadeColor.b, _alpha));
