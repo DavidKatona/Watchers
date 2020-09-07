@@ -1,16 +1,20 @@
-﻿using Assets.Scripts.Damagables;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DamageZone : MonoBehaviour
+namespace Assets.Scripts.Damagables
 {
-    [SerializeField] private int _zoneDamage;
-
-    private void OnTriggerStay2D(Collider2D collision)
+    public class DamageZone : MonoBehaviour
     {
-        var damagable = collision.GetComponent<IDamageable>();
-        if (damagable != null && collision.tag == "Player")
+        [SerializeField] private int _zoneDamage;
+
+        private void OnTriggerStay2D(Collider2D collision)
         {
-            damagable.TakeDamage(_zoneDamage);
+            var damagable = collision.GetComponent<IDamageable>();
+            if (damagable != null && collision.tag == "Player")
+            {
+                damagable.TakeDamage(_zoneDamage);
+            }
         }
     }
 }
+
+

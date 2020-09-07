@@ -56,5 +56,15 @@ namespace Assets.Scripts.Damagables.Enemies
             yield return new WaitForSeconds(0.1f);
             spriteRenderer.color = _originalColor;
         }
+
+        public void DropSouls()
+        {
+            Instantiate(GameAssets.GameAssets.Instance.prefabCollectibleSoul, transform.position, Quaternion.identity);
+        }
+
+        private void OnDestroy()
+        {
+            DropSouls();
+        }
     }
 }

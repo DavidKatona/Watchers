@@ -22,8 +22,8 @@ TagManager:
   - Tutorial
   - Player
   - PlayerSpell
-  - 
-  - 
+  - CollectiblePickup
+  - CollectibleNonCollidable
   - 
   - 
   - 
