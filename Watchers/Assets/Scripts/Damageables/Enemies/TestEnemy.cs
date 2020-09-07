@@ -40,6 +40,7 @@ namespace Assets.Scripts.Damagables.Enemies
             {
                 Instantiate(GameAssets.GameAssets.Instance.prefabDeathEffect, new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z), Quaternion.identity);
                 HitStop.Instance.Stop(0.04f);
+                DropSouls();
                 Destroy(gameObject);
                 OnSpawnableDestroyed?.Invoke(this, EventArgs.Empty);
             }
@@ -60,11 +61,6 @@ namespace Assets.Scripts.Damagables.Enemies
         public void DropSouls()
         {
             Instantiate(GameAssets.GameAssets.Instance.prefabCollectibleSoul, transform.position, Quaternion.identity);
-        }
-
-        private void OnDestroy()
-        {
-            DropSouls();
         }
     }
 }

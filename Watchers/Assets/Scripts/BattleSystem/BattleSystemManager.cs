@@ -61,8 +61,6 @@ namespace Assets.Scripts.BattleSystem
 
         private void IncrementWaveDifficulty(float difficultyModifier)
         {
-            _difficultyModifier += (WaveNumber / 10f);
-
             _minNumOfEnemies += WaveNumber;
             _minNumOfEnemies = Mathf.Clamp(_minNumOfEnemies, 5, 50);
             _maxNumOfEnemies += WaveNumber;

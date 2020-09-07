@@ -57,5 +57,7 @@ MonoBehaviour:
     type: 3}
   prefabAbyssBoltCastEffect: {fileID: 4888592692647344, guid: baad44d3f9d2b4d4b94d4397d7d85ba1,
     type: 3}
+  prefabCollectiblePicked: {fileID: 4733340085621846, guid: 2d88b259a4f23404eac922fa770c3eb9,
+    type: 3}
   prefabCollectibleSoul: {fileID: 1240596380332796190, guid: a9b6a78504a5e64438c8da2a72167100,
     type: 3}
