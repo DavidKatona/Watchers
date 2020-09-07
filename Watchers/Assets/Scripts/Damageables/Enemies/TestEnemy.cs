@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.BattleSystem;
+using Assets.Scripts.Collectibles;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -38,9 +39,13 @@ namespace Assets.Scripts.Damagables.Enemies
 
             if (Health <= 0)
             {
+                // Instantiate death effect.
                 Instantiate(GameAssets.GameAssets.Instance.prefabDeathEffect, new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z), Quaternion.identity);
+
+                // Instantiate collectible soul prefab.
+                Instantiate(GameAssets.GameAssets.Instance.prefabCollectibleSoul, transform.position, Quaternion.identity);
                 HitStop.Instance.Stop(0.04f);
-                DropSouls();
+
                 Destroy(gameObject);
                 OnSpawnableDestroyed?.Invoke(this, EventArgs.Empty);
             }
@@ -56,11 +61,6 @@ namespace Assets.Scripts.Damagables.Enemies
             spriteRenderer.color = damagedColor;
             yield return new WaitForSeconds(0.1f);
             spriteRenderer.color = _originalColor;
-        }
-
-        public void DropSouls()
-        {
-            Instantiate(GameAssets.GameAssets.Instance.prefabCollectibleSoul, transform.position, Quaternion.identity);
         }
     }
 }

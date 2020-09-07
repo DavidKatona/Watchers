@@ -21,10 +21,23 @@ namespace Assets.Scripts.Collectibles
             Destroy(parentObject);
         }
 
+        private void Start()
+        {
+            _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 0);
+        }
+
         private void Update()
         {
+
             _lifetimeCounter += Time.deltaTime;
             
+            if (_lifetimeCounter <= _lifetime * 0.1f)
+            {
+                var spriteColor = _spriteRenderer.color;
+                spriteColor.a += Time.deltaTime;
+                _spriteRenderer.color = spriteColor;
+            }
+
             if (_lifetimeCounter >= _lifetime)
             {
                 var parentObject = transform.parent.gameObject;
