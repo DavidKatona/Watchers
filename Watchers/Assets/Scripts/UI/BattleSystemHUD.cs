@@ -39,7 +39,6 @@ public class BattleSystemHUD : MonoBehaviour
     private void BattleSystemManager_OnEnemyNumbersReduced(object sender, EventArgs e)
     {
         var xScale = _waveHealthPool.localScale.x - _healthPoolUnit;
-        Debug.Log(xScale);
         _waveHealthPool.localScale = new Vector2(xScale, _waveHealthPool.localScale.y);
     }
 }

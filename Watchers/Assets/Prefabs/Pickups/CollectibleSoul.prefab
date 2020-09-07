@@ -261,6 +261,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 3974973504196722244}
   _light2D: {fileID: 7756944539666472891}
+  _lifetime: 20
+  _fadeOutSpeed: 1
+  _souls: 10000
 --- !u!1 &9183805829925035113
 GameObject:
   m_ObjectHideFlags: 0
