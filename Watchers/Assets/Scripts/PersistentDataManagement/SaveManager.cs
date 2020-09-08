@@ -40,7 +40,7 @@ namespace Assets.Scripts.PersistentDataManagement
             }
         }
 
-        private void SavePlayerData()
+        public void SavePlayerData()
         {
             PlayerPrefs.SetInt("hasSaved", 1);
 

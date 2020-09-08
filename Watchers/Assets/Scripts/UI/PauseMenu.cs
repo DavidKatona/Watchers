@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.PersistentDataManagement;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject _pauseMenuUI;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
+    [SerializeField] private SaveManager _saveManager;
     public static bool GameIsPaused = false;
 
     void Update()
@@ -42,12 +44,14 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
+        _saveManager.SavePlayerData();
         Loader.Load(Scene.MainMenu, true);
         Resume();
     }
 
     public void CloseGame()
     {
+        _saveManager.SavePlayerData();
         Application.Quit();
     }
 }
