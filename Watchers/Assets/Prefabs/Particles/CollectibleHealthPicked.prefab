@@ -186,7 +186,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.55775416, g: 0.5518868, b: 1, a: 0.5882353}
+      maxColor: {r: 0.9254902, g: 0.48235294, b: 0.48235294, a: 0.5882353}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4509,7 +4509,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 1
   m_MinParticleSize: 0
@@ -4719,7 +4719,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.55775416, g: 0.5518868, b: 1, a: 0.9019608}
+      maxColor: {r: 0.9254902, g: 0.48235294, b: 0.48235294, a: 0.9019608}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9114,7 +9114,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 1
   m_MinParticleSize: 0
@@ -9150,7 +9150,7 @@ GameObject:
   - component: {fileID: 198927480420149238}
   - component: {fileID: 199136700032306822}
   m_Layer: 0
-  m_Name: CollectiblePicked
+  m_Name: CollectibleHealthPicked
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9327,7 +9327,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.55775416, g: 0.5518868, b: 1, a: 0.9019608}
+      maxColor: {r: 0.9245283, g: 0.48406905, b: 0.48406905, a: 0.9019608}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -13722,7 +13722,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 1
   m_MinParticleSize: 0

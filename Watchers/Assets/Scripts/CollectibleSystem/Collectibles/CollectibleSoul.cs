@@ -26,7 +26,7 @@ namespace Assets.Scripts.Collectibles
             statManager.GetAttributes().SetSouls(souls + _souls);
 
             var parentObject = transform.parent.gameObject;
-            Instantiate(GameAssets.GameAssets.Instance.prefabCollectiblePicked, transform.position, Quaternion.identity);
+            Instantiate(GameAssets.GameAssets.Instance.prefabCollectibleSoulPicked, transform.position, Quaternion.identity);
             Destroy(parentObject);
         }
 

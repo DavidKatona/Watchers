@@ -57,7 +57,15 @@ MonoBehaviour:
     type: 3}
   prefabAbyssBoltCastEffect: {fileID: 4888592692647344, guid: baad44d3f9d2b4d4b94d4397d7d85ba1,
     type: 3}
-  prefabCollectiblePicked: {fileID: 4733340085621846, guid: 2d88b259a4f23404eac922fa770c3eb9,
-    type: 3}
   prefabCollectibleSoul: {fileID: 1240596380332796190, guid: a9b6a78504a5e64438c8da2a72167100,
+    type: 3}
+  prefabCollectibleSoulPicked: {fileID: 4733340085621846, guid: 2d88b259a4f23404eac922fa770c3eb9,
+    type: 3}
+  prefabCollectibleHealth: {fileID: 6841820074898632238, guid: c5d8604f5a55a1e44a56f006027de188,
+    type: 3}
+  prefabCollectibleHealthPicked: {fileID: 4733340085621846, guid: 004d2af92dba2394da319edeb32cda92,
+    type: 3}
+  prefabCollectibleMana: {fileID: 6841820074898632238, guid: 8ef04b9c634feb048a0fa2a72036f4d4,
+    type: 3}
+  prefabCollectibleManaPicked: {fileID: 4733340085621846, guid: 9906ce0ea286df748921e38283e3f9da,
     type: 3}

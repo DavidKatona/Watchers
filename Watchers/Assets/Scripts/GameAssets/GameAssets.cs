@@ -23,7 +23,11 @@ namespace Assets.Scripts.GameAssets
         public Transform prefabAbyssBolt;
         public Transform prefabAbyssBoltExplosionEffect;
         public Transform prefabAbyssBoltCastEffect;
-        public Transform prefabCollectiblePicked;
         public Transform prefabCollectibleSoul;
+        public Transform prefabCollectibleSoulPicked;
+        public Transform prefabCollectibleHealth;
+        public Transform prefabCollectibleHealthPicked;
+        public Transform prefabCollectibleMana;
+        public Transform prefabCollectibleManaPicked;
     }
 }
