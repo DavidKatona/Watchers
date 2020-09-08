@@ -137,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3949314512306167963}
   m_Layer: 0
-  m_Name: SoundManager
+  m_Name: AmbientSounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

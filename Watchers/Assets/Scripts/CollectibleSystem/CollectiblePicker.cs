@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Collectibles;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Assets.Scripts.CollectibleSystem
 {

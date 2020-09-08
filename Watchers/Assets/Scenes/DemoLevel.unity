@@ -10012,7 +10012,7 @@ PrefabInstance:
     - target: {fileID: 3949314512306167962, guid: 4b750935638cff74b9ca56e07d553b9c,
         type: 3}
       propertyPath: m_Name
-      value: SoundManager
+      value: AmbientSounds
       objectReference: {fileID: 0}
     - target: {fileID: 3949314512306167963, guid: 4b750935638cff74b9ca56e07d553b9c,
         type: 3}
