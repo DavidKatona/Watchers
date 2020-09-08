@@ -9,7 +9,7 @@ public class CharacterMenu : MonoBehaviour
     private const string mainStatsPath = "CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/MainStatistics/";
     private const string additionalStatsPath = "CharacterMenuUI/CharacterMenuFrame/CharacterStatistics/AdditionalStatistics/";
     private const string levelInfoPath = "CharacterMenuUI/CharacterMenuFrame/CharacterLevelInformation/";
-    private const string abilityFrame = "CharacterMenuUI/CharacterAttributesFrame/";
+    private const string attributesFrame = "CharacterMenuUI/CharacterAttributesFrame/Attributes/AttributesPanel/";
 
     public static bool IsOpened;
     public GameObject CharacterMenuUI;
@@ -27,6 +27,7 @@ public class CharacterMenu : MonoBehaviour
         StatManager.OnHealthChanged += StatManager_OnHealthChanged;
         StatManager.OnManaChanged += StatManager_OnManaChanged;
         UpdateStatisticsVisuals();
+        InitializeButtons();
     }
 
     private void Attributes_OnAttributesChanged(object sender, EventArgs e)
@@ -120,5 +121,23 @@ public class CharacterMenu : MonoBehaviour
     private void UpdateSoulsCounter()
     {
         transform.Find(levelInfoPath + "CurrentSoulsBackgroundColor/CurrentSoulsCounter").GetComponent<Text>().text = $"{_attributes.GetSouls():#,0}";
+    }
+
+    private void InitializeButtons()
+    {
+        transform.Find(attributesFrame + "incrVigor").GetComponent<Button>().onClick.AddListener(() => _attributes.IncreaseAttribute(AttributeType.Vigor));
+        transform.Find(attributesFrame + "decrVigor").GetComponent<Button>().onClick.AddListener(() => _attributes.DecreaseAttribute(AttributeType.Vigor));
+        transform.Find(attributesFrame + "incrSpirit").GetComponent<Button>().onClick.AddListener(() => _attributes.IncreaseAttribute(AttributeType.Spirit));
+        transform.Find(attributesFrame + "decrSpirit").GetComponent<Button>().onClick.AddListener(() => _attributes.DecreaseAttribute(AttributeType.Spirit));
+        transform.Find(attributesFrame + "incrStrength").GetComponent<Button>().onClick.AddListener(() => _attributes.IncreaseAttribute(AttributeType.Strength));
+        transform.Find(attributesFrame + "decrStrength").GetComponent<Button>().onClick.AddListener(() => _attributes.DecreaseAttribute(AttributeType.Strength));
+        transform.Find(attributesFrame + "incrIntelligence").GetComponent<Button>().onClick.AddListener(() => _attributes.IncreaseAttribute(AttributeType.Intelligence));
+        transform.Find(attributesFrame + "decrIntelligence").GetComponent<Button>().onClick.AddListener(() => _attributes.DecreaseAttribute(AttributeType.Intelligence));
+        transform.Find(attributesFrame + "incrResilience").GetComponent<Button>().onClick.AddListener(() => _attributes.IncreaseAttribute(AttributeType.Resilience));
+        transform.Find(attributesFrame + "decrResilience").GetComponent<Button>().onClick.AddListener(() => _attributes.DecreaseAttribute(AttributeType.Resilience));
+        transform.Find(attributesFrame + "incrVitality").GetComponent<Button>().onClick.AddListener(() => _attributes.IncreaseAttribute(AttributeType.Vitality));
+        transform.Find(attributesFrame + "decrVitality").GetComponent<Button>().onClick.AddListener(() => _attributes.DecreaseAttribute(AttributeType.Vitality));
+        transform.Find(attributesFrame + "incrFocus").GetComponent<Button>().onClick.AddListener(() => _attributes.IncreaseAttribute(AttributeType.Focus));
+        transform.Find(attributesFrame + "decrFocus").GetComponent<Button>().onClick.AddListener(() => _attributes.DecreaseAttribute(AttributeType.Focus));
     }
 }

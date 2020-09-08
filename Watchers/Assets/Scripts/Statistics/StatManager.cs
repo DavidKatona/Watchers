@@ -82,8 +82,10 @@ public class StatManager : MonoBehaviour
 
     private void Attributes_OnAttributesChanged(object sender, EventArgs e)
     {
+        var healthPercentage = GetHealthPercentage();
+        var manaPercentage = GetManaPercentage();
         RecalculateAllStats();
-        RestoreHealthAndMana();
+        PreserveHealthAndManaPercentage(healthPercentage, manaPercentage);
     }
 
     private void RecalculateAllStats()
@@ -103,6 +105,12 @@ public class StatManager : MonoBehaviour
         // Restore all missing health and manapoints.
         CurrentHealth = MaxHealth;
         CurrentMana = MaxMana;
+    }
+
+    private void PreserveHealthAndManaPercentage(float healthPercentage, float manaPercentage)
+    {
+        CurrentHealth = MaxHealth * healthPercentage;
+        CurrentMana = MaxMana * manaPercentage;
     }
 
     private void RegenerateHealthAndMana()
