@@ -70,7 +70,6 @@ public static class Loader
     /// </summary>
     public static void LoaderCallback()
     {
-        Debug.Log($"PauseMenu: {PauseMenu.GameIsPaused} | CharacerMenu: {CharacterMenu.IsOpened}");
         _onLoaderCallback?.Invoke();
     }
 }
