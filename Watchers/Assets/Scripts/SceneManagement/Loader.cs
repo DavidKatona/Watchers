@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Cursor;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,8 @@ public static class Loader
             };
 
             SceneManager.LoadScene(Scene.LoadingScene.ToString());
+            // We lock the cursor each time a new level is loaded. The loaded level will decide later if it should unlock the cursor or not.
+            CursorManager.LockCursor();
         }
         else
         {
@@ -67,6 +70,7 @@ public static class Loader
     /// </summary>
     public static void LoaderCallback()
     {
+        Debug.Log($"PauseMenu: {PauseMenu.GameIsPaused} | CharacerMenu: {CharacterMenu.IsOpened}");
         _onLoaderCallback?.Invoke();
     }
 }

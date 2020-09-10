@@ -8,11 +8,11 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
     [SerializeField] private SaveManager _saveManager;
-    public static bool GameIsPaused = false;
+    public static bool GameIsPaused;
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused)
             {
@@ -27,8 +27,18 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        GameIsPaused = false;
+    }
+
     public void Resume()
     {
+        if (!CharacterMenu.IsOpened)
+        {
+            CursorManager.LockCursor();
+        }
+
         _pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -36,6 +46,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Pause()
     {
+        CursorManager.UnlockCursor();
         _pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;

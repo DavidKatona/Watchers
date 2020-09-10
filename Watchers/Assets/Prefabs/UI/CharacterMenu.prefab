@@ -2266,6 +2266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8770271557989136640}
+  - component: {fileID: 8421463779602091631}
   m_Layer: 0
   m_Name: CharacterMenuUI
   m_TagString: Untagged
@@ -2289,6 +2290,18 @@ Transform:
   m_Father: {fileID: 5157433025095592568}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8421463779602091631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3023165838666328115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf8ecbe496eee534bac993d648b0c073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3484405197455019498
 GameObject:
   m_ObjectHideFlags: 0

@@ -1054,6 +1054,7 @@ MonoBehaviour:
   _pauseMenuUI: {fileID: 5262622651966886944}
   _audioSource: {fileID: 3717318408514936572}
   _audioClip: {fileID: 8300000, guid: de5edf2c1f30dc446b690048a785ae79, type: 3}
+  _saveManager: {fileID: 0}
 --- !u!82 &3717318408514936572
 AudioSource:
   m_ObjectHideFlags: 0

@@ -54,13 +54,14 @@ public class CharacterMenu : MonoBehaviour
 
     public void Close()
     {
+        //CursorManager.LockCursor();
         IsOpened = false;
         CharacterMenuUI.SetActive(IsOpened);
         audioSource.clip = menuCloseClip;
         audioSource.Play();
     }
 
-    void Update()
+    private void Update()
     {
         if (PauseMenu.GameIsPaused) return;
 
@@ -81,6 +82,11 @@ public class CharacterMenu : MonoBehaviour
 
             audioSource.Play();
         }
+    }
+
+    private void OnDisable()
+    {
+        IsOpened = false;
     }
 
     private void UpdateStatisticsVisuals()
