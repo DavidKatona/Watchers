@@ -5,9 +5,11 @@ namespace Assets.Scripts.Collectibles
 {
     public class CollectibleSoul : MonoBehaviour, ICollectible
     {
+        [Header("Dependencies")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Light2D _light2D;
 
+        [Header("Properties")]
         [Range(1, 60)]
         [Tooltip("Determines the total lifetime of the object after which it will start fading out.")]
         [SerializeField] private float _lifetime = 10f;

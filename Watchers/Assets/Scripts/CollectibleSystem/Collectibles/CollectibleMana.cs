@@ -5,8 +5,11 @@ namespace Assets.Scripts.Collectibles
 {
     public class CollectibleMana : MonoBehaviour, ICollectible
     {
+        [Header("Dependencies")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Light2D _light2D;
+
+        [Header("Properties")]
         [SerializeField] private int _mana;
         private Color _spriteColor;
         private float _lightIntensity;

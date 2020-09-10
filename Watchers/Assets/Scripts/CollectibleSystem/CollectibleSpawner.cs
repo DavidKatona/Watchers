@@ -12,6 +12,9 @@ namespace Assets.Scripts.CollectibleSystem
 
         [Tooltip("Determines the type of collectible to spawn on this objects spawnpoint.")]
         [SerializeField] private CollectibleType _collectibleType;
+
+        [Tooltip("Determines how long it takes for the collectible to respawn on this object's spawnpoint.")]
+        [SerializeField] private float _respawnDelay;
         private Vector3 _spawnPoint;
         private Transform _collectibleInstance;
 
@@ -27,7 +30,7 @@ namespace Assets.Scripts.CollectibleSystem
             if (_collectibleInstance == null)
             {
                 _collectibleInstance = GetItemToSpawn(_collectibleType, _randomizeCollectibles);
-                StartCoroutine(SpawnCollectible(_collectibleInstance, 5f));
+                StartCoroutine(SpawnCollectible(_collectibleInstance, _respawnDelay));
             }
         }
 
@@ -37,7 +40,6 @@ namespace Assets.Scripts.CollectibleSystem
             {
                 var collectibles = Enum.GetValues(typeof(CollectibleType));
                 var collectibleIndex = UnityEngine.Random.Range(0, collectibles.Length);
-                Debug.Log(collectibleIndex);
 
                 collectibleType = (CollectibleType)collectibleIndex;
             }
