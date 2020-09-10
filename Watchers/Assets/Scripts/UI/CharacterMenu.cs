@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Attributes;
+﻿using Assets.Cursor;
+using Assets.Scripts.Attributes;
 using System;
 using UnityEngine;
 using UnityEngine.UI;

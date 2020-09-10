@@ -1,6 +1,5 @@
-﻿using Assets.Scripts.PersistentDataManagement;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Cursor;
+using Assets.Scripts.PersistentDataManagement;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
@@ -13,7 +12,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             if (GameIsPaused)
             {
