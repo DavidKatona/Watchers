@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using Assets.Scripts.Audio;
 
 namespace Assets.Scripts.BattleSystem
 {
@@ -17,7 +18,10 @@ namespace Assets.Scripts.BattleSystem
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip _waveStartSound;
         [SerializeField] private AudioClip _waveEndSound;
+        [SerializeField] private AudioClip _waveMusicClip;
+
         private BattleState _battleState;
+        private GameObject _musicPlayerInstance;
         private float _difficultyModifier = 1f;
         private int _minNumOfEnemies = 5;
         private int _maxNumOfEnemies = 10;
@@ -39,8 +43,9 @@ namespace Assets.Scripts.BattleSystem
 
         public void StartWave()
         {
-            Debug.Log($"Wave {WaveNumber} started!");
             PlayWaveStartSound();
+            _musicPlayerInstance = CreateBattleSystemMusicPlayer();
+            _musicPlayerInstance.GetComponent<MusicPlayer>().PlayMusic();
 
             _battleState = BattleState.Active;
             InitializeWave(_minNumOfEnemies, _maxNumOfEnemies);
@@ -49,8 +54,9 @@ namespace Assets.Scripts.BattleSystem
 
         public void EndWave()
         {
-            Debug.Log($"Wave {WaveNumber} ended!");
             PlayWaveEndSound();
+            _musicPlayerInstance.GetComponent<MusicPlayer>().FadeOutMusic();
+            Destroy(_musicPlayerInstance, 1f);
 
             _battleState = BattleState.Idle;
             WaveNumber++;
@@ -139,6 +145,16 @@ namespace Assets.Scripts.BattleSystem
             {
                 _audioSource.PlayOneShot(_waveEndSound);
             }
+        }
+
+        private GameObject CreateBattleSystemMusicPlayer()
+        {
+            GameObject musicPlayerObject = new GameObject("BattleSystem_MusicPlayer");
+            var musicPlayerComponent = musicPlayerObject.AddComponent<MusicPlayer>();
+            var audioSourceComponent = musicPlayerObject.AddComponent<AudioSource>();
+            musicPlayerComponent.Setup(true, audioSourceComponent, _waveMusicClip);
+
+            return musicPlayerObject;
         }
     }
 }
