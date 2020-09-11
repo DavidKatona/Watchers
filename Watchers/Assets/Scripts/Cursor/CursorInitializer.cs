@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Cursor
+namespace Assets.Scripts.Cursor
 {
     public class CursorInitializer : MonoBehaviour
     {

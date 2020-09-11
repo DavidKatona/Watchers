@@ -1,4 +1,4 @@
-﻿using Assets.Cursor;
+﻿using Assets.Scripts.Cursor;
 using System;
 using System.Collections;
 using UnityEngine;
