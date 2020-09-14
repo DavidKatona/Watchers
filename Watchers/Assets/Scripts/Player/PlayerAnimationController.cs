@@ -82,7 +82,7 @@ public class PlayerAnimationController : MonoBehaviour
     private void SetRunningState()
     {
         //Running Animation
-        if (Mathf.Abs(_playerRigidBody2D.velocity.x) > 0 && _playerCollisionDetector.IsGrounded())
+        if (_playerInputManager.HorizontalInputModifier != 0 && _playerCollisionDetector.IsGrounded())
         {
             _playerAnimator.SetBool("IsRunning", true);
         }

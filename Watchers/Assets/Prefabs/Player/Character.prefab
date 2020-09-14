@@ -500,7 +500,7 @@ MonoBehaviour:
     m_Bits: 256
   _roofCheckLengthX: 0.2
   _roofCheckLengthY: 0.2
-  _wallCheckLengthX: 0.4
+  _wallCheckLengthX: 0.5
   _groundCheckTransform: {fileID: 4671008127011546170}
   _roofCheckTransform: {fileID: 4671008128193891095}
   _wallCheckTransform: {fileID: 4671008127760125175}

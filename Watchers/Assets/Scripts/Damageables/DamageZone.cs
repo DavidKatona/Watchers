@@ -2,6 +2,7 @@
 
 namespace Assets.Scripts.Damagables
 {
+    [RequireComponent(typeof(BoxCollider2D))]
     public class DamageZone : MonoBehaviour
     {
         [SerializeField] private int _zoneDamage;
