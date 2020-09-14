@@ -44,6 +44,30 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground_Back_2
+    uniqueID: 4279328015
+    locked: 0
+  - name: Fog_Back_2
+    uniqueID: 133307153
+    locked: 0
+  - name: Ground_Back_1
+    uniqueID: 4246330323
+    locked: 0
+  - name: Fog_Back_1
+    uniqueID: 3795173689
+    locked: 0
+  - name: Ground
+    uniqueID: 908708285
+    locked: 0
+  - name: Ground_Front_1
+    uniqueID: 3250770317
+    locked: 0
+  - name: Fog_Front_1
+    uniqueID: 3149378007
+    locked: 0
+  - name: Ground_Front_2
+    uniqueID: 3045072607
+    locked: 0
   - name: DamagePopup
     uniqueID: 940008935
     locked: 0
