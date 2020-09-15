@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.PersistentDataManagement
 {
-    public interface ISaveablePlayer : ISaveable
+    public interface ISaveablePlayer
     {
         float GetHealth();
         void SetHealth(float value);

@@ -22,7 +22,6 @@ namespace Assets.Scripts.BattleSystem
 
         private BattleState _battleState;
         private GameObject _musicPlayerInstance;
-        private float _difficultyModifier = 1f;
         private int _minNumOfEnemies = 5;
         private int _maxNumOfEnemies = 10;
 
@@ -61,11 +60,11 @@ namespace Assets.Scripts.BattleSystem
             _battleState = BattleState.Idle;
             WaveNumber++;
 
-            IncrementWaveDifficulty(_difficultyModifier);
+            IncrementWaveDifficulty();
             OnWaveEnded?.Invoke(this, EventArgs.Empty);
         }
 
-        private void IncrementWaveDifficulty(float difficultyModifier)
+        private void IncrementWaveDifficulty()
         {
             _minNumOfEnemies += WaveNumber;
             _minNumOfEnemies = Mathf.Clamp(_minNumOfEnemies, 5, 50);

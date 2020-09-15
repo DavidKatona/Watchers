@@ -46,11 +46,6 @@ namespace Assets.Scripts.PersistentDataManagement
 
             SaveAttributes();
 
-            float playerPositionX = _saveablePlayer.GetPositionX();
-            float playerPositionY = _saveablePlayer.GetPositionY();
-            PlayerPrefs.SetFloat("playerPositionX", playerPositionX);
-            PlayerPrefs.SetFloat("playerPositionY", playerPositionY);
-
             int playerSouls = _saveablePlayer.GetSouls();
             PlayerPrefs.SetInt("playerSouls", playerSouls);
 
@@ -67,13 +62,6 @@ namespace Assets.Scripts.PersistentDataManagement
         private void LoadPlayerData()
         {
             LoadAttributes();
-
-            if (PlayerPrefs.HasKey("playerPositionX") && PlayerPrefs.HasKey("playerPositionY"))
-            {
-                float playerPositionX = PlayerPrefs.GetFloat("playerPositionX");
-                float playerPositionY = PlayerPrefs.GetFloat("playerPositionY");
-                _saveablePlayer.SetPosition(new Vector2(playerPositionX, playerPositionY));
-            }
 
             int playerSouls = PlayerPrefs.GetInt("playerSouls");
             _saveablePlayer.SetSouls(playerSouls);

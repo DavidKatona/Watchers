@@ -30,26 +30,6 @@ namespace Assets.Scripts.PersistentDataManagement
             _statManager.SetCurrentMana(value);
         }
 
-        public Vector2 GetPoisition()
-        {
-            return _playerTransform.position;
-        }
-
-        public void SetPosition(Vector2 position)
-        {
-            _playerTransform.position = position;
-        }
-
-        public float GetPositionX()
-        {
-            return _playerTransform.position.x;
-        }
-
-        public float GetPositionY()
-        {
-            return _playerTransform.position.y;
-        }
-
         public int GetSouls()
         {
             return _statManager.GetAttributes().GetSouls();
