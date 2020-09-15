@@ -33,7 +33,8 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void ControlVerticalInput()
     {
-        if (!_playerAnimator.GetBool("IsAttacking"))
+        // This function is used to prevent the modification of the VerticalInputModifier if the player is already attacking or casting a spell. This prevents our attack and cast animations to change direction mid-animation.
+        if (!_playerAnimator.GetBool("IsAttacking") && !_playerAnimator.GetBool("IsCasting"))
         {
             var verticalInput1 = _playerInputManager.VerticalInputModifier;
             _playerAnimator.SetFloat("VerticalInput", verticalInput1);

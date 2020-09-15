@@ -159,6 +159,10 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
     private void CastAbyssBolt()
     {
         // ToDo: Refactor this function heavily. Break it up into smaller parts and remove magic numbers.
+        if (_timeElapsedSinceLastAttack > _timeBetweenAttacks)
+        {
+            _playerBrain.PlayerAnimator.SetBool("IsCasting", false);
+        }
 
         if (_playerBrain.GetInputManager().IsAbyssBoltPressed && _timeElapsedSinceLastAttack >= _timeBetweenAttacks && !_playerBrain.GetStateManager().IsDashing)
         {
@@ -169,23 +173,37 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
 
             _statManager.SetCurrentMana(_statManager.CurrentMana - manaCost);
 
-            _timeElapsedSinceLastAttack = 0;
-            _playerBrain.GetStateManager().IsRecoilingX = true;
+            _playerBrain.PlayerAnimator.SetBool("IsCasting", true);
+            _playerBrain.PlayerAnimator.SetTrigger("Cast");
 
+            _timeElapsedSinceLastAttack = 0;
+
+            // We prepare the spellcast as if it was a forward spellcast then change it later if needed.
             var horizontalDirection = _playerBrain.GetStateManager().IsLookingRight ? 1 : -1;
             var verticalDirection = 0;
             var attackTransform = _forwardAttackTransform;
             var yAxisInput = _playerBrain.GetInputManager().VerticalInputModifier;
 
-            if (yAxisInput > 0)
+            // Forward Cast
+            if (yAxisInput == 0 || yAxisInput < 0 && _playerBrain.GetCollisionDetector().IsGrounded())
+            {
+                _playerBrain.GetStateManager().IsRecoilingX = true;
+            }
+
+            // Upward Cast
+            else if (yAxisInput > 0)
             {
                 verticalDirection = 1;
                 attackTransform = _upwardsAttackTransform;
+                _playerBrain.GetStateManager().IsRecoilingY = true;
             }
+
+            // Downward Cast
             else if (yAxisInput < 0 && !_playerBrain.GetCollisionDetector().IsGrounded())
             {
                 verticalDirection = -1;
                 attackTransform = _downwardsAttackTransform;
+                _playerBrain.GetStateManager().IsRecoilingY = true;
             }
 
             CinemachineShake.Instance.Shake(2f, 0.1f);
