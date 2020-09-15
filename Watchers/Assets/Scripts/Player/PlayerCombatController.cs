@@ -1,6 +1,8 @@
-﻿using Assets.Scripts.Damagables;
+﻿using Assets.Scripts.Cursor;
+using Assets.Scripts.Damagables;
 using Assets.Scripts.GameAssets;
 using Assets.Scripts.Player.Combat;
+using Assets.Scripts.SceneManagement;
 using Assets.Scripts.Spells;
 using System.Collections;
 using UnityEngine;
@@ -248,6 +250,9 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
     private void Die()
     {
         Instantiate(GameAssets.Instance.prefabPlayerDeathEffect, transform.position, Quaternion.identity);
+        var sceneSwitcherObject = new GameObject("AutoSceneSwitcher");
+        var sceneSwitcherComponent = sceneSwitcherObject.AddComponent<AutoSceneSwitcher>();
+        sceneSwitcherComponent.Setup(Scene.MainMenu, 3.0f);
         Destroy(gameObject);
     }
 
