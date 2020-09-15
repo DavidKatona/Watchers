@@ -1,13 +1,7 @@
-﻿using UnityEngine;
-
-namespace Assets.Scripts.PersistentDataManagement
+﻿namespace Assets.Scripts.PersistentDataManagement
 {
     public interface ISaveablePlayer
     {
-        float GetHealth();
-        void SetHealth(float value);
-        float GetMana();
-        void SetMana(float value);
         int GetSouls();
         void SetSouls(int value);
         int GetAttribute(Attributes.AttributeType attributeType);

@@ -444,7 +444,7 @@ MonoBehaviour:
   audioClipHit: {fileID: 8300000, guid: 71ae7d8f7c3729944a5d881f1b1fb837, type: 3}
   spriteRenderer: {fileID: 2808210461935927344}
   damagedColor: {r: 0.46226418, g: 0.18098077, b: 0.18098077, a: 1}
-  _health: 300
+  _health: 150
   _attackRange: 2
 --- !u!114 &1747119650384754920
 MonoBehaviour:

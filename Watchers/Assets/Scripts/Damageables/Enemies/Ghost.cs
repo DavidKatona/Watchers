@@ -34,11 +34,19 @@ namespace Assets.Scripts.Damageables.Enemies
 
         private void Start()
         {
-            _aIDestinationSetter.target = GameObject.FindGameObjectWithTag("Player").transform;
+            var target = GameObject.FindGameObjectWithTag("Player");
+
+            if (target != null)
+            {
+                _aIDestinationSetter.target = target.transform;
+            }
         }
 
         private void Update()
         {
+            if (_aIDestinationSetter.target == null)
+                return;
+
             if (_aIDestinationSetter.target.position.x > transform.position.x)
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));

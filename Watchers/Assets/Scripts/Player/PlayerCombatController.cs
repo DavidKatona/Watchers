@@ -238,6 +238,17 @@ public class PlayerCombatController : MonoBehaviour, IDamageable
         if (!_isFlashing) StartCoroutine(Flash());
 
         OnDamaged?.Invoke();
+
+        if (Mathf.Approximately(_statManager.CurrentHealth, 0))
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Instantiate(GameAssets.Instance.prefabPlayerDeathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
     public Vector3 GetPosition()

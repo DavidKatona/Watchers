@@ -15,7 +15,11 @@ namespace Assets.Scripts.PersistentDataManagement
 
         private void Awake()
         {
-            _saveablePlayer = _saveablePlayerGameObject.GetComponent<ISaveablePlayer>();
+            if (_saveablePlayerGameObject != null)
+            {
+                _saveablePlayer = _saveablePlayerGameObject.GetComponent<ISaveablePlayer>();
+            }
+
             _battleSystem.OnWaveEnded += BattleSystem_OnWaveEnded;
         }
 
@@ -27,33 +31,19 @@ namespace Assets.Scripts.PersistentDataManagement
             }
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F5))
-            {
-                SavePlayerData();
-            }
-
-            if (Input.GetKeyDown(KeyCode.F9))
-            {
-                LoadPlayerData();
-            }
-        }
-
         public void SavePlayerData()
         {
+            if (_saveablePlayer == null)
+            {
+                return;
+            }
+
             PlayerPrefs.SetInt("hasSaved", 1);
 
             SaveAttributes();
 
             int playerSouls = _saveablePlayer.GetSouls();
             PlayerPrefs.SetInt("playerSouls", playerSouls);
-
-            float playerCurrentHealth = _saveablePlayer.GetHealth();
-            float playerCurrentMana = _saveablePlayer.GetMana();
-            PlayerPrefs.SetFloat("playerCurrentHealth", playerCurrentHealth);
-            PlayerPrefs.SetFloat("playerCurrentMana", playerCurrentMana);
-
             PlayerPrefs.Save();
 
             OnGameSaved?.Invoke(this, EventArgs.Empty);
@@ -65,14 +55,6 @@ namespace Assets.Scripts.PersistentDataManagement
 
             int playerSouls = PlayerPrefs.GetInt("playerSouls");
             _saveablePlayer.SetSouls(playerSouls);
-
-            if (PlayerPrefs.HasKey("playerCurrentHealth") && PlayerPrefs.HasKey("playerCurrentMana"))
-            {
-                float playerCurrentHealth = PlayerPrefs.GetFloat("playerCurrentHealth");
-                float playerCurrentMana = PlayerPrefs.GetFloat("playerCurrentMana");
-                _saveablePlayer.SetHealth(playerCurrentHealth);
-                _saveablePlayer.SetMana(playerCurrentMana);
-            }
         }
 
         private void LoadAttributes()

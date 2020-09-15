@@ -10,26 +10,6 @@ namespace Assets.Scripts.PersistentDataManagement
         [SerializeField] private StatManager _statManager;
         [SerializeField] private SkillManager _skillManager;
 
-        public float GetHealth()
-        {
-            return _statManager.CurrentHealth;
-        }
-
-        public void SetHealth(float value)
-        {
-            _statManager.SetCurrentHealth(value);
-        }
-
-        public float GetMana()
-        {
-            return _statManager.CurrentMana;
-        }
-
-        public void SetMana(float value)
-        {
-            _statManager.SetCurrentMana(value);
-        }
-
         public int GetSouls()
         {
             return _statManager.GetAttributes().GetSouls();

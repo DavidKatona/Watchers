@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
@@ -16,11 +14,6 @@ public class PlayerStateManager : MonoBehaviour
     public bool IsWallSliding { get; set; }
     public bool IsWallJumping { get; set; }
     public bool IsCasting { get; set; }
-    public bool IsCastReleased { get; set; }
-    public bool IsNearBench { get; set; }
-    public bool IsOnBench { get; set; }
-    public bool IsNearNPC { get; set; }
-    public bool IsUsingNPC { get; set; }
     public bool IsRecoilingX { get; set; }
     public bool IsRecoilingY { get; set; }
 }
