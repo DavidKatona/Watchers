@@ -28,7 +28,7 @@ public class BattleSystemHUD : MonoBehaviour
 
     private void BattleSystemManager_OnWaveEnded(object sender, EventArgs e)
     {
-        transform.Find("IdleStateElements/WaveStartText").GetComponent<Text>().text = $"Press \"Interact\" to launch Wave {_battleSystemManager.WaveNumber}.";
+        transform.Find("IdleStateElements/WaveStartText").GetComponent<Text>().text = $"Press \"F\" to launch Wave {_battleSystemManager.WaveNumber}.";
 
         _activeStateElements.SetActive(false);
         _idleStateElements.SetActive(true);

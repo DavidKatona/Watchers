@@ -553,6 +553,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4259936573523670674, guid: 8e3dd39fbf498244a94bce8bd4e62a2b,
+        type: 3}
+      propertyPath: m_Text
+      value: Press "F" to launch a new Wave.
+      objectReference: {fileID: 0}
     - target: {fileID: 4975820686184693013, guid: 8e3dd39fbf498244a94bce8bd4e62a2b,
         type: 3}
       propertyPath: m_AnchorMin.y
