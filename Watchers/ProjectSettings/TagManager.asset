@@ -16,7 +16,7 @@ TagManager:
   - UI
   - 
   - 
-  - Ground
+  - Obstacle
   - Post Processing
   - Attackable
   - Tutorial
@@ -24,7 +24,7 @@ TagManager:
   - PlayerSpell
   - CollectiblePickup
   - CollectibleNonCollidable
-  - 
+  - CameraBounds
   - 
   - 
   - 
